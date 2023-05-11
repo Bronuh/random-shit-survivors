@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjsepe4wt2q56"]
+[gd_scene load_steps=6 format=3 uid="uid://cjsepe4wt2q56"]
 
 [ext_resource type="Script" path="res://Scripts/Current/Main.cs" id="1_y3gu6"]
 [ext_resource type="PackedScene" uid="uid://oilwraaijcfo" path="res://Scenes/shaders_node.tscn" id="2_j61ta"]
 [ext_resource type="PackedScene" uid="uid://btwyyvp72keen" path="res://Scenes/hud_node.tscn" id="3_wq2fv"]
 [ext_resource type="PackedScene" uid="uid://bi7rb5qknto8t" path="res://Scenes/menu_node.tscn" id="4_mlycn"]
+[ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="5_12dna"]
 
 [node name="MainNode" type="Node2D"]
 script = ExtResource("1_y3gu6")
@@ -21,3 +22,6 @@ offset_bottom = 40.0
 [node name="MenuNode" parent="UiNode" instance=ExtResource("4_mlycn")]
 
 [node name="WorldNode" type="Node2D" parent="."]
+
+[node name="PhysycsSmoothing" type="Node2D" parent="WorldNode"]
+script = ExtResource("5_12dna")
