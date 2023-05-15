@@ -23,6 +23,7 @@ public partial class WorldNode : Node2D
 	// Called every physics tick. 'delta' is the elapsed time since the previous tick.
 	public override void _PhysicsProcess(double delta)
 	{
+		
 		World.Update((float)delta);
 		World.FixedUpdate((float)delta);
 		World.LateUpdate((float)delta);

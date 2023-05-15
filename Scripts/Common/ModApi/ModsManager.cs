@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BoilerplateProject.Scripts.Common.ModApi
 {
-	internal class ModsManager
+	public class ModsManager
 	{
 	}
 }

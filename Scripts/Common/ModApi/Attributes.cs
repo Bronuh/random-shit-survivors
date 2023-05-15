@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BoilerplateProject.Scripts.Common.ModApi
 {
-	internal class ModAttributes
-	{
-	}
+	[AttributeUsage(AttributeTargets.Class, Inherited = false)]
+	public class StaticConstructorOnStartup : Attribute { }
+
+
 }

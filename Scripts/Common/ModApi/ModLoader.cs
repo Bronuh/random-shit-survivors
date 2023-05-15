@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace BoilerplateProject.Scripts.Common.ModApi
 {
-	internal class ModLoader
+	public static class ModLoader
 	{
+
+		
 	}
 }

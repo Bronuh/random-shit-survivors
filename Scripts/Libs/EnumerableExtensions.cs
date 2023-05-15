@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoilerplateProject.Scripts.Libs
+namespace Scripts.Libs
 {
 	public static class EnumerableExtensions
 	{
