@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace BoilerplateProject.Scripts.Common.ModApi;
+namespace Scripts.Common.ModApi;
 
 public struct ModInfo
 {

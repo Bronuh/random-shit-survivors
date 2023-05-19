@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Scripts.Common.ModApi
+namespace Scripts.Libs
 {
-	public abstract class Mod
+	public static class StringExtensions
 	{
-		
 	}
 }

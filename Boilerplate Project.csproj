@@ -2,7 +2,7 @@
   <PropertyGroup>
 	<TargetFramework>net6.0</TargetFramework>
 	<EnableDynamicLoading>true</EnableDynamicLoading>
-	<RootNamespace>BoilerplateProject</RootNamespace>
+	<RootNamespace>Scripts</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
 	<PackageReference Include="Jint" Version="3.0.0-beta-2049" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoilerplateProject.Scripts.Common.ModApi
+namespace Scripts.Common.ModApi
 {
 	public class ModsManager
 	{

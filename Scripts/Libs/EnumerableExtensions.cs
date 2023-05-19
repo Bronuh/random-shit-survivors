@@ -9,40 +9,45 @@ namespace Scripts.Libs
 	public static class EnumerableExtensions
 	{
 		/// <summary>
-		/// Выводит все строковые значения в одну строку, с разделением запятыми
-		/// </summary>
-		/// <param name="list"></param>
-		/// <returns></returns>
-		public static string ToLine(this IEnumerable<string> list)
-		{
-			string respond = "";
-			foreach (string word in list)
-				respond += word + (word == list.Last() ? "" : ", ");
-
-			return respond;
-		}
-
-
-		/// <summary>
 		/// Возвращает случайный элемент списка
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="list"></param>
 		/// <returns></returns>
-		public static T GetRandom<T>(this IList<T> list)
+		public static T GetRandom<T>(this IEnumerable<T> sequence)
 		{
-			return list[new Random().Next(0, list.Count)];
-		}
+			Random random = new Random();
+			if (sequence == null)
+			{
+				throw new ArgumentNullException();
+			}
 
-		/// <summary>
-		/// Возвращает случайный элемент списка
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="list"></param>
-		/// <returns></returns>
-		public static T GetRandom<T>(this IEnumerable<T> list)
-		{
-			return list.ElementAt(new Random().Next(0, list.Count()));
+			if (!sequence.Any())
+			{
+				throw new ArgumentException("The sequence is empty.");
+			}
+
+			//optimization for ICollection<T>
+			if (sequence is ICollection<T>)
+			{
+				ICollection<T> col = (ICollection<T>)sequence;
+				return col.ElementAt(random.Next(col.Count));
+			}
+
+			int count = 1;
+			T selected = default(T);
+
+			foreach (T element in sequence)
+			{
+				if (random.Next(count++) == 0)
+				{
+					//Select the current element with 1/count probability
+					selected = element;
+				}
+			}
+
+			return selected;
 		}
 	}
+
 }

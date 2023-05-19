@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GodotScripts.Common
+namespace Scripts.Libs
 {
     #region Message Types / Interfaces
 
