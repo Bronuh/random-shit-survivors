@@ -10,18 +10,24 @@
 script = ExtResource("1_y3gu6")
 
 [node name="UiNode" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="ShadersNode" parent="UiNode" instance=ExtResource("2_j61ta")]
+unique_name_in_owner = true
 
 [node name="HudNode" parent="UiNode" instance=ExtResource("3_wq2fv")]
+unique_name_in_owner = true
 
 [node name="MenuNode" parent="UiNode" instance=ExtResource("4_mlycn")]
+unique_name_in_owner = true
 
 [node name="WorldNode" type="Node2D" parent="."]
+unique_name_in_owner = true
 
-[node name="PhysycsSmoothing" type="Node2D" parent="WorldNode"]
+[node name="PhysicsSmoothing" type="Node2D" parent="WorldNode"]
+unique_name_in_owner = true
 script = ExtResource("5_12dna")
