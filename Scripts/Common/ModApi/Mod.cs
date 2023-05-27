@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 
-namespace Scripts.Common.ModApi
+namespace Scripts.Common.ModApi;
+
+/// <summary>
+///		Представляет ссылку на загруженный мод
+/// </summary>
+public class Mod
 {
-	public abstract class Mod
-	{
-		
-	}
+	public ModInfo ModInfo { get; private set; }
+
+	public Assembly Assembly { get; private set; }
 }
+
