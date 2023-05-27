@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Scripts.Common
+namespace Scripts.Libs
 {
 	/// <summary>
 	/// Static wrapper around existing methods to reduce code volume.
