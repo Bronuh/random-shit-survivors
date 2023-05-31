@@ -9,7 +9,7 @@ namespace Scripts.Common.EventApi
 	/// <summary>
 	///		Just a message with a 'Cancelled' flag 
 	/// </summary>
-	public abstract class CancellableMessage : GameMessage
+	public  class CancellableMessage : GameMessage
 	{
 		public bool IsCancelled { get; private set; }
 		protected CancellableMessage(object sender, GameMessageArgs args) : base(sender, args)
