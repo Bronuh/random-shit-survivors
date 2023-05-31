@@ -3,6 +3,7 @@ using System;
 using Scellecs.Morpeh;
 using Scripts.Common.ModApi;
 using Scripts.Common;
+using Scripts.Current;
 
 public partial class Main : Node2D
 {
@@ -12,8 +13,22 @@ public partial class Main : Node2D
 
 	public Main():base()
 	{
-		_coreModLoader = new CoreModLoader(this);
-		_coreModLoader.Load();
+		if (GameSettings.EnableModApi)
+		{
+			// Scan mods
+			ModScanner.ScanMods();
+
+			// Execute Core Mods
+			_coreModLoader = new CoreModLoader(this);
+			_coreModLoader.Load();
+
+			// Manage mods
+			// It's probably better to use hook for scanner or smth.
+			_modsManager = new ModsManager();
+
+			// Load mods
+			_modLoader = new ModLoader();
+		}
 	}
 
 	// Called when the node enters the scene tree for the first time.
@@ -23,8 +38,6 @@ public partial class Main : Node2D
 		_modLoader.PreInit();
 		_modLoader.Init();
 		_modLoader.PostInit();
-
-
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

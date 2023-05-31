@@ -12,6 +12,12 @@ namespace Scripts.Common.ModApi
 	/// </summary>
 	public class ModLoader : IInitializable
 	{
+
+		public ModLoader() {
+			// Must load assemblies according to load order of ModsManager
+
+		}
+
 		/// <summary>
 		/// During the pre-initialization stage:<br/>
 		///		- Scans the mods folder<br/>
