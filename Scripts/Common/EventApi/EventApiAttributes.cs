@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace Scripts.Common.EventApi
 {
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-	public class HookAttribute : Attribute { }
+	public class EventListener : Attribute { }
 }
