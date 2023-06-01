@@ -22,6 +22,7 @@ public partial class Main : Node2D
 	{
 		// Use Event API
 		_eventBus = new EventBus(this);
+		var _eventScanner = new EventScanner(_eventBus);
 
 		if (GameSettings.EnableModApi)
 		{
@@ -43,6 +44,8 @@ public partial class Main : Node2D
 			// Load mods
 			_modLoader = ServiceStorage.ModLoader;
 		}
+
+		_eventScanner.ScanEventListeners();
 	}
 
 	// Called when the node enters the scene tree for the first time.
