@@ -25,7 +25,7 @@ public class EventBus
 	{
 		_main = main;
 	}
-	
+
 
 	/// <summary>
 	///		Subscribe to a message type with the given delivery action.
@@ -33,32 +33,63 @@ public class EventBus
 	/// <typeparam name="TMessage"></typeparam>
 	/// <param name="action"></param>
 	/// <returns>Message subscription token. Can be used for unsubscribtion</returns>
-	public TinyMessageSubscriptionToken Subscribe<TMessage>(Action<TMessage> action) where TMessage : GameMessage
+	public CustomSubscriptionToken Subscribe<TMessage>(Action<TMessage> action) where TMessage : GameMessage
 	{
-		// TODO: This method must check if _hooksDick contains TMessage type as key
-		// If yes, then create new hook and put it to list
-		// Otherwise add new key to dict.
-		// Same for publishing.
-		return _hub.Subscribe(action); // Obsolete
+		Type messageType = typeof(TMessage);
+
+		// Check if the _hooksDict already contains the message type as a key
+		if (!_hooksDict.ContainsKey(messageType))
+		{
+			// If not, create a new TinyMessengerHub and add it to the dictionary
+			_hooksDict[messageType] = new TinyMessengerHub();
+		}
+
+		// Get the corresponding hub for the message type
+		var hub = _hooksDict[messageType];
+		var subscriptionToken = hub.Subscribe(action);
+
+		// Explicitly specify the type argument when calling the Subscribe method
+		return new CustomSubscriptionToken(subscriptionToken, hub);
 	}
 
-	public TinyMessageSubscriptionToken SubscribeMethod(MethodInfo methodinfo)
-	{
-		// This method should add new subscription to the corresponding hub in _hooksDict
-		// but TinyMessengerHub.Subscribe accepts only Action<TArg> as parameter,
-		// so we need to create an Action from methodinfo with correct parameter type.
-		// P.S. The method is guaranteed to have one type parameter inherited from GameMessage
 
-		throw new NotImplementedException();
+	public CustomSubscriptionToken SubscribeMethod(MethodInfo methodInfo)
+	{
+		Type messageType = methodInfo.GetParameters()[0].ParameterType;
+
+
+		// Create an Action<TArg> delegate from the MethodInfo
+		var delegateType = typeof(Action<>).MakeGenericType(messageType);
+		var actionDelegate = Delegate.CreateDelegate(delegateType, null, methodInfo);
+
+		// Subscribe to the message type using the created delegate
+		return this.GetType().GetMethod("Subscribe")!.MakeGenericMethod(messageType)
+			.Invoke(this, new object[] { actionDelegate }) as CustomSubscriptionToken;
 	}
 
 
-	public void Unsubscribe(TinyMessageSubscriptionToken token)
+	public void Unsubscribe(CustomSubscriptionToken token)
 	{
-		Subscribe((CancellableMessage msg) => { });
-		_hub.Unsubscribe(token);
+		token.Unsubscribe();
 	}
 
+}
+
+public class CustomSubscriptionToken
+{
+	private TinyMessageSubscriptionToken _token;
+	private TinyMessengerHub _hub;
+
+	public CustomSubscriptionToken(TinyMessageSubscriptionToken token, TinyMessengerHub hub)
+	{
+		_token = token;
+		_hub = hub;
+	}
+
+	public void Unsubscribe()
+	{
+		_hub.Unsubscribe(_token);
+	}
 }
 
 
