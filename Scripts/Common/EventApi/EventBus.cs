@@ -4,12 +4,12 @@ using System.Reflection;
 namespace Scripts.Common.EventApi;
 
 /// <summary>
-///		Basic event bus class
+///		Basic event bus class.
 /// </summary>
 public class EventBus
 {
 	/// <summary>
-	///		Game Main node this EventBus is being attached to
+	///		Game Main node this EventBus is being attached to.
 	/// </summary>
 	public Main GameMain => _main;
 
@@ -30,9 +30,9 @@ public class EventBus
 	/// <summary>
 	///		Subscribe to a message type with the given delivery action.
 	/// </summary>
-	/// <typeparam name="TMessage"></typeparam>
-	/// <param name="action"></param>
-	/// <returns>Message subscription token. Can be used for unsubscribtion</returns>
+	/// <typeparam name="TMessage">The type of the message.</typeparam>
+	/// <param name="action">The delivery action.</param>
+	/// <returns>Message subscription token that can be used for unsubscribing.</returns>
 	public CustomSubscriptionToken Subscribe<TMessage>(Action<TMessage> action) where TMessage : GameMessage
 	{
 		Type messageType = typeof(TMessage);
@@ -52,7 +52,11 @@ public class EventBus
 		return new CustomSubscriptionToken(subscriptionToken, hub);
 	}
 
-
+	/// <summary>
+	///		Subscribes to a message type using the provided MethodInfo.
+	/// </summary>
+	/// <param name="methodInfo">The MethodInfo representing the delivery action.</param>
+	/// <returns>Message subscription token that can be used for unsubscribing.</returns>
 	public CustomSubscriptionToken SubscribeMethod(MethodInfo methodInfo)
 	{
 		Type messageType = methodInfo.GetParameters()[0].ParameterType;
@@ -67,7 +71,10 @@ public class EventBus
 			.Invoke(this, new object[] { actionDelegate }) as CustomSubscriptionToken;
 	}
 
-
+	/// <summary>
+	///		Unsubscribes from a message type using the provided subscription token.
+	/// </summary>
+	/// <param name="token">The subscription token.</param>
 	public void Unsubscribe(CustomSubscriptionToken token)
 	{
 		token.Unsubscribe();
