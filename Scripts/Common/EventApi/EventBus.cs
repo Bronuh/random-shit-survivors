@@ -28,6 +28,30 @@ public class EventBus
 
 
 	/// <summary>
+	/// Publishes a message of type TMessage to all subscribers.
+	/// </summary>
+	/// <typeparam name="TMessage">The type of the message to publish.</typeparam>
+	/// <param name="message">The message to publish.</param>
+	/// <remarks>
+	/// This method delivers the message to all subscribers who have subscribed to the specified message type.
+	/// If there are no subscribers for the message type, the message is not delivered.
+	/// </remarks>
+	public void Publish<TMessage>(TMessage message) where TMessage : GameMessage
+	{
+		Type messageType = typeof(TMessage);
+
+		// Check if the _hooksDict contains the message type as a key
+		if (_hooksDict.ContainsKey(messageType))
+		{
+			// Get the corresponding hub for the message type
+			var hub = _hooksDict[messageType];
+
+			// Publish the message using the hub
+			hub.Publish(message);
+		}
+	}
+
+	/// <summary>
 	///		Subscribe to a message type with the given delivery action.
 	/// </summary>
 	/// <typeparam name="TMessage">The type of the message.</typeparam>
@@ -47,6 +71,8 @@ public class EventBus
 		// Get the corresponding hub for the message type
 		var hub = _hooksDict[messageType];
 		var subscriptionToken = hub.Subscribe(action);
+
+
 
 		// Explicitly specify the type argument when calling the Subscribe method
 		return new CustomSubscriptionToken(subscriptionToken, hub);
@@ -98,6 +124,3 @@ public class CustomSubscriptionToken
 		_hub.Unsubscribe(_token);
 	}
 }
-
-
-
