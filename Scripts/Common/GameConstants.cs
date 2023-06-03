@@ -1,8 +1,7 @@
 namespace Scripts.Common;
 
-public static class GameConstants
+public static class GameControls
 {
-	#region CONTROLS
 	// Directions
 	public const string KeyRight = "right";
 	public const string KeyLeft = "left";
@@ -32,10 +31,10 @@ public static class GameConstants
 	public const string KeyF2 = "f2";
 	public const string KeyF3 = "f3";
 
-	#endregion
+}
 
-
-	#region NODES
+public static class GameNodes
+{
 	// Node names
 	public const string UiNodeName = "%UiNode";
 	public const string HudNodeName = "%HudNode";
@@ -44,6 +43,4 @@ public static class GameConstants
 
 	public const string WorldNodeName = "%WorldNode";
 	public const string PhysicsSmoothingName = "%PhysicsSmoothing";
-
-	#endregion
 }
