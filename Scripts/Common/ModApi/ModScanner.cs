@@ -130,7 +130,6 @@ internal static class ModScanner
 		// And that ModInfo must have an ID.
 		if(String.IsNullOrWhiteSpace(bundle.Info.ModId)){
 			Err($"{bundle.ModPath}:\nModInfo does not contain a ModId");
-			
 
 			if (GameSettings.TryRestoreModId) RestoreModId(bundle.Info);
 			else isValid = false;
@@ -141,6 +140,7 @@ internal static class ModScanner
 		if(bundle.Info.ModId.Split('.').Length < 2){
 			Err($"{bundle.ModPath}:\nModInfo contain invalid ModId ({bundle.Info.ModId}).\n"+
 			$"The ID must have at least two parts separated by a dot: author/team/organization/namespace and mod name.");
+			
 			if (GameSettings.TryRestoreModId) RestoreModId(bundle.Info);
 			else isValid = false;
 		}
