@@ -5,6 +5,7 @@
     <RootNamespace></RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Hjson" Version="3.0.0" />
     <PackageReference Include="Jint" Version="3.0.0-beta-2049" />
     <PackageReference Include="Leopotam.Ecs" Version="1.0.0" />
     <PackageReference Include="Leopotam.EcsLite" Version="1.0.0" />
@@ -18,5 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\Common\ModApi\Scripting\" />
+    <Folder Include="Scripts\Common\GodotNode\" />
   </ItemGroup>
 </Project>
