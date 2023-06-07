@@ -1,4 +1,4 @@
-﻿<Project Sdk="Godot.NET.Sdk/4.0.3">
+<Project Sdk="Godot.NET.Sdk/4.0.2">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -16,9 +16,5 @@
     <PackageReference Include="Scellecs.Morpeh" Version="2022.2.2" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
     <PackageReference Include="Svelto.ECS" Version="3.4.6" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\Common\ModApi\Scripting\" />
-    <Folder Include="Scripts\Common\GodotNode\" />
   </ItemGroup>
 </Project>

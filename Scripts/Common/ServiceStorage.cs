@@ -19,7 +19,7 @@ namespace Scripts.Common
 		///		Describes the state of the service storage. If false, services cannot be modified.<br/>
 		///		The storage is locked before calling PreInit in the Main class.
 		/// </summary>
-		public static bool IsUnlocked { get; private set; }
+		public static bool IsUnlocked { get; private set; } = true;
 
 		private static ModLoader _modLoader = new ModLoader();
 		private static ModsManager _modsManager = new ModsManager();

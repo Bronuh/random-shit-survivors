@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjsepe4wt2q56"]
+[gd_scene load_steps=7 format=3 uid="uid://cjsepe4wt2q56"]
 
 [ext_resource type="Script" path="res://Scripts/Current/Main.cs" id="1_y3gu6"]
 [ext_resource type="PackedScene" uid="uid://oilwraaijcfo" path="res://Scenes/shaders_node.tscn" id="2_j61ta"]
 [ext_resource type="PackedScene" uid="uid://btwyyvp72keen" path="res://Scenes/hud_node.tscn" id="3_wq2fv"]
 [ext_resource type="PackedScene" uid="uid://bi7rb5qknto8t" path="res://Scenes/menu_node.tscn" id="4_mlycn"]
+[ext_resource type="Texture2D" uid="uid://cs0ey4onfu2il" path="res://addons/glow_particle_pack/64/spotlight_4.png" id="4_rlofm"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="5_12dna"]
 
 [node name="MainNode" type="Node2D"]
@@ -21,6 +22,13 @@ unique_name_in_owner = true
 
 [node name="HudNode" parent="UiNode" instance=ExtResource("3_wq2fv")]
 unique_name_in_owner = true
+
+[node name="TextureRect" type="TextureRect" parent="UiNode/HudNode"]
+offset_left = 31.0
+offset_top = 48.0
+offset_right = 71.0
+offset_bottom = 88.0
+texture = ExtResource("4_rlofm")
 
 [node name="MenuNode" parent="UiNode" instance=ExtResource("4_mlycn")]
 unique_name_in_owner = true
