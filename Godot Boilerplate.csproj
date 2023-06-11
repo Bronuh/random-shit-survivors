@@ -17,8 +17,4 @@
     <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
     <PackageReference Include="Svelto.ECS" Version="3.4.6" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\Common\ModApi\Scripting\" />
-    <Folder Include="Scripts\Common\GodotNode\" />
-  </ItemGroup>
 </Project>
