@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Scripts.Current;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,6 +101,16 @@ namespace Scripts.Libs
 
 
 		#region IO
+		/// <summary>
+		/// Prints the specified objects to the console if Debug setting is true.
+		/// </summary>
+		/// <param name="what">Objects to print.</param>
+		public static void Debug(params object[] what)
+		{
+			if(GameSettings.Debug)
+				GD.Print(what);
+		}
+
 		/// <summary>
 		/// Prints the specified objects to the console.
 		/// </summary>

@@ -33,6 +33,7 @@ internal static class ModScanner
 	/// </summary>
 	internal static void ScanMods(){
 		// Check root directories
+		Print("Current path: "+Path.GetFullPath("."));
 		Directory.CreateDirectory(GameDataRoot);
 		Directory.CreateDirectory(ModsRoot);
 
@@ -46,9 +47,10 @@ internal static class ModScanner
 		Directory.CreateDirectory(Path.Combine(coreDir,AssembliesDir));
 		Directory.CreateDirectory(Path.Combine(coreDir,AssetsDir));
 		Directory.CreateDirectory(Path.Combine(coreDir,DefsDir));
+		Directory.CreateDirectory(Path.Combine(coreDir, CoresDir));
 
 		// Now scan base game and possible DLCs as mods
-		foreach(var dir in Directory.GetDirectories(GameDataRoot)){
+		foreach (var dir in Directory.GetDirectories(GameDataRoot)){
 			// Note that scanning order doesn't matter. Core game and DLCs will be sorted later automatically.
 			// Obviously, for automatic sorting, DLCs (Downloadable Content) must have 'Core' listed as a dependency in modinfo.json.
 			ScanMod(dir);
@@ -76,23 +78,47 @@ internal static class ModScanner
 			Err(e.StackTrace);
 		}
 
+		info ??= new ModInfo();
+
+		bundle.SetInfo(info);
 		bundle.SetPath(path);
 
 		bool isValidBundle = ValidateModBundle(bundle);
 
 		// Find all the core assemblies
-		var coreModFiles = Directory.GetFiles(Path.Combine(path,CoresDir)).Where(f => f.GetExtension().Equals("dll"));
-		foreach(var file in coreModFiles)
+		try
 		{
-			bundle.AddCoreAssembly(file);
+			var coreModFiles = Directory.GetFiles(Path.Combine(path, CoresDir)).Where(f => f.GetExtension().Equals("dll"));
+			foreach (var file in coreModFiles)
+			{
+				bundle.AddCoreAssembly(file);
+			}
+		}
+		catch (Exception e)
+		{
+			// just write debug message
+			Debug($"Can't load CORE assemblies for {bundle.Info.ModName}:");
+			Debug(e.Message);
 		}
 
+
 		// Find all other assemblies
-		var modFiles  = Directory.GetFiles(Path.Combine(path, AssembliesDir)).Where(f => f.GetExtension().Equals("dll"));
-		foreach (var file in modFiles)
+		try
 		{
-			bundle.AddAssembly(file);
+			var modFiles = Directory.GetFiles(Path.Combine(path, AssembliesDir)).Where(f => f.GetExtension().Equals("dll"));
+			foreach (var file in modFiles)
+			{
+				bundle.AddAssembly(file);
+			}
 		}
+		catch (Exception e)
+		{
+			// just write debug message
+			Debug($"Can't load mod assemblies for {bundle.Info.ModName}:");
+			Debug(e.Message);
+		}
+
+		
 
 		// TODO: Prepare VFS for definitions resolving
 		// TODO: Resolve patches

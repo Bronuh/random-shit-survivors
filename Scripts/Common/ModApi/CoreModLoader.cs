@@ -8,7 +8,7 @@ namespace Scripts.Common.ModApi
 {
 	internal class CoreModLoader
 	{
-		private List<Assembly> _coreAssemblies;
+		private List<Assembly> _coreAssemblies = new();
 
 		public IReadOnlyCollection<Assembly> CoreAssemblies{
 			get

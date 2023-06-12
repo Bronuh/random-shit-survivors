@@ -18,7 +18,7 @@ public partial class Main : Node2D
 	private ModLoader _modLoader;
 	private CoreModLoader _coreModLoader;
 
-	public Main():base()
+	public Main()
 	{
 		// Use Event API
 		_eventBus = new EventBus(this);
