@@ -1,23 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjsepe4wt2q56"]
+[gd_scene load_steps=6 format=3 uid="uid://cjsepe4wt2q56"]
 
 [ext_resource type="Script" path="res://Scripts/Current/Main.cs" id="1_y3gu6"]
 [ext_resource type="PackedScene" uid="uid://oilwraaijcfo" path="res://Scenes/shaders_node.tscn" id="2_j61ta"]
 [ext_resource type="PackedScene" uid="uid://btwyyvp72keen" path="res://Scenes/hud_node.tscn" id="3_wq2fv"]
 [ext_resource type="PackedScene" uid="uid://bi7rb5qknto8t" path="res://Scenes/menu_node.tscn" id="4_mlycn"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="5_12dna"]
-[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/TestNode.cs" id="6_j6f83"]
-[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/TestCustomResource.cs" id="7_hay74"]
-
-[sub_resource type="Resource" id="Resource_m1m2i"]
-script = ExtResource("7_hay74")
-IsActive = true
-SomeInt = 100
-
-[sub_resource type="Resource" id="Resource_xmrqr"]
-script = ExtResource("7_hay74")
-IsActive = true
-SomeInt = 100
-InternalResource = SubResource("Resource_m1m2i")
 
 [node name="MainNode" type="Node2D"]
 script = ExtResource("1_y3gu6")
@@ -44,7 +31,3 @@ unique_name_in_owner = true
 [node name="PhysicsSmoothing" type="Node2D" parent="WorldNode"]
 unique_name_in_owner = true
 script = ExtResource("5_12dna")
-
-[node name="TestNode" type="Node2D" parent="WorldNode/PhysicsSmoothing"]
-script = ExtResource("6_j6f83")
-TestResource = SubResource("Resource_xmrqr")
