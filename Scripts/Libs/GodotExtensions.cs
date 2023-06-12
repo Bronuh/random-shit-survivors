@@ -108,7 +108,7 @@ namespace Scripts.Libs
 		public static void Debug(params object[] what)
 		{
 			if(GameSettings.Debug)
-				GD.Print(what);
+				GD.Print($"[DEBUG:] {what}");
 		}
 
 		/// <summary>
@@ -118,6 +118,15 @@ namespace Scripts.Libs
 		public static void Print(params object[] what)
 		{
 			GD.Print(what);
+		}
+
+		/// <summary>
+		/// Prints the specified objects to the console.
+		/// </summary>
+		/// <param name="what">Objects to print.</param>
+		public static void Warn(params object[] what)
+		{
+			GD.Print($"[WARNING:] {what}");
 		}
 
 		/// <summary>

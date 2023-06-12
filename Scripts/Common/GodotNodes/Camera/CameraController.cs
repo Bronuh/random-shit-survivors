@@ -10,7 +10,10 @@ namespace Scripts.Common.GodotNodes
 	[GlobalClass]
 	public abstract partial class CameraController : Camera2D
 	{
-		private Camera2D _camera = null;
+		protected Camera2D _camera = null;
+
+		[Export] bool IsActive { get; set; } = true;
+		[Export] int Priority { get; set; } = 0;
 
 
 		public override void _Ready()
@@ -30,11 +33,20 @@ namespace Scripts.Common.GodotNodes
 
 		protected virtual void FindCamera()
 		{
-			if (GetParentOrNull<Camera2D>() is null)
+			Node parent = GetParent();
+			if (parent is null)
 			{
-				Warn($"Parent is null");
+				Warn($"Parent is null for {GetPath()}");
 				return;
 			}
+
+			if (!parent.GetType().IsAssignableTo(typeof(Camera2D)))
+			{
+				Warn($"Parent for {GetPath()} is not Camera2D");
+				return;
+			}
+
+			_camera = parent as Camera2D;
 		}
 	}
 }
