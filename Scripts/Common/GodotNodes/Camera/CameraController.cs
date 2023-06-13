@@ -1,4 +1,5 @@
 ﻿using Godot.Collections;
+using Scripts.Common.GodotNodes.Camera;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace Scripts.Common.GodotNodes
 {
 	[GlobalClass]
-	public abstract partial class CameraController : Camera2D
+	public abstract partial class CameraController : CustomCamera2D
 	{
 		protected Camera2D _camera = null;
 
@@ -40,13 +41,13 @@ namespace Scripts.Common.GodotNodes
 				return;
 			}
 
-			if (!parent.GetType().IsAssignableTo(typeof(Camera2D)))
+			if (!parent.GetType().IsAssignableTo(typeof(CustomCamera2D)))
 			{
-				Warn($"Parent for {GetPath()} is not Camera2D");
+				Warn($"Parent for {GetPath()} is not CustomCamera2D");
 				return;
 			}
 
-			_camera = parent as Camera2D;
+			_camera = parent as CustomCamera2D;
 		}
 	}
 }
