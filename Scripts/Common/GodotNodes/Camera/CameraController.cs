@@ -1,5 +1,4 @@
 ﻿using Godot.Collections;
-using Scripts.Common.GodotNodes.Camera;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +18,7 @@ namespace Scripts.Common.GodotNodes
 
 		public override void _Ready()
 		{
-
+			FindCamera();
 		}
 
 		public override void _Process(double delta)

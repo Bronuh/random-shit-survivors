@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Godot.Collections;
 using Scripts.Current;
 using System;
 using System.Collections.Generic;
@@ -136,6 +137,17 @@ namespace Scripts.Libs
 		public static void Err(params object[] what)
 		{
 			GD.PrintErr(what);
+		}
+		#endregion
+
+		#region Nodes
+		public static bool HasChildOfType<TNode>(this Node node) where TNode : Node
+		{
+			if (node.GetChildCount() < 1)
+				return false;
+
+			Array<Node> children = node.GetChildren();
+			return children.OfType<TNode>().Count() > 0;
 		}
 		#endregion
 	}
