@@ -88,13 +88,14 @@ namespace Scripts.Common.GodotNodes
 		public int MaxZoomOutSteps { get; set; } = 5;
 
 
-		private float _smoothingFactor = 1.0f;
-		private int _zoomSteps = 0;
-
 		/// <summary>
 		///		Contains camera's target location.
 		/// </summary>
 		public Vector2 TargetPosition { get; set; } = Vec2();
+
+		private float _smoothingFactor = 1.0f;
+		private int _zoomSteps = 0;
+
 
 
 		public override void _Ready()

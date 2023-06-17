@@ -36,10 +36,6 @@ namespace Scripts.Common.GodotNodes
 			set => _pullPower = Math.Max(value, 0);
 		}
 
-		[Export]
-		public bool UseSmoothingBoost { get; set; } = false;
-		[Export]
-		public float SmoothingBoost { get; set; } = 0.7f;
 
 		private float _pullPower = 0.9f;
 		private bool _isPulling = false;
