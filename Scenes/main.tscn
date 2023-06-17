@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjsepe4wt2q56"]
+[gd_scene load_steps=8 format=3 uid="uid://cjsepe4wt2q56"]
 
 [ext_resource type="Script" path="res://Scripts/Current/Main.cs" id="1_y3gu6"]
 [ext_resource type="PackedScene" uid="uid://oilwraaijcfo" path="res://Scenes/shaders_node.tscn" id="2_j61ta"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bi7rb5qknto8t" path="res://Scenes/menu_node.tscn" id="4_mlycn"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="5_12dna"]
 [ext_resource type="Script" path="res://Scripts/Common/GodotNodes/Camera/CustomCamera2D.cs" id="6_mqq57"]
+[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/Camera/DraggableCamera.cs" id="7_a7nff"]
 
 [node name="MainNode" type="Node2D"]
 script = ExtResource("1_y3gu6")
@@ -35,3 +36,6 @@ script = ExtResource("5_12dna")
 
 [node name="CustomCamera2D" type="Camera2D" parent="WorldNode/PhysicsSmoothing"]
 script = ExtResource("6_mqq57")
+
+[node name="DraggableCamera" type="Camera2D" parent="WorldNode/PhysicsSmoothing"]
+script = ExtResource("7_a7nff")

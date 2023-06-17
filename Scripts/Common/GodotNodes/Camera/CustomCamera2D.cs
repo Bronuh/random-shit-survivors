@@ -123,16 +123,53 @@ namespace Scripts.Common.GodotNodes
 
 			if (!mev.Pressed) return;
 
-			if (mev.ButtonIndex == MouseButton.WheelUp && _zoomSteps < MaxZoomInSteps)
+			if (mev.ButtonIndex == MouseButton.WheelUp)
 			{
-				var change = 1 + ZoomStep;
+				ZoomIn();
+			}
+			if (mev.ButtonIndex == MouseButton.WheelDown)
+			{
+				ZoomOut();
+			}
+		}
+
+
+		/// <summary>
+		/// Zooms in by the specified number of steps.
+		/// </summary>
+		/// <param name="steps">The number of steps to zoom in. Default is 1.</param>
+		public void ZoomIn(int steps = 1)
+		{
+			if (steps < 0)
+				throw new ArgumentOutOfRangeException($"Attempt to zoom {steps} times");
+
+			if (_zoomSteps >= MaxZoomInSteps)
+				return;
+
+			var change = 1 + ZoomStep;
+			for (int i = 0; i < steps; i++)
+			{
 				Zoom *= change;
 				_zoomSteps++;
 			}
-			if (mev.ButtonIndex == MouseButton.WheelDown && _zoomSteps > -MaxZoomOutSteps)
+		}
+
+		/// <summary>
+		/// Zooms out by the specified number of steps.
+		/// </summary>
+		/// <param name="steps">The number of steps to zoom out. Default is 1.</param>
+		public void ZoomOut(int steps = 1)
+		{
+			if (steps < 0)
+				throw new ArgumentOutOfRangeException($"Attempt to zoom {steps} times");
+
+			if (_zoomSteps <= -MaxZoomOutSteps)
+				return;
+
+			var change = 1 + ZoomStep;
+			for (int i = 0; i < steps; i++)
 			{
-				var change = 1 - ZoomStep;
-				Zoom *= change;
+				Zoom /= change;
 				_zoomSteps--;
 			}
 		}
@@ -142,8 +179,8 @@ namespace Scripts.Common.GodotNodes
 			float noSmoothing = 1f; // Use this instead of SmoothingFactor if UseSmoothing is false
 
 			base.Position += (TargetPosition - base.Position) // vector from the current position to the target position
-				* (UseSmoothing ? SmoothingFactor : noSmoothing) // multiply it by smoothing factor
-				* (float)dt; // and apply time
+				* (UseSmoothing ? SmoothingFactor : noSmoothing); // multiply it by smoothing factor
+				//* (float)(dt / (1/60)); // and apply time. Probably it's not good decision
 		}
 	}
 }

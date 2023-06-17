@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Scripts.Common.GodotNodes
 {
 	[GlobalClass]
-	public partial class DraggableCamera : CustomCamera2D
+	public partial class DraggableCamera : FollowingCamera
 	{
 		[Export] public MouseButton DragButton { get; set; } = MouseButton.Middle;
 
@@ -38,6 +38,10 @@ namespace Scripts.Common.GodotNodes
 
 		public override void _Process(double delta)
 		{
+			base._Process(delta);
+			if (TargetNode is not null)
+				return;
+
 			if (!Input.IsMouseButtonPressed(DragButton))
 			{
 				_inertia *= InertiaSaving;
@@ -51,7 +55,7 @@ namespace Scripts.Common.GodotNodes
 				_inertia = -(GetMousePosition() - _lastMousePosition) * SpeedScale;
 			}
 
-			TargetPosition += _inertia / Zoom;
+			TargetPosition += _inertia / Zoom; // hope it'll not explode or something
 
 			_lastMousePosition = GetMousePosition();
 		}
