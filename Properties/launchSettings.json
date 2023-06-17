@@ -5,7 +5,7 @@
     },
     "Run Game": {
       "commandName": "Executable",
-      "executablePath": "D:\\Next-Sync\\Sync\\Dev\\С++\\godot-4.0.2-stable\\bin\\godot.windows.editor.x86_64.mono.exe",
+      "executablePath": "D:\\Program Files\\Godot_v4.1-beta2_mono_win64\\Godot_v4.1-beta2_mono_win64.exe",
       "commandLineArgs": "--path . --verbose",
       "workingDirectory": ".",
       "nativeDebugging": true

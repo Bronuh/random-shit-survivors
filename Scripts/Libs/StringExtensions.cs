@@ -79,7 +79,7 @@ namespace Scripts.Libs
 				double currentValue = 1 * Math.Pow(10, (int)suffix * 3);
 
 				// Get the suffix value.
-				string? suffixValue = Enum.GetName(typeof(NumberSuffix), (int)suffix);
+				string suffixValue = Enum.GetName(typeof(NumberSuffix), (int)suffix);
 
 				// If the suffix is the placeholder, set it to an empty string.
 				if ((int)suffix == 0) { suffixValue = string.Empty; }

@@ -21,7 +21,7 @@ public class EventBus
 	// So we will manually assign a TinyMessengerHub to every message type.
 	private Dictionary<Type, TinyMessengerHub> _hooksDict = new();
 
-	public EventBus(Main main)
+	public EventBus(Main main = null)
 	{
 		_main = main;
 	}

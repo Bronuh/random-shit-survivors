@@ -36,6 +36,8 @@ public static class GameControls
 public static class GameNodes
 {
 	// Node names
+	public const string MainNodeName = "MainNode";
+
 	public const string UiNodeName = "%UiNode";
 	public const string HudNodeName = "%HudNode";
 	public const string MenuNodeName = "%MenuNode";
