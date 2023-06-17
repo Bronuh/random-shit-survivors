@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3xuhye2ov324"
-path="res://.godot/imported/flare_01.png-a9946f2fcc298f4448a52e5029b074bc.ctex"
+path="res://.godot/imported/flare_01.png-75f5d020864b96a911c427e23285e0ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/kenney_particle_pack/flare_01.png"
-dest_files=["res://.godot/imported/flare_01.png-a9946f2fcc298f4448a52e5029b074bc.ctex"]
+source_file="res://Assets/Textures/Particles/Effects/flare_01.png"
+dest_files=["res://.godot/imported/flare_01.png-75f5d020864b96a911c427e23285e0ab.ctex"]
 
 [params]
 

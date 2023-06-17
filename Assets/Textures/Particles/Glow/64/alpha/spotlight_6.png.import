@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cf2olul1hbmhp"
-path="res://.godot/imported/spotlight_6.png-c3901ac059715a52543e4d1b6c0a0628.ctex"
+path="res://.godot/imported/spotlight_6.png-01ee92726c9b8778cdfc275ae9d13f12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/glow_particle_pack/64/alpha/spotlight_6.png"
-dest_files=["res://.godot/imported/spotlight_6.png-c3901ac059715a52543e4d1b6c0a0628.ctex"]
+source_file="res://Assets/Textures/Particles/Glow/64/alpha/spotlight_6.png"
+dest_files=["res://.godot/imported/spotlight_6.png-01ee92726c9b8778cdfc275ae9d13f12.ctex"]
 
 [params]
 

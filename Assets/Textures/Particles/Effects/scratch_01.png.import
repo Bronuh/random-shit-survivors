@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bi8sxnudx3yhc"
-path="res://.godot/imported/scratch_01.png-1291aab6b34bb80847cb4eb62a74be13.ctex"
+path="res://.godot/imported/scratch_01.png-cdac0d8eaab179a87b6d638cd789d5c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/kenney_particle_pack/scratch_01.png"
-dest_files=["res://.godot/imported/scratch_01.png-1291aab6b34bb80847cb4eb62a74be13.ctex"]
+source_file="res://Assets/Textures/Particles/Effects/scratch_01.png"
+dest_files=["res://.godot/imported/scratch_01.png-cdac0d8eaab179a87b6d638cd789d5c7.ctex"]
 
 [params]
 

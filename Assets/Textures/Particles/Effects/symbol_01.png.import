@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2hor3211su4p"
-path="res://.godot/imported/symbol_01.png-5b9ea60a310faaff2c3403de92c36885.ctex"
+path="res://.godot/imported/symbol_01.png-87d67e5791e9cecc34d063f3b923f6e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/kenney_particle_pack/symbol_01.png"
-dest_files=["res://.godot/imported/symbol_01.png-5b9ea60a310faaff2c3403de92c36885.ctex"]
+source_file="res://Assets/Textures/Particles/Effects/symbol_01.png"
+dest_files=["res://.godot/imported/symbol_01.png-87d67e5791e9cecc34d063f3b923f6e7.ctex"]
 
 [params]
 

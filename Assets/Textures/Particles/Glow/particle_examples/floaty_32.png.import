@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://f0cmsdo2ngr0"
-path="res://.godot/imported/floaty_32.png-ddddf36e7dbb1607772e07ca37f18b9e.ctex"
+path="res://.godot/imported/floaty_32.png-70ac1955bbe14df46e6aeba86de587e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/glow_particle_pack/particle_examples/floaty_32.png"
-dest_files=["res://.godot/imported/floaty_32.png-ddddf36e7dbb1607772e07ca37f18b9e.ctex"]
+source_file="res://Assets/Textures/Particles/Glow/particle_examples/floaty_32.png"
+dest_files=["res://.godot/imported/floaty_32.png-70ac1955bbe14df46e6aeba86de587e9.ctex"]
 
 [params]
 
