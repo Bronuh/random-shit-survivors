@@ -11,17 +11,14 @@ public partial class Main : Node2D
 	// Public getters for services
 	public ModsManager ModsManager => _modsManager;
 	public ModLoader ModLoader => _modLoader;
-	public EventBus EventBus => _eventBus;
 
-	private EventBus _eventBus;
 	private ModsManager _modsManager;
 	private ModLoader _modLoader;
-	private CoreModLoader _coreModLoader;
 
 	public Main()
 	{
 		// Use Event API
-		_eventBus = new EventBus(this);
+		EventBus.Initialize(this);
 		var _eventScanner = new EventScanner(_eventBus);
 
 		if (GameSettings.EnableModApi)
@@ -32,8 +29,8 @@ public partial class Main : Node2D
 			ServiceStorage.ModLoader = new ModLoader();
 
 			// Execute Core Mods
-			_coreModLoader = new CoreModLoader(this);
-			_coreModLoader.Load();
+			CoreModLoader.Initialize(this);
+			CoreModLoader.Load();
 
 			ServiceStorage.Lock();
 

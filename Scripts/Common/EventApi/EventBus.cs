@@ -11,19 +11,32 @@ public class EventBus
 	/// <summary>
 	///		Game Main node this EventBus is being attached to.
 	/// </summary>
-	public Main GameMain => _main;
+	public static Main GameMain => _instance._main;
 
-	private Main _main;
+	private Main _main = null;
+	private static EventBus _instance = new();
 	//private TinyMessengerHub _hub; // Better use _hooksDict
 
 	// Using dictionary to quick get all hooks for the provided message types.
 	// It will be faster than iterating through the global hooks list as it implemented in TinyMessenger.
 	// So we will manually assign a TinyMessengerHub to every message type.
-	private Dictionary<Type, TinyMessengerHub> _hooksDict = new();
+	private static Dictionary<Type, TinyMessengerHub> _hooksDict = new();
 
-	public EventBus(Main main = null)
+	private EventBus(Main main = null)
 	{
 		_main = main;
+	}
+
+	/// <summary>
+	/// It's can work even without Main reference
+	/// </summary>
+	/// <param name="main"></param>
+	public static void Initialize(Main main = null)
+	{
+		if(GameMain is null)
+		{
+			_instance = new EventBus(main);
+		}
 	}
 
 
@@ -36,7 +49,7 @@ public class EventBus
 	/// This method delivers the message to all subscribers who have subscribed to the specified message type.
 	/// If there are no subscribers for the message type, the message is not delivered.
 	/// </remarks>
-	public void Publish<TMessage>(TMessage message) where TMessage : GameMessage
+	public static void Publish<TMessage>(TMessage message) where TMessage : GameMessage
 	{
 		Type messageType = typeof(TMessage);
 
@@ -57,7 +70,7 @@ public class EventBus
 	/// <typeparam name="TMessage">The type of the message.</typeparam>
 	/// <param name="action">The delivery action.</param>
 	/// <returns>Message subscription token that can be used for unsubscribing.</returns>
-	public CustomSubscriptionToken Subscribe<TMessage>(Action<TMessage> action) where TMessage : GameMessage
+	public static CustomSubscriptionToken Subscribe<TMessage>(Action<TMessage> action) where TMessage : GameMessage
 	{
 		Type messageType = typeof(TMessage);
 
@@ -83,7 +96,7 @@ public class EventBus
 	/// </summary>
 	/// <param name="methodInfo">The MethodInfo representing the delivery action.</param>
 	/// <returns>Message subscription token that can be used for unsubscribing.</returns>
-	public CustomSubscriptionToken SubscribeMethod(MethodInfo methodInfo)
+	public static CustomSubscriptionToken SubscribeMethod(MethodInfo methodInfo)
 	{
 		Type messageType = methodInfo.GetParameters()[0].ParameterType;
 
@@ -93,8 +106,8 @@ public class EventBus
 		var actionDelegate = Delegate.CreateDelegate(delegateType, null, methodInfo);
 
 		// Subscribe to the message type using the created delegate
-		return this.GetType().GetMethod("Subscribe")!.MakeGenericMethod(messageType)
-			.Invoke(this, new object[] { actionDelegate }) as CustomSubscriptionToken;
+		return _instance.GetType().GetMethod("Subscribe")!.MakeGenericMethod(messageType)
+			.Invoke(_instance, new object[] { actionDelegate }) as CustomSubscriptionToken;
 	}
 
 	/// <summary>

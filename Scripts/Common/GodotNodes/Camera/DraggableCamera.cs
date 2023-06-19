@@ -68,11 +68,11 @@ namespace Scripts.Common.GodotNodes
 			// Call CustomCamera2D processing first
 			base._Process(delta);
 
-			// Stop dragging processing if it's disabled
+			// Stop processing if it's disabled
 			if (!UseDragging)
 				return;
 
-			// Also don't process dragging if the camera following the node
+			// Also don't handle dragging if the camera is following the node
 			if (TargetNode is not null)
 				return;
 

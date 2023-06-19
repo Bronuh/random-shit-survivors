@@ -6,26 +6,26 @@ using System.Runtime.Loader;
 
 namespace Scripts.Common.ModApi
 {
-	internal class CoreModLoader
+	internal static class CoreModLoader
 	{
-		private List<Assembly> _coreAssemblies = new();
+		private static List<Assembly> _coreAssemblies = new();
 
-		public IReadOnlyCollection<Assembly> CoreAssemblies{
+		public static IReadOnlyCollection<Assembly> CoreAssemblies{
 			get
 			{
 				return _coreAssemblies.AsReadOnly();
 			}
-		}	
-		
-			
-		private Main _main;
+		}
 
-		public CoreModLoader(Main main)
+
+		private static Main _main;
+
+		public static void Initialize(Main main)
 		{
 			_main = main;
 		}
 
-		public void Load() { 
+		public static void Load() { 
 			var bundles = ModScanner.GetModBundles();
 			AssemblyLoadContext loadContext = AssemblyLoadContext.Default;
 
@@ -49,7 +49,7 @@ namespace Scripts.Common.ModApi
 			ExecuteCores();
 		}
 
-		public void AddCoreAssembly(Assembly assembly)
+		public static void AddCoreAssembly(Assembly assembly)
 		{
 			if (_coreAssemblies.Contains(assembly)) return;
 			if (_coreAssemblies.Any((localAssembly) => Equals(localAssembly.FullName, assembly.FullName))) return;
@@ -57,7 +57,7 @@ namespace Scripts.Common.ModApi
 			_coreAssemblies.Add(assembly);
 		}
 
-		private void ExecuteCores()
+		private static void ExecuteCores()
 		{
 			foreach(var coreAssembly in _coreAssemblies) {
 				try

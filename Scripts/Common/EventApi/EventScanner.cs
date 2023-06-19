@@ -13,17 +13,6 @@ namespace Scripts.Common.EventApi
 	/// </summary>
 	internal class EventScanner
 	{
-		private EventBus _bus;
-
-		/// <summary>
-		///		Initializes a new instance of the <see cref="EventScanner"/> class.
-		/// </summary>
-		/// <param name="bus">The event bus to subscribe the event listeners to.</param>
-		public EventScanner(EventBus bus)
-		{
-			_bus = bus;
-		}
-
 		/// <summary>
 		///		Scans event listeners and subscribes them to the event bus.
 		/// </summary>
@@ -40,7 +29,7 @@ namespace Scripts.Common.EventApi
 
 			foreach (var method in methods)
 			{
-				_bus.SubscribeMethod(method);
+				EventBus.SubscribeMethod(method);
 			}
 		}
 	}
