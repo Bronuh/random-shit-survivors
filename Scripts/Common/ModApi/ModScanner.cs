@@ -1,8 +1,9 @@
-﻿
+﻿using Godot;
 using Newtonsoft.Json;
 using Scripts.Current;
 using System.Collections.ObjectModel;
 using System.Reflection.Metadata;
+using static Scripts.Common.GamePaths;
 
 namespace Scripts.Common.ModApi;
 
@@ -13,18 +14,7 @@ internal static class ModScanner
 	/// </summary>
 	public static bool ScanFinished { get; private set; } = false;
 
-	// Relative pathes for scanner
-	private const string ModsRoot = "Mods"; // Directory where mods is located, relative to game execution directory.
-	private const string GameDataRoot = "GameData";
-
-	private const string AboutDir = "About"; // Must contain modinfo.json and optional icon.png.
-	private const string ModInfoFile = "modinfo.json";
-	private const string IconFile = "icon.png";
-	private const string AssembliesDir = "Assemblies"; // Non-core assemblies must be located here.
-	private const string AssetsDir = "Assets"; // All assets (images, textures, sounds, etc) must be located here.
-	private const string DefsDir = "Defs"; // All game object definitions (serialized data) must be located here.
-	private const string PatchesDir = "Patches"; // All Defs patches must be located here.
-	private const string CoresDir = "Cores"; // All core assemblies must be located here. The core assemblies will be loaded and executed before all other mods.
+	
 
 	private static List<ModBundle> _bundles = new();
 
@@ -56,12 +46,23 @@ internal static class ModScanner
 			ScanMod(dir);
 		}
 
+		foreach (var dir in Directory.GetDirectories(ModsRoot))
+		{
+			// Note that scanning order doesn't matter. Core game and DLCs will be sorted later automatically.
+			// Obviously, for automatic sorting, DLCs (Downloadable Content) must have 'Core' listed as a dependency in modinfo.json.
+			ScanMod(dir);
+		}
+
 		ScanFinished = true;
 	}
+
+
 
 	public static ReadOnlyCollection<ModBundle> GetModBundles() {
 		return _bundles.AsReadOnly();
 	}
+
+
 
 	/// <summary>
 	/// 	Scans specified mod directory.
@@ -118,7 +119,7 @@ internal static class ModScanner
 			Debug(e.Message);
 		}
 
-		
+		ModsManager.RegisterMod(bundle);
 
 		// TODO: Prepare VFS for definitions resolving
 		// TODO: Resolve patches
@@ -174,9 +175,10 @@ internal static class ModScanner
 		return isValid;
 	}
 
+
 	private static void RestoreModId(this ModInfo info)
 	{
-		info.ModId = $"{info.Author}.{info.ModName}";
+		info.ModId = $"{info.Author.Clear()}.{info.ModName.Clear()}";
 		Print($"ModInfo does not contain a ModId. Restoring ModId from Author and ModName.");
 	}
 }

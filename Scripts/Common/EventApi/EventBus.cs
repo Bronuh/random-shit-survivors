@@ -114,7 +114,7 @@ public class EventBus
 	///		Unsubscribes from a message type using the provided subscription token.
 	/// </summary>
 	/// <param name="token">The subscription token.</param>
-	public void Unsubscribe(CustomSubscriptionToken token)
+	public static void Unsubscribe(CustomSubscriptionToken token)
 	{
 		token.Unsubscribe();
 	}

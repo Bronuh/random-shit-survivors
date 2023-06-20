@@ -46,3 +46,21 @@ public static class GameNodes
 	public const string WorldNodeName = "%WorldNode";
 	public const string PhysicsSmoothingName = "%PhysicsSmoothing";
 }
+
+public static class GamePaths
+{
+	// Relative pathes
+	public const string ModsRoot = "Mods"; // Directory where mods is located, relative to game execution directory.
+	public const string GameDataRoot = "GameData";
+	public const string ActiveModsFile = "activeMods.json";
+
+
+	public const string AboutDir = "About"; // Must contain modinfo.json and optional icon.png.
+	public const string ModInfoFile = "modinfo.json";
+	public const string IconFile = "icon.png";
+	public const string AssembliesDir = "Assemblies"; // Non-core assemblies must be located here.
+	public const string AssetsDir = "Assets"; // All assets (images, textures, sounds, etc) must be located here.
+	public const string DefsDir = "Defs"; // All game object definitions (serialized data) must be located here.
+	public const string PatchesDir = "Patches"; // All Defs patches must be located here.
+	public const string CoresDir = "Cores"; // All core assemblies must be located here. The core assemblies will be loaded and executed before all other mods.
+}

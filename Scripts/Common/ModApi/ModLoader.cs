@@ -10,14 +10,8 @@ namespace Scripts.Common.ModApi
 	/// <summary>
 	/// Class that describes mod loading logic.
 	/// </summary>
-	public class ModLoader : IInitializable
+	public static class ModLoader
 	{
-
-		public ModLoader() {
-			// Must load assemblies according to load order of ModsManager
-
-		}
-
 		/// <summary>
 		/// During the pre-initialization stage:<br/>
 		///		- Scans the mods folder<br/>
@@ -27,7 +21,7 @@ namespace Scripts.Common.ModApi
 		///		- Forms the list of active and inactive mods<br/>
 		///		- Calls PreInit() on the initializers
 		/// </summary>
-		public virtual void PreInit()
+		public static void PreInit()
 		{
 		}
 
@@ -36,7 +30,7 @@ namespace Scripts.Common.ModApi
 		///		- Entities (content) are created<br/>
 		///		- Init() is called on the initializers
 		/// </summary>
-		public virtual void Init()
+		public static void Init()
 		{
 		}
 
@@ -45,7 +39,7 @@ namespace Scripts.Common.ModApi
 		///		During the post-initialization stage, additional patches are applied to dependent mods.
 		///		Also calls PostInit() on the initializers.
 		/// </summary>
-		public virtual void PostInit()
+		public static void PostInit()
 		{
 		}
 	}

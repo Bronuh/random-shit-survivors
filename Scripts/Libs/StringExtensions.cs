@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Scripts.Libs
@@ -21,6 +22,15 @@ namespace Scripts.Libs
 			return (T)System.Enum.Parse(typeof(T), value, true);
 		}
 
+		/// <summary>
+		/// Removes non-alphanumeric characters from a string.
+		/// </summary>
+		/// <param name="str">The input string.</param>
+		/// <returns>The modified string with non-alphanumeric characters removed.</returns>
+		public static string Clear(this string str)
+		{
+			return Regex.Replace(str, "[^a-zA-Z0-9]", "");
+		}
 
 		/// <summary>
 		/// Determines whether the specified string contains all the specified values.

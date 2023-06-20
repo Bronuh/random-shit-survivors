@@ -11,12 +11,12 @@ namespace Scripts.Common.EventApi
 	/// <summary>
 	///		Scans event listeners and subscribes them to the event bus.
 	/// </summary>
-	internal class EventScanner
+	internal static class EventScanner
 	{
 		/// <summary>
 		///		Scans event listeners and subscribes them to the event bus.
 		/// </summary>
-		public void ScanEventListeners()
+		public static void ScanEventListeners()
 		{
 			var methods = AppDomain.CurrentDomain.GetAssemblies() // Returns all currently loaded assemblies
 				.SelectMany(x => x.GetTypes()) // returns all types defined in these assemblies

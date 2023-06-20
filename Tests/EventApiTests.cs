@@ -6,7 +6,7 @@ namespace Tests
 	[TestClass]
 	public class EventApiTests
 	{
-		private EventBus _eventBus = new();
+		//private EventBus _eventBus = new();
 
 		public class TestMessage : GameMessage
 		{
@@ -15,7 +15,7 @@ namespace Tests
 				Args = args;
 			}
 
-			public TestMessageArgs Args { get; }
+			public new TestMessageArgs Args { get; }
 		}
 		public class TestMessageArgs : GameMessageArgs
 		{
@@ -35,8 +35,8 @@ namespace Tests
 			string msg = "";
 
 			// act
-			_eventBus.Subscribe<TestMessage>((m) => { msg = m.Args.Msg; });
-			_eventBus.Publish(new TestMessage(new TestMessageArgs(expectedOutput)));
+			EventBus.Subscribe<TestMessage>((m) => { msg = m.Args.Msg; });
+			EventBus.Publish(new TestMessage(new TestMessageArgs(expectedOutput)));
 
 			// assert
 			Assert.AreEqual(expectedOutput, msg);

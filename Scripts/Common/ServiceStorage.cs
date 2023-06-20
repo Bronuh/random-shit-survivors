@@ -21,38 +21,8 @@ namespace Scripts.Common
 		/// </summary>
 		public static bool IsUnlocked { get; private set; } = true;
 
-		private static ModLoader _modLoader = new ModLoader();
-		private static ModsManager _modsManager = new ModsManager();
 
 		private static HashSet<IService> _customServices = new HashSet<IService>();
-
-
-		/// <summary>
-		///		The current mod loader. Can be replaced by Core mods (see <see cref="ICoreMod"/>).
-		/// </summary>
-		public static ModLoader ModLoader
-		{
-			get { return _modLoader; }
-			set
-			{
-				if (IsUnlocked) { _modLoader = value; }
-				else { Throw(); }
-			}
-		}
-
-
-		/// <summary>
-		///		The current mods manager. Can be replaced by Core mods (see <see cref="ICoreMod"/>).
-		/// </summary>
-		public static ModsManager ModsManager
-		{
-			get { return _modsManager; }
-			set
-			{
-				if (IsUnlocked) { _modsManager = value; }
-				else { Throw(); }
-			}
-		}
 
 
 		/// <summary>
