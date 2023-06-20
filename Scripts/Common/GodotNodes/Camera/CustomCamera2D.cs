@@ -26,21 +26,6 @@ namespace Scripts.Common.GodotNodes
 		}
 
 		/// <summary>
-		///		Position, relative to the node's parent. Hides setter. Use TargetPosition to set camera position.
-		///		TODO: Is it even needed?
-		/// </summary>
-		/*public new Vector2 Position { 
-			get 
-			{
-				return base.Position;
-			}
-			private set 
-			{ 
-				base.Position = value;
-			}
-		}*/
-
-		/// <summary>
 		///		What method will be used to process the camera.
 		/// </summary>
 		[Export] public CameraProcessMode ProcessOn { get; set; } = CameraProcessMode.Physics;

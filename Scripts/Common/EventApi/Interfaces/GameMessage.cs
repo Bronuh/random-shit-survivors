@@ -9,15 +9,12 @@ namespace Scripts.Common.EventApi;
 
 public abstract class GameMessage : ITinyMessage
 {
-	public object Sender => _sender;
-	public GameMessageArgs Args => _args;
+	/// <summary>
+	/// True if you can cancel this message by calling Cancel()
+	/// </summary>
+	public virtual bool IsCancellable => false;
 
-	private object _sender;
-	private GameMessageArgs _args;
 
-	public GameMessage(object sender, GameMessageArgs args)
-	{
-		_sender = sender;
-		_args = args;
-	}
+	public GameMessage() { }
+
 }

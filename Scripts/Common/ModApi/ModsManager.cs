@@ -28,6 +28,10 @@ namespace Scripts.Common.ModApi
 
 
 		public static void Initialize() {
+
+			// Get all the mods
+			_allMods = ModScanner.GetModBundles();
+
 			// Path to the activeMods.json
 			string activeModsListPath = Path.Combine(ActiveModsFile);
 
@@ -60,6 +64,7 @@ namespace Scripts.Common.ModApi
 
 			// Check if current load order contains misordered entries
 			CheckOrder();
+			_ready = true;
 		}
 
 		public static void CheckOrder()

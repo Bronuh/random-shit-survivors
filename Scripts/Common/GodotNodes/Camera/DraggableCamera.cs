@@ -32,7 +32,6 @@ namespace Scripts.Common.GodotNodes
 		public bool UseInertia { get; set; } = true;
 		/// <summary>
 		/// Multiplier applied to the inertia every frame. The closer to 0, the slower the deceleration.
-		/// TODO: Review this field. Can be made more elegant + add a limit
 		/// </summary>
 		/// <remarks>
 		/// It's seems like values lesser than 0.9 makes the camera to stop almost instantly.

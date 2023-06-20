@@ -58,8 +58,11 @@ internal static class ModScanner
 
 
 
-	public static ReadOnlyCollection<ModBundle> GetModBundles() {
-		return _bundles.AsReadOnly();
+	public static List<ModBundle> GetModBundles() {
+		if(!ScanFinished)
+			throw new InvalidOperationException("Tried to get mod bundles, but scanning is not finished.");
+
+		return _bundles;
 	}
 
 
@@ -119,9 +122,8 @@ internal static class ModScanner
 			Debug(e.Message);
 		}
 
-		ModsManager.RegisterMod(bundle);
+		_bundles.Add(bundle);
 
-		// TODO: Prepare VFS for definitions resolving
 		// TODO: Resolve patches
 	}
 

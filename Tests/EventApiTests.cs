@@ -10,22 +10,15 @@ namespace Tests
 
 		public class TestMessage : GameMessage
 		{
-			public TestMessage(TestMessageArgs args) : base(null, args)
-			{
-				Args = args;
-			}
-
-			public new TestMessageArgs Args { get; }
-		}
-		public class TestMessageArgs : GameMessageArgs
-		{
-			public TestMessageArgs(string msg)
+			public string Msg { get; }
+			public TestMessage(string msg)
 			{
 				Msg = msg;
 			}
 
-			public string Msg { get; }
 		}
+
+		public class CancellableTestMessage : CancellableMessage { }
 
 		[TestMethod]
 		public void EventBus_Basic_SendAndReceiveMessage()
@@ -35,8 +28,27 @@ namespace Tests
 			string msg = "";
 
 			// act
-			EventBus.Subscribe<TestMessage>((m) => { msg = m.Args.Msg; });
-			EventBus.Publish(new TestMessage(new TestMessageArgs(expectedOutput)));
+			EventBus.Subscribe<TestMessage>((m) => { msg = m.Msg; });
+			EventBus.Publish(new TestMessage(expectedOutput));
+
+			// assert
+			Assert.AreEqual(expectedOutput, msg);
+		}
+
+		[TestMethod]
+		public void EventBus_Basic_CancelMessage()
+		{
+			// arrange
+			string expectedOutput = "Cancelled";
+			string msg = "Published";
+
+			// act
+			EventBus.Subscribe<CancellableTestMessage>((m) => { m.Cancel(); });
+			var message = new CancellableTestMessage();
+			EventBus.Publish(message);
+
+			if(message.IsCancelled)
+				msg = expectedOutput;
 
 			// assert
 			Assert.AreEqual(expectedOutput, msg);

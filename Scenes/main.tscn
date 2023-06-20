@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjsepe4wt2q56"]
+[gd_scene load_steps=10 format=3 uid="uid://cjsepe4wt2q56"]
 
 [ext_resource type="Script" path="res://Scripts/Current/Main.cs" id="1_y3gu6"]
 [ext_resource type="PackedScene" uid="uid://oilwraaijcfo" path="res://Scenes/shaders_node.tscn" id="2_j61ta"]
+[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/UI/ShadersNode.cs" id="3_7pkw1"]
 [ext_resource type="PackedScene" uid="uid://btwyyvp72keen" path="res://Scenes/hud_node.tscn" id="3_wq2fv"]
 [ext_resource type="PackedScene" uid="uid://bi7rb5qknto8t" path="res://Scenes/menu_node.tscn" id="4_mlycn"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="5_12dna"]
-[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/Camera/CustomCamera2D.cs" id="6_mqq57"]
-[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/Camera/DraggableCamera.cs" id="7_a7nff"]
+[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/UI/HudNode.cs" id="5_h26ms"]
+[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/UI/MenuNode.cs" id="7_4vnm6"]
+[ext_resource type="Script" path="res://Scripts/Current/WorldNode.cs" id="8_n4xt2"]
 
 [node name="MainNode" type="Node2D"]
 script = ExtResource("1_y3gu6")
@@ -20,22 +22,20 @@ offset_bottom = 40.0
 
 [node name="ShadersNode" parent="UiNode" instance=ExtResource("2_j61ta")]
 unique_name_in_owner = true
+script = ExtResource("3_7pkw1")
 
 [node name="HudNode" parent="UiNode" instance=ExtResource("3_wq2fv")]
 unique_name_in_owner = true
+script = ExtResource("5_h26ms")
 
 [node name="MenuNode" parent="UiNode" instance=ExtResource("4_mlycn")]
 unique_name_in_owner = true
+script = ExtResource("7_4vnm6")
 
 [node name="WorldNode" type="Node2D" parent="."]
 unique_name_in_owner = true
+script = ExtResource("8_n4xt2")
 
 [node name="PhysicsSmoothing" type="Node2D" parent="WorldNode"]
 unique_name_in_owner = true
 script = ExtResource("5_12dna")
-
-[node name="CustomCamera2D" type="Camera2D" parent="WorldNode/PhysicsSmoothing"]
-script = ExtResource("6_mqq57")
-
-[node name="DraggableCamera" type="Camera2D" parent="WorldNode/PhysicsSmoothing"]
-script = ExtResource("7_a7nff")
