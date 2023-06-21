@@ -379,6 +379,42 @@ namespace Scripts.Libs
 			return node.GetNode<Main>(GameNodes.WorldNodeName);
 		}
 		#endregion
+
+		#region Color
+		/// <summary>
+		/// Darkens the specified color by the given amount.
+		/// </summary>
+		/// <param name="color">The color to darken.</param>
+		/// <param name="amount">The amount by which to darken the color. Should be a value between 0 and 1.</param>
+		/// <returns>The darkened color.</returns>
+		public static Color Darken(this Color color, float amount)
+		{
+			amount = Math.Clamp(amount, 0, 1);
+			return color with
+			{
+				R = color.R * (1 - amount),
+				G = color.G * (1 - amount),
+				B = color.B * (1 - amount)
+			};
+		}
+
+		/// <summary>
+		/// Lightens the specified color by the given amount.
+		/// </summary>
+		/// <param name="color">The color to lighten.</param>
+		/// <param name="amount">The amount by which to lighten the color. Should be a value between 0 and 1.</param>
+		/// <returns>The lightened color.</returns>
+		public static Color Lighten(this Color color, float amount)
+		{
+			amount = Math.Clamp(amount, 0, 1);
+			return color with
+			{
+				R = color.R + (1 - color.R) * amount,
+				G = color.G + (1 - color.G) * amount,
+				B = color.B + (1 - color.B) * amount
+			};
+		}
+		#endregion
 	}
 
 
