@@ -1,4 +1,5 @@
-﻿namespace Scripts.Common.TickSystem
+﻿
+namespace Scripts.Libs.TickSystem
 {
 	/// <summary>
 	/// Scheduler class.
@@ -70,7 +71,7 @@
 		public SchedulerTask ExecuteEveryNTicks(Action<double> action, int interval, int delay = 0,
 			int executionTimes = 1, bool doInfinitely = true)
 		{
-			return AddTask(action, _tick + (long)delay, interval, executionTimes, doInfinitely);
+			return AddTask(action, _tick + delay, interval, executionTimes, doInfinitely);
 		}
 
 
@@ -168,7 +169,7 @@
 				task.Execute(dt);
 				if (task.DoInfinitely || task.ExecutionsRemaining > 0)
 				{
-					task.NextExecutionAt = _tick + (long)task.Interval;
+					task.NextExecutionAt = _tick + task.Interval;
 					_taskList.Add(task);
 				}
 			}

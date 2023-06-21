@@ -1,11 +1,8 @@
 using Godot;
-using System;
-using Scellecs.Morpeh;
-using Scripts.Common.ModApi;
-using Scripts.Common;
 using Scripts.Current;
-using Scripts.Common.EventApi;
 using Scripts.Common.GodotNodes.UI;
+using Scripts.Libs.EventApi;
+using Scripts.Libs.ModApi;
 
 public partial class Main : Node2D
 {

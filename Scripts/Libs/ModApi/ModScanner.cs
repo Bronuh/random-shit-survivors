@@ -1,11 +1,9 @@
 ﻿using Godot;
 using Newtonsoft.Json;
 using Scripts.Current;
-using System.Collections.ObjectModel;
-using System.Reflection.Metadata;
 using static Scripts.Common.GamePaths;
 
-namespace Scripts.Common.ModApi;
+namespace Scripts.Libs.ModApi;
 
 internal static class ModScanner
 {
@@ -14,33 +12,35 @@ internal static class ModScanner
 	/// </summary>
 	public static bool ScanFinished { get; private set; } = false;
 
-	
+
 
 	private static List<ModBundle> _bundles = new();
 
 	/// <summary>
 	/// 	Starts scanning process. This method also will scan GameData directory.
 	/// </summary>
-	internal static void ScanMods(){
+	internal static void ScanMods()
+	{
 		// Check root directories
-		Print("Current path: "+Path.GetFullPath("."));
+		Print("Current path: " + Path.GetFullPath("."));
 		Directory.CreateDirectory(GameDataRoot);
 		Directory.CreateDirectory(ModsRoot);
 
 		// Check Game data directories
-		string coreDir = Path.Combine(GameDataRoot,"Core");
+		string coreDir = Path.Combine(GameDataRoot, "Core");
 
 		// Basically game is just one large mod
 		Directory.CreateDirectory(coreDir);
 
-		Directory.CreateDirectory(Path.Combine(coreDir,AboutDir));
-		Directory.CreateDirectory(Path.Combine(coreDir,AssembliesDir));
-		Directory.CreateDirectory(Path.Combine(coreDir,AssetsDir));
-		Directory.CreateDirectory(Path.Combine(coreDir,DefsDir));
+		Directory.CreateDirectory(Path.Combine(coreDir, AboutDir));
+		Directory.CreateDirectory(Path.Combine(coreDir, AssembliesDir));
+		Directory.CreateDirectory(Path.Combine(coreDir, AssetsDir));
+		Directory.CreateDirectory(Path.Combine(coreDir, DefsDir));
 		Directory.CreateDirectory(Path.Combine(coreDir, CoresDir));
 
 		// Now scan base game and possible DLCs as mods
-		foreach (var dir in Directory.GetDirectories(GameDataRoot)){
+		foreach (var dir in Directory.GetDirectories(GameDataRoot))
+		{
 			// Note that scanning order doesn't matter. Core game and DLCs will be sorted later automatically.
 			// Obviously, for automatic sorting, DLCs (Downloadable Content) must have 'Core' listed as a dependency in modinfo.json.
 			ScanMod(dir);
@@ -58,8 +58,9 @@ internal static class ModScanner
 
 
 
-	public static List<ModBundle> GetModBundles() {
-		if(!ScanFinished)
+	public static List<ModBundle> GetModBundles()
+	{
+		if (!ScanFinished)
 			throw new InvalidOperationException("Tried to get mod bundles, but scanning is not finished.");
 
 		return _bundles;
@@ -70,13 +71,15 @@ internal static class ModScanner
 	/// <summary>
 	/// 	Scans specified mod directory.
 	/// </summary>
-	private static void ScanMod(string path){
+	private static void ScanMod(string path)
+	{
 		ModBundle bundle = new ModBundle();
 		ModInfo info = null;
-		try{
-			info = JsonConvert.DeserializeObject<ModInfo>(File.ReadAllText(Path.Combine(path,AboutDir,ModInfoFile)));
+		try
+		{
+			info = JsonConvert.DeserializeObject<ModInfo>(File.ReadAllText(Path.Combine(path, AboutDir, ModInfoFile)));
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			Err(e.Message);
 			Err(e.StackTrace);
@@ -128,49 +131,54 @@ internal static class ModScanner
 	}
 
 
-	
-	private static bool ValidateModBundle(ModBundle bundle){
+
+	private static bool ValidateModBundle(ModBundle bundle)
+	{
 		// The method will return true until something goes wrong during validation.
 		// This is done on purpose so that all errors found during validation are logged.
-		bool isValid = true; 
+		bool isValid = true;
 
 		// First, restore things that can be restored
 		// Try to restore mod author
-		if (String.IsNullOrWhiteSpace(bundle.Info.ModName) && GameSettings.TryRestoreAuthor)
+		if (string.IsNullOrWhiteSpace(bundle.Info.ModName) && GameSettings.TryRestoreAuthor)
 		{
 			Print($"{bundle.ModPath}:\nModInfo does not contain an Author. Restoring with 'Generic' author.");
 			bundle.Info.Author = "Generic";
 		}
 
 		// Try to restore mod name
-		if (String.IsNullOrWhiteSpace(bundle.Info.ModName) && GameSettings.TryRestoreModName){
+		if (string.IsNullOrWhiteSpace(bundle.Info.ModName) && GameSettings.TryRestoreModName)
+		{
 			Print($"{bundle.ModPath}:\nModInfo does not contain a ModName. Restoring from directory name.");
 			bundle.Info.ModName = Path.GetDirectoryName(bundle.ModPath);
 		}
 
-		
+
 		// And then validate
 		// Bundle must contain a ModInfo instance
-		if (bundle.Info is null){
+		if (bundle.Info is null)
+		{
 			Err($"{bundle.ModPath}:\nMod bundle does not contain a ModInfo instance");
 			isValid = false;
 		}
 
 		// And that ModInfo must have an ID.
-		if(String.IsNullOrWhiteSpace(bundle.Info.ModId)){
+		if (string.IsNullOrWhiteSpace(bundle.Info.ModId))
+		{
 			Err($"{bundle.ModPath}:\nModInfo does not contain a ModId");
 
-			if (GameSettings.TryRestoreModId) RestoreModId(bundle.Info);
+			if (GameSettings.TryRestoreModId) bundle.Info.RestoreModId();
 			else isValid = false;
 		}
 
 
 		// The ID must have at least two parts separated by a dot: author/team/organization/namespace and mod name.
-		if(bundle.Info.ModId.Split('.').Length < 2){
-			Err($"{bundle.ModPath}:\nModInfo contain invalid ModId ({bundle.Info.ModId}).\n"+
+		if (bundle.Info.ModId.Split('.').Length < 2)
+		{
+			Err($"{bundle.ModPath}:\nModInfo contain invalid ModId ({bundle.Info.ModId}).\n" +
 			$"The ID must have at least two parts separated by a dot: author/team/organization/namespace and mod name.");
-			
-			if (GameSettings.TryRestoreModId) RestoreModId(bundle.Info);
+
+			if (GameSettings.TryRestoreModId) bundle.Info.RestoreModId();
 			else isValid = false;
 		}
 

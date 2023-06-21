@@ -1,13 +1,11 @@
-using Scripts.Common.EventApi;
 using Scripts.Libs;
+using Scripts.Libs.EventApi;
 
 namespace Tests
 {
 	[TestClass]
 	public class EventApiTests
 	{
-		//private EventBus _eventBus = new();
-
 		public class TestMessage : GameMessage
 		{
 			public string Msg { get; }
@@ -15,7 +13,6 @@ namespace Tests
 			{
 				Msg = msg;
 			}
-
 		}
 
 		public class CancellableTestMessage : CancellableMessage { }

@@ -1,12 +1,7 @@
 ﻿using Godot;
-using Scripts.Common.EventApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Scripts.Libs.EventApi;
 
-namespace Scripts.Libs
+namespace Scripts.Common
 {
 	public partial class AdvancedInputListener : Node
 	{

@@ -1,7 +1,6 @@
-﻿using Scripts.Libs;
-using System.Reflection;
+﻿using System.Reflection;
 
-namespace Scripts.Common.EventApi;
+namespace Scripts.Libs.EventApi;
 
 /// <summary>
 ///		Basic event bus class.
@@ -33,7 +32,7 @@ public class EventBus
 	/// <param name="main"></param>
 	public static void Initialize(Main main = null)
 	{
-		if(GameMain is null)
+		if (GameMain is null)
 		{
 			_instance = new EventBus(main);
 		}

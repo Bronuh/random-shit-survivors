@@ -1,13 +1,5 @@
-﻿using Scripts.Common.ModApi;
-using Scripts.Common.ModApi.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Scripts.Common
+﻿
+namespace Scripts.Libs.ModApi
 {
 
 	/// <summary>

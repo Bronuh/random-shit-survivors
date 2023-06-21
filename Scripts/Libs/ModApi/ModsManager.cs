@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Newtonsoft.Json;
 using static Scripts.Common.GamePaths;
 
-namespace Scripts.Common.ModApi
+namespace Scripts.Libs.ModApi
 {
 	/// <summary>
 	///		Class responsible for user mod management.
@@ -27,7 +22,8 @@ namespace Scripts.Common.ModApi
 		private static bool _ready = false;
 
 
-		public static void Initialize() {
+		public static void Initialize()
+		{
 
 			// Get all the mods
 			_allMods = ModScanner.GetModBundles();
@@ -72,7 +68,7 @@ namespace Scripts.Common.ModApi
 			foreach (ModBundle bundle in ActiveMods)
 			{
 				var orderScan = new LoadOrderWarning(bundle, ActiveMods);
-				if(orderScan.HasWarnings())
+				if (orderScan.HasWarnings())
 					Warnings.Add(orderScan);
 			}
 		}

@@ -1,16 +1,14 @@
-﻿using Scripts.Common.ModApi.Interfaces;
-using System.IO;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.Loader;
 
-namespace Scripts.Common.ModApi
+namespace Scripts.Libs.ModApi
 {
 	internal static class CoreModLoader
 	{
 		private static List<Assembly> _coreAssemblies = new();
 
-		public static IReadOnlyCollection<Assembly> CoreAssemblies{
+		public static IReadOnlyCollection<Assembly> CoreAssemblies
+		{
 			get
 			{
 				return _coreAssemblies.AsReadOnly();
@@ -25,7 +23,8 @@ namespace Scripts.Common.ModApi
 			_main = main;
 		}
 
-		public static void Load() { 
+		public static void Load()
+		{
 			var bundles = ModScanner.GetModBundles();
 			AssemblyLoadContext loadContext = AssemblyLoadContext.Default;
 
@@ -59,7 +58,8 @@ namespace Scripts.Common.ModApi
 
 		private static void ExecuteCores()
 		{
-			foreach(var coreAssembly in _coreAssemblies) {
+			foreach (var coreAssembly in _coreAssemblies)
+			{
 				try
 				{
 					foreach (Type type in coreAssembly.GetTypes())
@@ -71,7 +71,7 @@ namespace Scripts.Common.ModApi
 						}
 					}
 				}
-				catch(Exception ex)
+				catch (Exception ex)
 				{
 					Err(ex.Message);
 					Err(ex.StackTrace);

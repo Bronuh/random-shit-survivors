@@ -1,12 +1,5 @@
-﻿using Mono.Cecil;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Scripts.Common.EventApi
+﻿
+namespace Scripts.Libs.EventApi
 {
 	/// <summary>
 	///		Scans event listeners and subscribes them to the event bus.

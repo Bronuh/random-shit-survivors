@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Scripts.Common.ModApi.Interfaces
+﻿
+namespace Scripts.Libs.ModApi
 {
 	/// <summary>
 	///		Interface that defines methods called during initialization. The interface methods are called sequentially.

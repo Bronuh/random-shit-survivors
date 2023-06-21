@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Scripts.Common.ModApi
+﻿
+namespace Scripts.Libs.ModApi
 {
 	/// <summary>
 	/// This class represents loading misorders for the specified mod.
@@ -94,7 +89,7 @@ namespace Scripts.Common.ModApi
 		/// <returns>true if there is at least one any misorder</returns>
 		public bool HasWarnings()
 		{
-			return 
+			return
 				IncompatibleWithMods.Count > 0
 				|| RequiredModsNotFound.Count > 0
 				|| ModsToBeLoadedAfter.Count > 0

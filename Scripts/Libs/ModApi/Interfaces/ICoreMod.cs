@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Scripts.Common.ModApi.Interfaces
+﻿
+namespace Scripts.Libs.ModApi
 {
 	/// <summary>
 	///		Interface describing a single method called BEFORE initialization begins.

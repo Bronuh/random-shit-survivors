@@ -1,13 +1,6 @@
-﻿using Godot;
-using Scripts.Common.EventApi;
-using Scripts.Common.ModApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Scripts.Common.ModApi.ModApiEvents;
-
+﻿using Scripts.Libs.EventApi;
+using Scripts.Libs.ModApi;
+using static Scripts.Libs.ModApi.ModApiEvents;
 
 public partial class Main
 {

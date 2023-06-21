@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Scripts.Common.ModApi
+﻿
+namespace Scripts.Libs.ModApi
 {
 	/// <summary>
 	///		Classes marked with this attribute will have their static constructor called after post-initialization.

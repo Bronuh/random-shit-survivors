@@ -1,11 +1,5 @@
-﻿using Scripts.Common.ModApi.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Scripts.Common.ModApi
+﻿
+namespace Scripts.Libs.ModApi
 {
 	/// <summary>
 	/// Class that describes mod loading logic.

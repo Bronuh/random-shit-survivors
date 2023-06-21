@@ -1,8 +1,5 @@
-using Godot;
-using Lombok.NET;
-using System;
 
-namespace Scripts.Common.ModApi;
+namespace Scripts.Libs.ModApi;
 
 /// <summary>
 ///		This class contains information about the mod.

@@ -1,12 +1,6 @@
-﻿using Scripts.Common.EventApi;
-using Scripts.Libs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace Scripts.Common.ModApi
+namespace Scripts.Libs.ModApi
 {
 	public static class ModApiEvents
 	{

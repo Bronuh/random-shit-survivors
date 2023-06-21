@@ -1,11 +1,6 @@
-﻿using Scripts.Common.EventApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Scripts.Libs.EventApi;
 
-namespace Scripts.Common.TickSystem
+namespace Scripts.Libs.TickSystem
 {
 	public static class ClockEvents
 	{

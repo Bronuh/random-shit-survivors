@@ -1,13 +1,7 @@
-﻿using Scripts.Common.ModApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VirtualFileSystem;
+﻿using VirtualFileSystem;
 using static Scripts.Common.GamePaths;
 
-namespace Scripts.Common
+namespace Scripts.Libs.ModApi
 {
 	/// <summary>
 	/// Provides functionality for managing storage and loading assets.

@@ -2,11 +2,6 @@
 using Godot.Collections;
 using Scripts.Common;
 using Scripts.Current;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scripts.Libs
 {

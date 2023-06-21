@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Scripts.Common.ModApi;
+namespace Scripts.Libs.ModApi;
 
 /// <summary>
 ///		Представляет ссылку на загруженный мод

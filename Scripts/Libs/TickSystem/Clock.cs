@@ -1,13 +1,7 @@
-﻿using Scripts.Common.EventApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using static Scripts.Common.TickSystem.ClockEvents;
+﻿using Scripts.Libs.EventApi;
+using static Scripts.Libs.TickSystem.ClockEvents;
 
-namespace Scripts.Common.TickSystem
+namespace Scripts.Libs.TickSystem
 {
 	/// <summary>
 	/// This class provides basic clock functionality.
@@ -44,7 +38,7 @@ namespace Scripts.Common.TickSystem
 		/// Delta represents time in seconds since last tick.
 		/// </summary>
 		/// <param name="action"></param>
-		public Clock(Action<double> action, string name = null) 
+		public Clock(Action<double> action, string name = null)
 		{
 			TickAction = action;
 			ClockName = name;
@@ -91,7 +85,7 @@ namespace Scripts.Common.TickSystem
 			double interval = GetInterval();
 
 			// Fire tick start event
-			if(FireEvents)
+			if (FireEvents)
 				EventBus.Publish(new TickEvent(TickStage.Start, _first ? 0 : interval, CurrentTick, ClockName));
 
 			// Execute main action
@@ -112,7 +106,7 @@ namespace Scripts.Common.TickSystem
 		private double GetInterval()
 		{
 			DateTime now = DateTime.Now;
-			double interval = (_lastTickTime == default) ? 0 : (now - _lastTickTime).TotalSeconds;
+			double interval = _lastTickTime == default ? 0 : (now - _lastTickTime).TotalSeconds;
 			_lastTickTime = now;
 			return interval;
 		}
