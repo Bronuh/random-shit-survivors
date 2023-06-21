@@ -22,11 +22,38 @@ namespace Scripts.Common
 		public override void _Input(InputEvent inputEvent)
 		{
 			if (this != Instance) return;
+
+			if(inputEvent is InputEventKey)
+			{
+				var keyEvent = inputEvent as InputEventKey;
+				if(keyEvent.IsPressed())
+					EventBus.Publish(new KeyPressedEvent(keyEvent));
+
+
+				if (keyEvent.IsReleased())
+					EventBus.Publish(new KeyReleasedEvent(keyEvent));
+			}
 		}
+
+
+
 
 		public class KeyPressedEvent : GameMessage 
 		{ 
-			
+			public InputEventKey Event { get; private set; }
+			public KeyPressedEvent(InputEventKey eventKey)
+			{
+				Event = eventKey;
+			}
+		}
+
+		public class KeyReleasedEvent : GameMessage
+		{
+			public InputEventKey Event { get; private set; }
+			public KeyReleasedEvent(InputEventKey eventKey)
+			{
+				Event = eventKey;
+			}
 		}
 	}
 }
