@@ -47,6 +47,20 @@ namespace Scripts.Libs
 		// object Sender { get; }
     }
 
+	
+	/// <summary>
+	///		Just a message with a 'Cancelled' flag 
+	/// </summary>
+	public abstract class CancellableMessage : ITinyMessage
+	{
+		public bool IsCancelled { get; protected set; } = false;
+
+		/// <summary>
+		///		Mark this message as cancelled
+		/// </summary> 
+		public void Cancel() => IsCancelled = true;
+	}
+
     /// <summary>
     /// Base class for messages that provides weak refrence storage of the sender
     /// </summary>
@@ -806,18 +820,26 @@ namespace Scripts.Libs
                                        select sub).ToList();
             }
 
-            currentlySubscribed.ForEach(sub =>
-            {
-                try
-                {
-                    sub.Proxy.Deliver(message, sub.Subscription);
-                }
-                catch (Exception exception)
-                {
-                    // By default ignore any errors and carry on
-                    _SubscriberErrorHandler.Handle(message, exception);
-                }
-            });
+			bool isCancellable = message.GetType().IsAssignableTo(typeof(CancellableMessage));
+			CancellableMessage cMsg = null;
+			if (isCancellable)
+				cMsg = message as CancellableMessage;
+
+			foreach (var sub in currentlySubscribed)
+			{
+				try
+				{
+					if (isCancellable && cMsg.IsCancelled)
+						break;
+
+					sub.Proxy.Deliver(message, sub.Subscription);
+				}
+				catch (Exception exception)
+				{
+					// By default ignore any errors and carry on
+					_SubscriberErrorHandler.Handle(message, exception);
+				}
+			}
         }
 
         private void PublishAsyncInternal<TMessage>(TMessage message, AsyncCallback callback) where TMessage : class, ITinyMessage

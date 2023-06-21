@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Scripts.Common.GodotNodes
 {
-	public partial class Holo2D : Sprite2D
+	public partial class Holo2D : Node2D
 	{
+
 	}
 }

@@ -1,5 +1,5 @@
 using Scripts.Common.EventApi;
-using static Godot.HttpRequest;
+using Scripts.Libs;
 
 namespace Tests
 {
@@ -48,6 +48,34 @@ namespace Tests
 			EventBus.Publish(message);
 
 			if(message.IsCancelled)
+				msg = expectedOutput;
+
+			// assert
+			Assert.AreEqual(expectedOutput, msg);
+		}
+
+		[TestMethod]
+		public void EventBus_Basic_CancelledMessageMustStopDelivering()
+		{
+			// arrange
+			string expectedOutput = "Cancelled by first";
+			string secondChange = "Executed after cancel";
+			string msg = "Published";
+
+			// act
+			EventBus.Subscribe<CancellableTestMessage>((m) => {
+				msg = expectedOutput;
+				m.Cancel(); 
+			});
+
+			EventBus.Subscribe<CancellableTestMessage>((m) => {
+				msg = secondChange;
+			});
+
+			var message = new CancellableTestMessage();
+			EventBus.Publish(message);
+
+			if (message.IsCancelled)
 				msg = expectedOutput;
 
 			// assert

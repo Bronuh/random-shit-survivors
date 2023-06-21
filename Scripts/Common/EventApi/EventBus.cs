@@ -49,7 +49,7 @@ public class EventBus
 	/// This method delivers the message to all subscribers who have subscribed to the specified message type.
 	/// If there are no subscribers for the message type, the message is not delivered.
 	/// </remarks>
-	public static void Publish<TMessage>(TMessage message) where TMessage : GameMessage
+	public static void Publish<TMessage>(TMessage message) where TMessage : class, ITinyMessage
 	{
 		Type messageType = typeof(TMessage);
 
@@ -70,7 +70,7 @@ public class EventBus
 	/// <typeparam name="TMessage">The type of the message.</typeparam>
 	/// <param name="action">The delivery action.</param>
 	/// <returns>Message subscription token that can be used for unsubscribing.</returns>
-	public static CustomSubscriptionToken Subscribe<TMessage>(Action<TMessage> action) where TMessage : GameMessage
+	public static CustomSubscriptionToken Subscribe<TMessage>(Action<TMessage> action) where TMessage : class, ITinyMessage
 	{
 		Type messageType = typeof(TMessage);
 

@@ -39,7 +39,7 @@ public partial class Main : Node2D
 			// Load mods
 			LoadMods();
 		}
-
+		
 		EventScanner.ScanEventListeners();
 	}
 
