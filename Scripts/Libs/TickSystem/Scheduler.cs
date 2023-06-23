@@ -83,7 +83,22 @@ namespace Scripts.Libs.TickSystem
 		/// <returns>A reference to the created task for manual management</returns>
 		public SchedulerTask ExecuteAt(Action<double> action, long targetTick)
 		{
-			return AddTask(action, targetTick);
+			if(targetTick > _tick)
+				return AddTask(action, targetTick);
+
+			return null;
+		}
+
+
+		/// <summary>
+		/// Executes a task once after a delay.
+		/// </summary>
+		/// <param name="action">The action to be executed</param>
+		/// <param name="targetTick">The target tick for execution</param>
+		/// <returns>A reference to the created task for manual management</returns>
+		public SchedulerTask ExecuteAfter(Action<double> action, long delay)
+		{
+			return AddTask(action, _tick + delay);
 		}
 
 
@@ -130,7 +145,7 @@ namespace Scripts.Libs.TickSystem
 		/// Emulates a tick of the scheduler.
 		/// </summary>
 		/// <param name="dt">The delta time for the tick</param>
-		public void Tick(double dt)
+		public void Tick(double dt = 0)
 		{
 			if (!_running)
 				return;

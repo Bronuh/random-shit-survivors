@@ -60,7 +60,7 @@ namespace Scripts.Libs.TickSystem
 		/// Starts clock with specified ticks per second.
 		/// </summary>
 		/// <param name="ticksPerSecond"></param>
-		public void StartClock(int ticksPerSecond)
+		public void StartClock(int ticksPerSecond = 0)
 		{
 			// Invalid value will be replaced with default 60 TPS
 			if (ticksPerSecond <= 0)
