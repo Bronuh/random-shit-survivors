@@ -1,6 +1,6 @@
 namespace Scripts.Current;
 
-public static class GameSettings{
+public static class InternalGameSettings{
     // General
 	public static bool Debug = true;
 

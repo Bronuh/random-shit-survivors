@@ -1,4 +1,4 @@
-namespace Scripts.Common;
+namespace Scripts.Current;
 
 public static class GameControls
 {

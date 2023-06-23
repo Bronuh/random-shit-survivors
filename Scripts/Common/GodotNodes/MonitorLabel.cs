@@ -41,7 +41,7 @@ namespace Scripts.Common.GodotNodes
 
 		public override void _Ready()
 		{
-			Visible = GameSettings.Debug;
+			Visible = InternalGameSettings.Debug;
 		}
 
 		// Updates the debug panel with all the values in the monitor.

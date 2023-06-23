@@ -1,6 +1,6 @@
 ﻿
 using Newtonsoft.Json;
-using static Scripts.Common.GamePaths;
+using static Scripts.Current.GamePaths;
 
 namespace Scripts.Libs.ModApi
 {

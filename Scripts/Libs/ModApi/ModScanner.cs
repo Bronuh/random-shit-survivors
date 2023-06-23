@@ -1,7 +1,7 @@
 ﻿using Godot;
 using Newtonsoft.Json;
 using Scripts.Current;
-using static Scripts.Common.GamePaths;
+using static Scripts.Current.GamePaths;
 
 namespace Scripts.Libs.ModApi;
 
@@ -140,14 +140,14 @@ internal static class ModScanner
 
 		// First, restore things that can be restored
 		// Try to restore mod author
-		if (string.IsNullOrWhiteSpace(bundle.Info.ModName) && GameSettings.TryRestoreAuthor)
+		if (string.IsNullOrWhiteSpace(bundle.Info.ModName) && InternalGameSettings.TryRestoreAuthor)
 		{
 			Print($"{bundle.ModPath}:\nModInfo does not contain an Author. Restoring with 'Generic' author.");
 			bundle.Info.Author = "Generic";
 		}
 
 		// Try to restore mod name
-		if (string.IsNullOrWhiteSpace(bundle.Info.ModName) && GameSettings.TryRestoreModName)
+		if (string.IsNullOrWhiteSpace(bundle.Info.ModName) && InternalGameSettings.TryRestoreModName)
 		{
 			Print($"{bundle.ModPath}:\nModInfo does not contain a ModName. Restoring from directory name.");
 			bundle.Info.ModName = Path.GetDirectoryName(bundle.ModPath);
@@ -167,7 +167,7 @@ internal static class ModScanner
 		{
 			Err($"{bundle.ModPath}:\nModInfo does not contain a ModId");
 
-			if (GameSettings.TryRestoreModId) bundle.Info.RestoreModId();
+			if (InternalGameSettings.TryRestoreModId) bundle.Info.RestoreModId();
 			else isValid = false;
 		}
 
@@ -178,7 +178,7 @@ internal static class ModScanner
 			Err($"{bundle.ModPath}:\nModInfo contain invalid ModId ({bundle.Info.ModId}).\n" +
 			$"The ID must have at least two parts separated by a dot: author/team/organization/namespace and mod name.");
 
-			if (GameSettings.TryRestoreModId) bundle.Info.RestoreModId();
+			if (InternalGameSettings.TryRestoreModId) bundle.Info.RestoreModId();
 			else isValid = false;
 		}
 

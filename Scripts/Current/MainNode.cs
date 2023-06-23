@@ -18,7 +18,7 @@ public partial class MainNode : Node2D
 		// Use Event API.
 		EventBus.Initialize(this);
 
-		if (GameSettings.EnableModApi)
+		if (InternalGameSettings.EnableModApi)
 		{
 			// Scan mods, including cores.
 			ScanMods();

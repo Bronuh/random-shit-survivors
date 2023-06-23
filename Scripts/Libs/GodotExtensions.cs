@@ -1,6 +1,5 @@
 ﻿using Godot;
 using Godot.Collections;
-using Scripts.Common;
 using Scripts.Current;
 
 namespace Scripts.Libs
@@ -291,7 +290,7 @@ namespace Scripts.Libs
 		/// <param name="what">Objects to print.</param>
 		public static void Debug(params object[] what)
 		{
-			if (GameSettings.Debug)
+			if (InternalGameSettings.Debug)
 				GD.Print($"[DEBUG:] {what}");
 		}
 

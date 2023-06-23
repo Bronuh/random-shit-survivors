@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Scripts.Current;
 
 namespace Scripts.Common.GodotNodes
 {
