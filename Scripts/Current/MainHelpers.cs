@@ -2,7 +2,7 @@
 using Scripts.Libs.ModApi;
 using static Scripts.Libs.ModApi.ModApiEvents;
 
-public partial class Main
+public partial class MainNode
 {
 	private void ScanMods()
 	{

@@ -358,9 +358,9 @@ namespace Scripts.Libs
 		/// </summary>
 		/// <param name="node"></param>
 		/// <returns></returns>
-		public static Main GetMain(this Node node)
+		public static MainNode GetMain(this Node node)
 		{
-			return node.GetNode<Main>($"/{GameNodes.MainNodeName}");
+			return node.GetNode<MainNode>($"/{GameNodes.MainNodeName}");
 		}
 
 
@@ -369,9 +369,9 @@ namespace Scripts.Libs
 		/// </summary>
 		/// <param name="node"></param>
 		/// <returns></returns>
-		public static Main GetWorld(this Node node)
+		public static MainNode GetWorld(this Node node)
 		{
-			return node.GetNode<Main>(GameNodes.WorldNodeName);
+			return node.GetNode<MainNode>(GameNodes.WorldNodeName);
 		}
 		#endregion
 

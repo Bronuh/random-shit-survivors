@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cjsepe4wt2q56"]
 
-[ext_resource type="Script" path="res://Scripts/Current/Main.cs" id="1_y3gu6"]
+[ext_resource type="Script" path="res://Scripts/Current/MainNode.cs" id="1_gcou8"]
 [ext_resource type="PackedScene" uid="uid://oilwraaijcfo" path="res://Scenes/shaders_node.tscn" id="2_j61ta"]
 [ext_resource type="Script" path="res://Scripts/Common/GodotNodes/UI/ShadersNode.cs" id="3_7pkw1"]
 [ext_resource type="PackedScene" uid="uid://btwyyvp72keen" path="res://Scenes/hud_node.tscn" id="3_wq2fv"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/Current/WorldNode.cs" id="8_n4xt2"]
 
 [node name="MainNode" type="Node2D"]
-script = ExtResource("1_y3gu6")
+script = ExtResource("1_gcou8")
 
 [node name="UiNode" type="Control" parent="."]
 unique_name_in_owner = true

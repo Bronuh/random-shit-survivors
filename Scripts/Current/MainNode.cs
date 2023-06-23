@@ -4,7 +4,7 @@ using Scripts.Common.GodotNodes.UI;
 using Scripts.Libs.EventApi;
 using Scripts.Libs.ModApi;
 
-public partial class Main : Node2D
+public partial class MainNode : Node2D
 {
 	// TODO: Assign values on ready
 	public WorldNode World { get; private set; }
@@ -13,7 +13,7 @@ public partial class Main : Node2D
 	public MenuNode Menu { get; private set; }
 
 
-	public Main()
+	public MainNode()
 	{
 		// Use Event API.
 		EventBus.Initialize(this);

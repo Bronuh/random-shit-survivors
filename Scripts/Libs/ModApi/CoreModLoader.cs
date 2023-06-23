@@ -16,9 +16,9 @@ namespace Scripts.Libs.ModApi
 		}
 
 
-		private static Main _main;
+		private static MainNode _main;
 
-		public static void Initialize(Main main)
+		public static void Initialize(MainNode main)
 		{
 			_main = main;
 		}

@@ -10,9 +10,9 @@ public class EventBus
 	/// <summary>
 	///		Game Main node this EventBus is being attached to.
 	/// </summary>
-	public static Main GameMain => _instance._main;
+	public static MainNode GameMain => _instance._main;
 
-	private Main _main = null;
+	private MainNode _main = null;
 	private static EventBus _instance = new();
 	private static bool _isInitialized = false;
 	//private TinyMessengerHub _hub; // Better use _hooksDict
@@ -22,7 +22,7 @@ public class EventBus
 	// So we will manually assign a TinyMessengerHub to every message type.
 	private static Dictionary<Type, TinyMessengerHub> _hooksDict = new();
 
-	private EventBus(Main main = null)
+	private EventBus(MainNode main = null)
 	{
 		_main = main;
 	}
@@ -31,7 +31,7 @@ public class EventBus
 	/// It's can work even without Main reference
 	/// </summary>
 	/// <param name="main"></param>
-	public static void Initialize(Main main = null)
+	public static void Initialize(MainNode main = null)
 	{
 		if (GameMain is null && !_isInitialized)
 		{
