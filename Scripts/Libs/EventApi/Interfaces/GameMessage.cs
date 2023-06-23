@@ -1,7 +1,7 @@
 ﻿
 namespace Scripts.Libs.EventApi;
 
-public abstract class GameMessage : ITinyMessage
+public abstract class GameEvent : HandleableEvent
 {
-	public GameMessage() { }
+	public GameEvent() { }
 }

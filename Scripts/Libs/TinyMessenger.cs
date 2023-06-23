@@ -41,13 +41,13 @@ namespace Scripts.Libs
 		/// Probably not needed
 		/// </summary>
 		// object Sender { get; }
-    }
+	}
 
 	
 	/// <summary>
 	///		Just a message with a 'Cancelled' flag 
 	/// </summary>
-	public abstract class CancellableMessage : ITinyMessage
+	public abstract class CancellableEvent : HandleableEvent
 	{
 		public bool IsCancelled { get; protected set; } = false;
 
@@ -55,6 +55,13 @@ namespace Scripts.Libs
 		///		Mark this message as cancelled
 		/// </summary> 
 		public void Cancel() => IsCancelled = true;
+	}
+
+	public abstract class HandleableEvent : ITinyMessage
+	{
+		public bool IsHandled { get; protected set; } = false;
+
+		public void Handle() => IsHandled = true;
 	}
 
     /// <summary>
@@ -816,16 +823,17 @@ namespace Scripts.Libs
                                        select sub).ToList();
             }
 
-			bool isCancellable = message.GetType().IsAssignableTo(typeof(CancellableMessage));
-			CancellableMessage cMsg = null;
-			if (isCancellable)
-				cMsg = message as CancellableMessage;
+			bool isHandleable = message.GetType().IsAssignableTo(typeof(HandleableEvent));
+
+			HandleableEvent hMsg = null;
+			if (isHandleable)
+				hMsg = message as HandleableEvent;
 
 			foreach (var sub in currentlySubscribed)
 			{
 				try
 				{
-					if (isCancellable && cMsg.IsCancelled)
+					if (isHandleable && hMsg.IsHandled)
 						break;
 
 					sub.Proxy.Deliver(message, sub.Subscription);

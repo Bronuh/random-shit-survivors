@@ -6,7 +6,7 @@ namespace Tests
 	[TestClass]
 	public class EventApiTests
 	{
-		public class TestMessage : GameMessage
+		public class TestMessage : GameEvent
 		{
 			public string Msg { get; }
 			public TestMessage(string msg)
@@ -15,10 +15,10 @@ namespace Tests
 			}
 		}
 
-		public class CancellableTestMessage : CancellableMessage { }
+		public class CancellableTestEvent : CancellableEvent { }
 
 		[TestMethod]
-		public void EventBus_Basic_SendAndReceiveMessage()
+		public void EventBus_Basic_SendAndReceiveEvent()
 		{
 			// arrange
 			string expectedOutput = "TEST";
@@ -33,15 +33,15 @@ namespace Tests
 		}
 
 		[TestMethod]
-		public void EventBus_Basic_CancelMessage()
+		public void EventBus_Basic_CancelEvent()
 		{
 			// arrange
 			string expectedOutput = "Cancelled";
 			string msg = "Published";
 
 			// act
-			EventBus.Subscribe<CancellableTestMessage>((m) => { m.Cancel(); });
-			var message = new CancellableTestMessage();
+			EventBus.Subscribe<CancellableTestEvent>((m) => { m.Cancel(); });
+			var message = new CancellableTestEvent();
 			EventBus.Publish(message);
 
 			if(message.IsCancelled)
@@ -52,24 +52,24 @@ namespace Tests
 		}
 
 		[TestMethod]
-		public void EventBus_Basic_CancelledMessageMustStopDelivering()
+		public void EventBus_Basic_HandledEventMustStopDelivering()
 		{
 			// arrange
-			string expectedOutput = "Cancelled by first";
-			string secondChange = "Executed after cancel";
+			string expectedOutput = "Handled by first";
+			string secondChange = "Executed after handle";
 			string msg = "Published";
 
 			// act
-			EventBus.Subscribe<CancellableTestMessage>((m) => {
+			EventBus.Subscribe<CancellableTestEvent>((m) => {
 				msg = expectedOutput;
-				m.Cancel(); 
+				m.Handle(); 
 			});
 
-			EventBus.Subscribe<CancellableTestMessage>((m) => {
+			EventBus.Subscribe<CancellableTestEvent>((m) => {
 				msg = secondChange;
 			});
 
-			var message = new CancellableTestMessage();
+			var message = new CancellableTestEvent();
 			EventBus.Publish(message);
 
 			if (message.IsCancelled)

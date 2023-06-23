@@ -12,7 +12,7 @@ namespace Scripts.Libs.ModApi
 		/// Cancel this event to prevent default ModsManager from starting.
 		/// You still can use ModScanner.GetModBundles() to use with custom mods manager
 		/// </remarks>
-		public class ModsManagerAboutToStartEvent : CancellableMessage { }
+		public class ModsManagerAboutToStartEvent : CancellableEvent { }
 
 		/// <summary>
 		/// Fired after loading core mods and before initializing mods manager.<br/>
@@ -22,6 +22,6 @@ namespace Scripts.Libs.ModApi
 		/// Cancel this event to prevent default ModsManager from starting.
 		/// You still can use ModScanner.GetModBundles() to use with custom mods manager
 		/// </remarks>
-		public class ModLoaderAboutToStartEvent : CancellableMessage { }
+		public class ModLoaderAboutToStartEvent : CancellableEvent { }
 	}
 }

@@ -17,7 +17,7 @@ namespace Scripts.Libs.EventApi
 				.SelectMany(x => x.GetMethods(System.Reflection.BindingFlags.Static)) // returns all methods defined in those classes
 				.Where(x => x.ReturnType.Equals(typeof(void))) // method should return void
 				.Where(x => x.GetParameters().Length == 1) // method should accept only one parameter
-				.Where(x => x.GetParameters().First().ParameterType.IsAssignableTo(typeof(GameMessage))) // and that parameter must be assignable to a variable of type GameMessage
+				.Where(x => x.GetParameters().First().ParameterType.IsAssignableTo(typeof(GameEvent))) // and that parameter must be assignable to a variable of type GameMessage
 				.Where(x => x.GetCustomAttributes(typeof(EventListener), false).FirstOrDefault() != null); // returns only methods that have the EventListener attribute
 
 			foreach (var method in methods)

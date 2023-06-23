@@ -20,7 +20,7 @@ namespace Scripts.Libs.TickSystem
 		/// <summary>
 		/// Fired on the every clock tick
 		/// </summary>
-		public class TickEvent : GameMessage
+		public class TickEvent : GameEvent
 		{
 			/// <summary>
 			/// Current stage of the tick

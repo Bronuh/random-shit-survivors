@@ -38,7 +38,7 @@ namespace Scripts.Common
 
 
 
-		public class KeyPressedEvent : GameMessage 
+		public class KeyPressedEvent : GameEvent 
 		{ 
 			public InputEventKey Event { get; private set; }
 			public KeyPressedEvent(InputEventKey eventKey)
@@ -47,7 +47,7 @@ namespace Scripts.Common
 			}
 		}
 
-		public class KeyReleasedEvent : GameMessage
+		public class KeyReleasedEvent : GameEvent
 		{
 			public InputEventKey Event { get; private set; }
 			public KeyReleasedEvent(InputEventKey eventKey)
