@@ -14,6 +14,7 @@ public class EventBus
 
 	private Main _main = null;
 	private static EventBus _instance = new();
+	private static bool _isInitialized = false;
 	//private TinyMessengerHub _hub; // Better use _hooksDict
 
 	// Using dictionary to quick get all hooks for the provided message types.
@@ -32,8 +33,9 @@ public class EventBus
 	/// <param name="main"></param>
 	public static void Initialize(Main main = null)
 	{
-		if (GameMain is null)
+		if (GameMain is null && !_isInitialized)
 		{
+			_isInitialized = true;
 			_instance = new EventBus(main);
 		}
 	}
@@ -50,6 +52,9 @@ public class EventBus
 	/// </remarks>
 	public static void Publish<TMessage>(TMessage message) where TMessage : class, ITinyMessage
 	{
+		if(!_isInitialized)
+			_isInitialized = true;
+
 		Type messageType = typeof(TMessage);
 
 		// Check if the _hooksDict contains the message type as a key
@@ -71,6 +76,9 @@ public class EventBus
 	/// <returns>Message subscription token that can be used for unsubscribing.</returns>
 	public static CustomSubscriptionToken Subscribe<TMessage>(Action<TMessage> action) where TMessage : class, ITinyMessage
 	{
+		if (!_isInitialized)
+			_isInitialized = true;
+
 		Type messageType = typeof(TMessage);
 
 		// Check if the _hooksDict already contains the message type as a key
@@ -97,6 +105,10 @@ public class EventBus
 	/// <returns>Message subscription token that can be used for unsubscribing.</returns>
 	public static CustomSubscriptionToken SubscribeMethod(MethodInfo methodInfo)
 	{
+		if (!_isInitialized)
+			_isInitialized = true;
+
+
 		Type messageType = methodInfo.GetParameters()[0].ParameterType;
 
 
@@ -111,10 +123,14 @@ public class EventBus
 
 	/// <summary>
 	///		Unsubscribes from a message type using the provided subscription token.
+	///		TODO: Probably it will be better to unsubscribe directly from the tokens
 	/// </summary>
 	/// <param name="token">The subscription token.</param>
 	public static void Unsubscribe(CustomSubscriptionToken token)
 	{
+		if (!_isInitialized)
+			_isInitialized = true;
+
 		token.Unsubscribe();
 	}
 
