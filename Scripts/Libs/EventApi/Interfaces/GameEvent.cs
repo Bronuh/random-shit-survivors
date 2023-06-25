@@ -1,5 +1,4 @@
-﻿
-namespace Scripts.Libs.EventApi;
+﻿namespace Scripts.Libs.EventApi;
 
 public abstract class GameEvent : HandleableEvent
 {
