@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dbtkvto1e0plu"]
+
+[node name="Separator" type="Panel"]
+custom_minimum_size = Vector2(0, 5)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2

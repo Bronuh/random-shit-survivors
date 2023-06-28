@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt4gojyc8btes"]
+
+[ext_resource type="Script" path="res://Scenes/Tests/TestInfo.cs" id="1_f8h3j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_l4ye7"]
+line_spacing = 1.0
+font_size = 12
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_il5ln"]
+line_spacing = 1.0
+font_size = 10
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="TestInfo" type="HBoxContainer"]
+script = ExtResource("1_f8h3j")
+
+[node name="Status" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(15, 5)
+layout_mode = 2
+
+[node name="TextContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MethodName" type="Label" parent="TextContainer"]
+layout_mode = 2
+text = "<no_name>"
+label_settings = SubResource("LabelSettings_l4ye7")
+
+[node name="Message" type="Label" parent="TextContainer"]
+layout_mode = 2
+text = "<no_info>"
+label_settings = SubResource("LabelSettings_il5ln")

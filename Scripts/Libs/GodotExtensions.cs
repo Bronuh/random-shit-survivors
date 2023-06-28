@@ -291,7 +291,10 @@ namespace Scripts.Libs
 		public static void Debug(params object[] what)
 		{
 			if (InternalGameSettings.Debug)
-				GD.Print($"[DEBUG:] {what}");
+			{
+				object[] arr = { $"[DEBUG] " };
+				GD.Print(arr.Concat(what).ToArray());
+			}
 		}
 
 		/// <summary>
@@ -309,7 +312,8 @@ namespace Scripts.Libs
 		/// <param name="what">Objects to print.</param>
 		public static void Warn(params object[] what)
 		{
-			GD.Print($"[WARNING:] {what}");
+			object[] arr = { $"[WARNING] " };
+			GD.Print(arr.Concat(what).ToArray());
 		}
 
 		/// <summary>
