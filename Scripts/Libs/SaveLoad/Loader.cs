@@ -5,15 +5,22 @@ namespace Scripts.Libs.SaveLoad
 	public class Loader
 	{
 		public bool IsWorking => (CurrentObject is not null) && (SaveLoad.Mode is SaveLoadMode.Loading);
+
+		public JObject RootObject { get; private set; } = null;
 		public JObject CurrentObject { get; private set; } = null;
 
 		public void InitLoad(string input)
 		{
 			CurrentObject = JObject.Parse(input);
+			RootObject = CurrentObject;
 			SaveLoad.Mode = SaveLoadMode.Loading;
-			Debug($"Started loading from string: {input}");
 		}
 
+		/// <summary>
+		/// Enters the object
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
 		internal bool EnterObject(string name)
 		{
 			if (!IsWorking)

@@ -5,6 +5,8 @@ namespace Scripts.Libs.SaveLoad
 	public class Saver
 	{
 		public bool IsWorking => (CurrentObject is not null) && (SaveLoad.Mode is SaveLoadMode.Saving);
+
+		public JObject RootObject { get; private set; } = null;
 		public JObject CurrentObject { get; private set; } = null;
 
 		public string SavingResult { get; private set; }
@@ -12,6 +14,7 @@ namespace Scripts.Libs.SaveLoad
 		public void InitSave()
 		{
 			CurrentObject = new JObject();
+			RootObject = CurrentObject;
 			SaveLoad.Mode = SaveLoadMode.Saving;
 		}
 
