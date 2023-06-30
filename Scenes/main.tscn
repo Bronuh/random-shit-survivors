@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Common/GodotNodes/UI/HudNode.cs" id="5_h26ms"]
 [ext_resource type="Script" path="res://Scripts/Common/GodotNodes/UI/MenuNode.cs" id="7_4vnm6"]
 [ext_resource type="Script" path="res://Scripts/Current/WorldNode.cs" id="8_n4xt2"]
-[ext_resource type="PackedScene" uid="uid://dp5j357r4o5af" path="res://Scenes/Tests/Tests.tscn" id="10_rwocu"]
+[ext_resource type="Script" path="res://Scripts/Common/Input/AdvancedInputListener.cs" id="10_cas5n"]
 
 [node name="MainNode" type="Node2D"]
 script = ExtResource("1_gcou8")
@@ -31,7 +31,11 @@ script = ExtResource("5_h26ms")
 
 [node name="MenuNode" parent="UiNode" instance=ExtResource("4_mlycn")]
 unique_name_in_owner = true
+process_mode = 2
 script = ExtResource("7_4vnm6")
+
+[node name="AdvancedInputListener" type="Node2D" parent="."]
+script = ExtResource("10_cas5n")
 
 [node name="WorldNode" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -41,4 +45,6 @@ script = ExtResource("8_n4xt2")
 unique_name_in_owner = true
 script = ExtResource("5_12dna")
 
-[node name="Tests" parent="." instance=ExtResource("10_rwocu")]
+[node name="Node2D" type="Node2D" parent="WorldNode/PhysicsSmoothing"]
+
+[node name="Line2D" type="Line2D" parent="WorldNode/PhysicsSmoothing/Node2D"]

@@ -1,9 +1,11 @@
-﻿using Godot;
+﻿using Esprima.Ast;
+using Godot;
 using Scripts.Libs.EventApi;
 
 namespace Scripts.Common
 {
-	public partial class AdvancedInputListener : Node
+	[GlobalClass]
+	public partial class AdvancedInputListener : Node2D
 	{
 		private static AdvancedInputListener _instance;
 
@@ -88,5 +90,13 @@ namespace Scripts.Common
 			return Input.IsMouseButtonPressed(button);
 		}
 
+		/// <summary>
+		/// Returns global coordinates of the mouse
+		/// </summary>
+		/// <returns></returns>
+		public static Vector2 MousePos()
+		{
+			return _instance.GetGlobalMousePosition();
+		}
 	}
 }

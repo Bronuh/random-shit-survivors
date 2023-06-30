@@ -44,7 +44,10 @@ public partial class MainNode : Node2D
 	public override void _Ready()
 	{
 		ServiceStorage.Lock();
-
+		World = GetNode<WorldNode>(GameNodes.WorldNodeName);
+		Hud = GetNode<HudNode>(GameNodes.HudNodeName);
+		Shaders = GetNode<ShadersNode>(GameNodes.ShadersNodeName);
+		Menu = GetNode<MenuNode>(GameNodes.MenuNodeName);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
