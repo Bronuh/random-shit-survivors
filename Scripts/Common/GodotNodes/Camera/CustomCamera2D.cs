@@ -76,18 +76,31 @@ namespace Scripts.Common.GodotNodes
 		private float _smoothingFactor = 1.0f;
 		private int _zoomSteps = 0;
 
+		
+		// Private fields for the Shake feature
+		private Random random = new Random();
+		private float shakeDuration = 0f;
+		private float shakeIntensity = 0f;
+		private float shakeFrequency = 0f;
+		private float shakeTimer = 0f;
+		private double timeSinceLastShake = 0f;
+
 
 
 		public override void _Ready()
 		{
 			if (UseOnReady)
 				MakeCurrent();
+
 		}
 
 		public override void _Process(double delta)
 		{
 			if (ProcessOn is CameraProcessMode.Frames)
 				Move(delta);
+
+			// Shake must be always processed here
+			ProcessShake(delta);
 		}
 
 		public override void _PhysicsProcess(double delta)
@@ -135,6 +148,7 @@ namespace Scripts.Common.GodotNodes
 			}
 		}
 
+
 		/// <summary>
 		/// Zooms out by the specified number of steps.
 		/// </summary>
@@ -155,6 +169,52 @@ namespace Scripts.Common.GodotNodes
 			}
 		}
 
+		/// <summary>
+		/// Shakes the camera with the specified parameters.
+		/// </summary>
+		/// <param name="duration">The duration of the camera shake in seconds.</param>
+		/// <param name="intensity">The intensity of the camera shake. A higher value results in a more pronounced shake effect.</param>
+		/// <param name="frequency">The frequency of the camera shake in shakes per second. The minimum allowed frequency is 0.1.</param>
+		///
+		/// <remarks>
+		/// The camera will shake for the specified duration with the given intensity and frequency.
+		/// The shake gradually decreases over time until it stops completely.
+		/// The frequency determines how often the camera will shake within the specified duration.
+		/// A frequency of 1.0 means the camera will shake once per second, 2.0 means twice per second, and so on.
+		/// The minimum allowed frequency is 0.1 (one shake every 10 seconds).
+		/// </remarks>
+		public void Shake(float duration = 1, float intensity = 2, float frequency = 20)
+		{
+			shakeDuration = duration;
+			shakeIntensity = intensity;
+			shakeFrequency = frequency;
+			shakeTimer = duration;
+			timeSinceLastShake = 0f;
+		}
+
+
+		public void Punch(Vector2 direction, float duration = 0.2f)
+		{
+			// Define the punch properties
+			float punchDuration = 0.2f; // Duration of the punch animation in seconds
+			Offset = direction;
+
+			Tween tween = CreateTween();
+			tween.TweenProperty(this, "offset", Vec2(), punchDuration);
+		}
+
+		public void Punch(float strength, float duration = 0.2f)
+		{
+			// Define the punch properties
+			float punchDuration = 0.2f; // Duration of the punch animation in seconds
+			Offset = strength * RandNorm2();
+
+			Tween tween = CreateTween();
+			tween.TweenProperty(this, "offset", Vec2(), punchDuration);
+		}
+
+
+
 		private void Move(double dt)
 		{
 			float noSmoothing = 1f; // Use this instead of SmoothingFactor if UseSmoothing is false
@@ -162,6 +222,31 @@ namespace Scripts.Common.GodotNodes
 			base.Position += (TargetPosition - base.Position) // vector from the current position to the target position
 				* (UseSmoothing ? SmoothingFactor : noSmoothing); // multiply it by smoothing factor
 				//* (float)(dt / (1/60)); // and apply time. Probably it's not good decision
+		}
+
+
+		private void ProcessShake(double delta)
+		{
+			if (shakeTimer > 0f)
+			{
+				shakeTimer -= (float)delta;
+				timeSinceLastShake += delta;
+
+				if (shakeTimer <= 0f)
+				{
+					Offset = Vector2.Zero;
+				}
+				else if (timeSinceLastShake >= (1f / shakeFrequency))
+				{
+					timeSinceLastShake = 0f;
+
+					float x = (float)random.NextDouble() * 2f - 1f;
+					float y = (float)random.NextDouble() * 2f - 1f;
+					float intensity = shakeIntensity * (shakeTimer / shakeDuration);
+
+					Offset = new Vector2(x, y) * intensity;
+				}
+			}
 		}
 	}
 }

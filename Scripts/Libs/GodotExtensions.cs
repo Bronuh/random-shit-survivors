@@ -1,6 +1,7 @@
 ﻿using Godot;
 using Godot.Collections;
 using Scripts.Current;
+using System;
 
 namespace Scripts.Libs
 {
@@ -93,6 +94,37 @@ namespace Scripts.Libs
 		/// Returns a Vector2I instance with all values set to zero.
 		/// </summary>
 		public static Vector2I Vec2I() { return Vector2I.Zero; }
+
+
+
+		/// <summary>
+		/// Extends the functionality of the Vector2 class by spinning it around a random angle.
+		/// </summary>
+		/// <param name="vector">The Vector2 instance to spin.</param>
+		/// <returns>A new Vector2 instance representing the original vector rotated by a random angle.</returns>
+		public static Vector2 Spin(this Vector2 vector)
+		{
+			float angle = (float)(MainNode.GameRandom.NextDouble() * 2 * Math.PI);
+			vector = vector.Rotated(angle);
+
+			return vector;
+		}
+
+		/// <summary>
+		/// Generates a random Vector2 with its components corresponding to the coordinates of a point on the unit circle.
+		/// </summary>
+		/// <returns>A new Vector2 instance representing a random point on the unit circle.</returns>
+		public static Vector2 RandNorm2()
+		{
+			float angle = (float)(MainNode.GameRandom.NextDouble() * 2 * Math.PI);
+			float x = (float)Math.Cos(angle);
+			float y = (float)Math.Sin(angle);
+
+			Vector2 vector = new Vector2(x, y);
+			vector = vector.Normalized();
+
+			return vector;
+		}
 		#endregion
 
 		#region Rect Tools

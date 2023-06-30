@@ -3,6 +3,7 @@ namespace Scripts.Current;
 public static class InternalGameSettings{
     // General
 	public static bool Debug = true;
+	public static bool UseConatantSeed = true;
 
 	// Mod API Settings
 	public static bool EnableModApi = true;
