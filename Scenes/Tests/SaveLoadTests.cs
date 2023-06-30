@@ -30,6 +30,24 @@ public class SaveLoadTests
 	}
 
 
+	public class ExposableThingWithArray : IExposable
+	{
+		public int[] intsArray = { 1, 10, 25, 42, 16, 36, 99999};
+		public IExposable[] exposablesArray = { 
+			new AnotherExposableThing(),
+			new AnotherExposableThing(),
+			new ExposableThing(),
+			new AnotherExposableThing()
+		};
+
+		public void ExposeData()
+		{
+			SaveLoad_Array.Link(ref intsArray, "intsArray");
+			SaveLoad_Array.Link(ref exposablesArray, "exposablesArray");
+		}
+	}
+
+
 	[TestMethod]
 	public void SaveLoad_Json_NullableChecksForProperty()
 	{
@@ -69,25 +87,6 @@ public class SaveLoadTests
 	}
 
 	[TestMethod]
-	public void SaveLoad_Json_RecursiveExposableSaving()
-	{
-		// arrange
-		SaveLoad.Stop();
-		ExposableThing thing = new ExposableThing();
-		string label = "first_name_for_label";
-
-		// act
-		SaveLoad.Saver.InitSave();
-		SaveLoad_Exposable.Link(ref thing, label);
-
-		SaveLoad.Saver.FinalizeSave();
-
-		// assert
-		Assert.Inconclusive($"Serialized code is: {SaveLoad.Saver.SavingResult}");
-		//Assert.IsTrue(Parser.IsNull(obj));
-	}
-
-	[TestMethod]
 	public void SaveLoad_Load_LoadExposableFromCode()
 	{
 		// arrange
@@ -111,6 +110,53 @@ public class SaveLoadTests
 		// Assert.Inconclusive(SaveLoad.Loader.CurrentObject.ToString());
 		//Assert.IsNotNull(anotherExposableThing);
 		bool result = anotherExposableThing.doubleVar != 0 && anotherExposableThing.thing.position != Vec2();
+		Assert.IsTrue(result);
+	}
+
+
+
+	[TestMethod]
+	public void SaveLoad_Json_RecursiveExposableSaving()
+	{
+		// arrange
+		SaveLoad.Stop();
+		ExposableThing thing = new ExposableThing();
+		string label = "first_name_for_label";
+
+		// act
+		SaveLoad.Saver.InitSave();
+		SaveLoad_Exposable.Link(ref thing, label);
+
+		SaveLoad.Saver.FinalizeSave();
+
+		// assert
+		Assert.Inconclusive($"Serialized code is: {SaveLoad.Saver.SavingResult}");
+		//Assert.IsTrue(Parser.IsNull(obj));
+	}
+
+	[TestMethod]
+	public void SaveLoad_Json_ArraysSaveAndLoad()
+	{
+		// arrange
+		SaveLoad.Stop();
+		ExposableThingWithArray thing = new ExposableThingWithArray();
+		ExposableThingWithArray anotherExposableThing = new ExposableThingWithArray();
+
+		string label = "arraysThing";
+		SaveLoad.Saver.InitSave();
+		SaveLoad_Exposable.Link(ref thing, label);
+		SaveLoad.Stop();
+		string savedData = SaveLoad.Saver.SavingResult;
+
+		// act
+		SaveLoad.Loader.InitLoad(savedData);
+		SaveLoad_Exposable.Link(ref anotherExposableThing, label);
+		SaveLoad.Stop();
+
+		// assert
+		// Assert.Inconclusive(SaveLoad.Loader.CurrentObject.ToString());
+		//Assert.IsNotNull(anotherExposableThing);
+		bool result = (anotherExposableThing is not null) && anotherExposableThing.intsArray[0] != 0;
 		Assert.IsTrue(result);
 	}
 }
