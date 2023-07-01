@@ -5,7 +5,7 @@ using System;
 
 
 /// <summary>
-/// This node is ugly and slow AF
+/// This node is slow AF
 /// Also, it's shouldn't move with the parent node, so put it directly in the World node
 /// Its even slower than ExperimentalTrailLine
 /// </summary>
