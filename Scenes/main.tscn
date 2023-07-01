@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cjsepe4wt2q56"]
+[gd_scene load_steps=15 format=3 uid="uid://cjsepe4wt2q56"]
 
 [ext_resource type="Script" path="res://Scripts/Current/MainNode.cs" id="1_gcou8"]
 [ext_resource type="PackedScene" uid="uid://oilwraaijcfo" path="res://Scenes/Ui/shaders_node.tscn" id="2_j61ta"]
@@ -7,10 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://bi7rb5qknto8t" path="res://Scenes/Ui/menu_node.tscn" id="4_mlycn"]
 [ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="5_12dna"]
 [ext_resource type="Script" path="res://Scripts/Common/GodotNodes/UI/HudNode.cs" id="5_h26ms"]
+[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/MonitorLabel.cs" id="6_6mgnn"]
 [ext_resource type="Script" path="res://Scripts/Common/GodotNodes/UI/MenuNode.cs" id="7_4vnm6"]
 [ext_resource type="Script" path="res://Scripts/Current/WorldNode.cs" id="8_n4xt2"]
 [ext_resource type="Script" path="res://Scripts/Common/Input/AdvancedInputListener.cs" id="10_cas5n"]
-[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/Camera/CustomCamera2D.cs" id="11_gbcmr"]
+[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/MouseFollower.cs" id="11_u8gj1"]
+[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/Trail/ExperimentalTrailPolygon.cs" id="12_xjeb7"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_egyj3"]
+size = Vector2(20, 20)
 
 [node name="MainNode" type="Node2D"]
 script = ExtResource("1_gcou8")
@@ -30,6 +35,12 @@ script = ExtResource("3_7pkw1")
 unique_name_in_owner = true
 script = ExtResource("5_h26ms")
 
+[node name="MonitorLabel" type="Label" parent="UiNode/HudNode"]
+offset_right = 1146.0
+offset_bottom = 247.0
+script = ExtResource("6_6mgnn")
+UseGlobal = true
+
 [node name="MenuNode" parent="UiNode" instance=ExtResource("4_mlycn")]
 unique_name_in_owner = true
 process_mode = 2
@@ -46,5 +57,23 @@ script = ExtResource("8_n4xt2")
 unique_name_in_owner = true
 script = ExtResource("5_12dna")
 
-[node name="CustomCamera2D" type="Camera2D" parent="WorldNode"]
-script = ExtResource("11_gbcmr")
+[node name="Follower" type="Node2D" parent="WorldNode/PhysicsSmoothing"]
+visible = false
+script = ExtResource("11_u8gj1")
+
+[node name="PlaceholderSprite" type="Sprite2D" parent="WorldNode/PhysicsSmoothing/Follower"]
+texture = SubResource("PlaceholderTexture2D_egyj3")
+
+[node name="ExperimentalTrailPolygon" type="Node2D" parent="WorldNode" node_paths=PackedStringArray("Target")]
+script = ExtResource("12_xjeb7")
+Target = NodePath("../PhysicsSmoothing/Follower")
+SegmentsCount = 5
+StartWidth = 30.0
+StartColor = Color(1, 0, 0, 1)
+EndColor = Color(0, 1, 0.0196078, 1)
+EndAlpha = 0.0
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(313.184, 206.719)
+polygon = PackedVector2Array(-0.183655, -0.718597, -148.184, 22.2814, -80.1837, 149.281, 45.8163, 33.2814)
