@@ -50,7 +50,7 @@ public static class GameNodes
 public static class GamePaths
 {
 	// Relative pathes
-	public const string ModsRoot = "Mods"; // Directory where mods is located, relative to game execution directory.
+	public const string ModsRoot = "user://Mods"; // Directory where mods is located, relative to game execution directory.
 	public const string GameDataRoot = "GameData";
 	public const string ActiveModsFile = "activeMods.json";
 
