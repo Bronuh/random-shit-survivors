@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cjsepe4wt2q56"]
+[gd_scene load_steps=12 format=3 uid="uid://cjsepe4wt2q56"]
 
 [ext_resource type="Script" path="res://Scripts/Current/MainNode.cs" id="1_gcou8"]
 [ext_resource type="PackedScene" uid="uid://oilwraaijcfo" path="res://Scenes/Ui/shaders_node.tscn" id="2_j61ta"]
@@ -11,10 +11,6 @@
 [ext_resource type="Script" path="res://Scripts/Common/GodotNodes/UI/MenuNode.cs" id="7_4vnm6"]
 [ext_resource type="Script" path="res://Scripts/Current/WorldNode.cs" id="8_n4xt2"]
 [ext_resource type="Script" path="res://Scripts/Common/Input/AdvancedInputListener.cs" id="10_cas5n"]
-[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/MouseFollower.cs" id="11_u8gj1"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_egyj3"]
-size = Vector2(20, 20)
 
 [node name="MainNode" type="Node2D"]
 script = ExtResource("1_gcou8")
@@ -55,12 +51,6 @@ script = ExtResource("8_n4xt2")
 [node name="PhysicsSmoothing" type="Node2D" parent="WorldNode"]
 unique_name_in_owner = true
 script = ExtResource("5_12dna")
-
-[node name="Follower" type="Node2D" parent="WorldNode/PhysicsSmoothing"]
-script = ExtResource("11_u8gj1")
-
-[node name="PlaceholderSprite" type="Sprite2D" parent="WorldNode/PhysicsSmoothing/Follower"]
-texture = SubResource("PlaceholderTexture2D_egyj3")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 visible = false
