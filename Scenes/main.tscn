@@ -67,10 +67,11 @@ texture = SubResource("PlaceholderTexture2D_egyj3")
 [node name="ExperimentalTrailPolygon" type="Node2D" parent="WorldNode" node_paths=PackedStringArray("Target")]
 script = ExtResource("12_xjeb7")
 Target = NodePath("../PhysicsSmoothing/Follower")
-SegmentsCount = 5
-StartWidth = 30.0
+SegmentsCount = 60
+StartWidth = 100.0
+EndWidth = 1.0
 StartColor = Color(1, 0, 0, 1)
-EndColor = Color(0, 1, 0.0196078, 1)
+EndColor = Color(0, 0, 1, 1)
 EndAlpha = 0.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
