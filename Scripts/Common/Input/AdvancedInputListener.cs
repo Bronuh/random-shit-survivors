@@ -1,5 +1,6 @@
 ﻿using Esprima.Ast;
 using Godot;
+using Scripts.Current;
 using Scripts.Libs.EventApi;
 
 namespace Scripts.Common
@@ -88,6 +89,15 @@ namespace Scripts.Common
 		public static bool IsPressed(MouseButton button)
 		{
 			return Input.IsMouseButtonPressed(button);
+		}
+
+		/// <summary>
+		/// Shortcut for Input.GetVector(GameControls.KeyLeft, GameControls.KeyRight, GameControls.KeyUp, GameControls.KeyDown)
+		/// </summary>
+		/// <returns>Normalized input direction vector</returns>
+		public static Vector2 GetInputDirection()
+		{
+			return Input.GetVector(GameControls.KeyLeft, GameControls.KeyRight, GameControls.KeyUp, GameControls.KeyDown);
 		}
 
 		/// <summary>

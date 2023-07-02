@@ -412,6 +412,34 @@ namespace Scripts.Libs
 
 		#region Color
 		/// <summary>
+		/// Converts a grayscale value to a Color object.
+		/// </summary>
+		/// <param name="value">The grayscale value to be used for all color components.</param>
+		/// <returns>A Color object representing the grayscale value.</returns>
+		/// <remarks>
+		/// The grayscale value will be applied to all color components (R, G, and B) of the resulting Color object.
+		/// </remarks>
+		public static Color Grayscale(float value)
+		{
+			return new Color(value, value, value);
+		}
+
+		/// <summary>
+		/// Converts a Vector3 object representing RGB values to a Color object.
+		/// </summary>
+		/// <param name="rgb">The Vector3 object representing the RGB values (X: Red, Y: Green, Z: Blue).</param>
+		/// <returns>A Color object created from the RGB values.</returns>
+		/// <remarks>
+		/// The X component of the Vector3 object will be used as the Red value of the resulting Color object.
+		/// The Y component of the Vector3 object will be used as the Green value of the resulting Color object.
+		/// The Z component of the Vector3 object will be used as the Blue value of the resulting Color object.
+		/// </remarks>
+		public static Color ToColor(Vector3 rgb)
+		{
+			return new Color(rgb.X, rgb.Y, rgb.Z);
+		}
+
+		/// <summary>
 		/// Darkens the specified color by the given amount.
 		/// </summary>
 		/// <param name="color">The color to darken.</param>

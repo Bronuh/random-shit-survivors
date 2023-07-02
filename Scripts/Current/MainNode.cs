@@ -6,7 +6,7 @@ using Scripts.Libs.ModApi;
 
 public partial class MainNode : Node2D
 {
-	public static Random GameRandom { get; private set; } = InternalGameSettings.UseConatantSeed ? new Random(1) : new Random();
+	public static Random GameRandom { get; private set; } = InternalGameSettings.UseConstantSeed ? new Random(1) : new Random();
 	// TODO: Assign values on ready
 	public WorldNode World { get; private set; }
 	public HudNode Hud { get; private set; }

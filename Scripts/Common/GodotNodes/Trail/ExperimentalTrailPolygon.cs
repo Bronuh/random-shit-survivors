@@ -147,7 +147,7 @@ public partial class ExperimentalTrailPolygon : Node2D
 	private class Segment
 	{
 		// Processing/Deletion flag
-		public bool Finished => timeToLive <= -startingTimeToLive/2 || polygon == null;
+		public bool Finished => timeToLive <= 0 || polygon == null;
 
 		// Start pos is the end pos of the previous segment
 		public Vector2 StartPos => previous?.endPos ?? startPos;

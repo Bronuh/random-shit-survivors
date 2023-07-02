@@ -43,11 +43,11 @@ namespace Scripts.Common.GodotNodes
 		///		The camera always tries to move towards the goal, so 1 means that it will go all the way in one tick,
 		///		while 0.5 means that every tick the camera will go only half of the remaining way.
 		/// </remarks>
-		[Export(PropertyHint.Range, "0.1,1,0.01")]
+		[Export(PropertyHint.Range, "0.01,10,0.01")]
 		public float SmoothingFactor
 		{
 			get => _smoothingFactor;
-			set => Math.Clamp(value, 0, 1);
+			set => _smoothingFactor = Math.Clamp(value, 0, 1);
 		}
 
 
@@ -134,6 +134,9 @@ namespace Scripts.Common.GodotNodes
 		/// <param name="steps">The number of steps to zoom in. Default is 1.</param>
 		public void ZoomIn(int steps = 1)
 		{
+			if (!AllowZoom)
+				return;
+
 			if (steps < 0)
 				throw new ArgumentOutOfRangeException($"Attempt to zoom {steps} times");
 
@@ -155,6 +158,9 @@ namespace Scripts.Common.GodotNodes
 		/// <param name="steps">The number of steps to zoom out. Default is 1.</param>
 		public void ZoomOut(int steps = 1)
 		{
+			if (!AllowZoom)
+				return;
+
 			if (steps < 0)
 				throw new ArgumentOutOfRangeException($"Attempt to zoom {steps} times");
 
@@ -219,8 +225,8 @@ namespace Scripts.Common.GodotNodes
 		{
 			float noSmoothing = 1f; // Use this instead of SmoothingFactor if UseSmoothing is false
 
-			base.Position += (TargetPosition - base.Position) // vector from the current position to the target position
-				* (UseSmoothing ? SmoothingFactor : noSmoothing); // multiply it by smoothing factor
+			Position += (TargetPosition - Position) // vector from the current position to the target position
+				* (UseSmoothing ? SmoothingFactor * (float)dt : noSmoothing); // multiply it by smoothing factor
 				//* (float)(dt / (1/60)); // and apply time. Probably it's not good decision
 		}
 
