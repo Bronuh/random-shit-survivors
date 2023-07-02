@@ -58,15 +58,13 @@ unique_name_in_owner = true
 script = ExtResource("5_12dna")
 
 [node name="Follower" type="Node2D" parent="WorldNode/PhysicsSmoothing"]
-visible = false
 script = ExtResource("11_u8gj1")
 
 [node name="PlaceholderSprite" type="Sprite2D" parent="WorldNode/PhysicsSmoothing/Follower"]
 texture = SubResource("PlaceholderTexture2D_egyj3")
 
-[node name="ExperimentalTrailPolygon" type="Node2D" parent="WorldNode" node_paths=PackedStringArray("Target")]
+[node name="ExperimentalTrailPolygon" type="Node2D" parent="WorldNode/PhysicsSmoothing/Follower"]
 script = ExtResource("12_xjeb7")
-Target = NodePath("../PhysicsSmoothing/Follower")
 SegmentsCount = 60
 StartWidth = 100.0
 EndWidth = 1.0

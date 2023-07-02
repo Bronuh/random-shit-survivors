@@ -7,7 +7,6 @@ using System;
 
 /// <summary>
 /// This node is slow AF
-/// Also, it's shouldn't move with the parent node, so put it directly in the World node
 /// Its even slower than ExperimentalTrailLine
 /// </summary>
 [GlobalClass]
@@ -81,11 +80,15 @@ public partial class ExperimentalTrailPolygon : Node2D
 
 	public override void _Ready()
 	{
+		Target = GetParent<Node2D>();
 		Reset();
 	}
 
 	public override void _Process(double delta)
 	{
+		// Reset pos to (0, 0)
+		GlobalPosition = Vec2();
+
 		// Accumulate some time
 		_timeThreshold += delta;
 
