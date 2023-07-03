@@ -43,8 +43,11 @@ namespace Scripts.Common.GodotNodes
 			base._Process(delta);
 			if (TargetNode is null) return;
 
-			if (Input.IsActionPressed(PullKey)) Offset = GetShift();
-			else Offset = Vec2();
+			if (UsePull)
+			{
+				if (Input.IsActionPressed(PullKey)) Offset = GetShift();
+				else Offset = Vec2();
+			}
 
 			TargetPosition = TargetNode.Position + Offset;
 		}
@@ -57,7 +60,7 @@ namespace Scripts.Common.GodotNodes
 		{
 			Vector2 vp_mouse = GetViewport().GetMousePosition();
 
-			return (vp_mouse - GetViewportRect().Size / 2) * PullPower;
+			return (vp_mouse - GetViewportRect().Size).Normalized() * PullPower;
 		}
 	}
 }

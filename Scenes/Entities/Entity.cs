@@ -1,12 +1,28 @@
 using Godot;
 using Godot.Collections;
 using Scripts.Common.GodotNodes;
-using System;
+using Scripts.Current;
+using static GameSession;
+
+public enum EntityTeam
+{
+	None,
+	Player,
+	Enemies
+}
 
 public partial class Entity : Node2D
 {
 	[Export]
-	public EntityController Controller { get; set; } = null;
+	public EntityController Controller
+	{
+		get => _controller;
+		set
+		{
+			_controller = value;
+			_controller.Parent = this;
+		}
+	}
 
 	[Export]
 	public Array<EntityComponent> Components { get; set; } = new Array<EntityComponent> ();
@@ -21,11 +37,17 @@ public partial class Entity : Node2D
 	public double Armor { get; set; }
 
 	[Export]
-	public float Speed { get; set; } = 3000;
+	public float Speed { get; set; } = 1000;
 
+	[Export]
+	public EntityTeam Team { get; set; } = EntityTeam.None;
+
+	public GameSession Session => GameSession.Instance;
+	private EntityController _controller = null;
 
 	public override void _Ready()
 	{
+		Controller.Parent = this;
 		HP = MaxHP;
 	}
 
@@ -39,5 +61,10 @@ public partial class Entity : Node2D
 	public override void _PhysicsProcess(double delta)
 	{
 
+	}
+
+	internal void Init(PlayerData instance)
+	{
+		
 	}
 }

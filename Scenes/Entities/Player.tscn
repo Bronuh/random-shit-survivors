@@ -9,6 +9,7 @@ script = ExtResource("2_46ijo")
 [node name="Player" instance=ExtResource("1_mo0o1")]
 Controller = SubResource("Resource_prot6")
 MaxHP = 100
+Team = 1
 
 [node name="Sprite2D" parent="." index="1"]
 position = Vector2(0, -0.5)

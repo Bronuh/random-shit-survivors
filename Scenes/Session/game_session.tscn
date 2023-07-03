@@ -16,14 +16,6 @@ script = ExtResource("2_kbj26")
 
 [node name="Entities" type="Node2D" parent="."]
 
-[node name="FollowingCamera" type="Camera2D" parent="Entities" node_paths=PackedStringArray("TargetNode")]
-script = ExtResource("3_y8blh")
-TargetNode = NodePath("../Player")
-ProcessOn = 0
-UseOnReady = true
-UseSmoothing = true
-SmoothingFactor = 10.0
-
 [node name="Player" parent="Entities" instance=ExtResource("4_byjl6")]
 
 [node name="ExperimentalTrailPolygon" type="Node2D" parent="Entities/Player"]
@@ -32,3 +24,13 @@ StartWidth = 20.0
 EndWidth = 20.0
 Length = 0.25
 EndAlpha = 0.0
+
+[node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("TargetNode")]
+position_smoothing_enabled = true
+position_smoothing_speed = 25.0
+script = ExtResource("3_y8blh")
+TargetNode = NodePath("../Entities/Player")
+UsePull = true
+ProcessOn = 0
+UseOnReady = true
+AllowZoom = true

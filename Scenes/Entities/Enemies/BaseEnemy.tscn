@@ -8,6 +8,7 @@ script = ExtResource("2_yc5ml")
 
 [node name="BaseEnemy" instance=ExtResource("1_2uvjq")]
 Controller = SubResource("Resource_bhc8a")
+Team = 2
 
 [node name="Sprite2D" parent="." index="1"]
 modulate = Color(0, 0, 0, 1)

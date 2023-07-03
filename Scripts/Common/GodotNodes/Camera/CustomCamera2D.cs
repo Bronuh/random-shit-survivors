@@ -43,7 +43,7 @@ namespace Scripts.Common.GodotNodes
 		///		The camera always tries to move towards the goal, so 1 means that it will go all the way in one tick,
 		///		while 0.5 means that every tick the camera will go only half of the remaining way.
 		/// </remarks>
-		[Export(PropertyHint.Range, "0.01,10,0.01")]
+		[Export(PropertyHint.Range, "0.0, 1, 0.01")]
 		public float SmoothingFactor
 		{
 			get => _smoothingFactor;
@@ -85,13 +85,14 @@ namespace Scripts.Common.GodotNodes
 		private float shakeTimer = 0f;
 		private double timeSinceLastShake = 0f;
 
+		private float _minSmoothing = 0f;
+		private float _maxSmoothing = 1f;
 
 
 		public override void _Ready()
 		{
 			if (UseOnReady)
 				MakeCurrent();
-
 		}
 
 		public override void _Process(double delta)
@@ -219,15 +220,20 @@ namespace Scripts.Common.GodotNodes
 			tween.TweenProperty(this, "offset", Vec2(), punchDuration);
 		}
 
-
-
 		private void Move(double dt)
 		{
-			float noSmoothing = 1f; // Use this instead of SmoothingFactor if UseSmoothing is false
-
-			Position += (TargetPosition - Position) // vector from the current position to the target position
-				* (UseSmoothing ? SmoothingFactor * (float)dt : noSmoothing); // multiply it by smoothing factor
-				//* (float)(dt / (1/60)); // and apply time. Probably it's not good decision
+			if (UseSmoothing)
+			{
+				float realSmoothing = _minSmoothing + (_maxSmoothing - _minSmoothing) * SmoothingFactor;
+				// Calculate the interpolation factor based on the SmoothingFactor
+				float interpolationFactor = realSmoothing;
+				// Apply the interpolation factor to smooth the movement
+				Position += (TargetPosition - Position) * interpolationFactor;
+			}
+			else
+			{
+				Position = TargetPosition;
+			}
 		}
 
 

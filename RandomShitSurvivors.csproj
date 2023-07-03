@@ -5,7 +5,11 @@
     <RootNamespace></RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Scenes\Items\**" />
+    <Compile Remove="Scripts\Current\NotEcs\**" />
     <Compile Remove="Tests\**" />
+    <EmbeddedResource Remove="Scenes\Items\**" />
+    <EmbeddedResource Remove="Scripts\Current\NotEcs\**" />
     <EmbeddedResource Remove="Tests\**" />
   </ItemGroup>
   <ItemGroup>
@@ -21,8 +25,5 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="GodotSharp" Version="4.1.0-rc.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\Current\NotEcs\" />
   </ItemGroup>
 </Project>

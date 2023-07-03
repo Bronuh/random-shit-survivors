@@ -156,7 +156,10 @@ namespace Scripts.Libs
 		/// <returns>The height of the Rect2.</returns>
 		public static float Height(this Rect2 rect) => rect.Size.Y;
 
-
+		public static float GetCircumradius(this Rect2 rect)
+		{
+			return Mathf.Sqrt(rect.Width() * rect.Width() + rect.Height()*rect.Height()) / 2;
+		}
 
 		/// <summary>
 		/// Returns a new Rect2 representing the left half of the specified Rect2.

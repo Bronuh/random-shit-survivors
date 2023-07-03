@@ -48,10 +48,12 @@ script = ExtResource("10_cas5n")
 
 [node name="WorldNode" type="Node2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(1, 1)
 script = ExtResource("8_n4xt2")
 
 [node name="PhysicsSmoothing" type="Node2D" parent="WorldNode"]
 unique_name_in_owner = true
+visible = false
 script = ExtResource("5_12dna")
 
-[node name="GameSession" parent="WorldNode/PhysicsSmoothing" instance=ExtResource("12_vax0a")]
+[node name="GameSession" parent="WorldNode" instance=ExtResource("12_vax0a")]

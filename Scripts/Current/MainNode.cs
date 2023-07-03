@@ -3,10 +3,13 @@ using Scripts.Current;
 using Scripts.Common.GodotNodes.UI;
 using Scripts.Libs.EventApi;
 using Scripts.Libs.ModApi;
+using Esprima.Ast;
 
 public partial class MainNode : Node2D
 {
+	public static MainNode Main { get; private set; }
 	public static Random GameRandom { get; private set; } = InternalGameSettings.UseConstantSeed ? new Random(1) : new Random();
+	
 	// TODO: Assign values on ready
 	public WorldNode World { get; private set; }
 	public HudNode Hud { get; private set; }
@@ -18,6 +21,7 @@ public partial class MainNode : Node2D
 	{
 		// Use Event API.
 		EventBus.Initialize(this);
+		Main = this;
 
 		if (InternalGameSettings.EnableModApi)
 		{
