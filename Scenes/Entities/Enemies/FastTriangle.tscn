@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://xk27css5pefv"]
+
+[ext_resource type="PackedScene" uid="uid://ck5kpo3lykeba" path="res://Scenes/Entities/Enemies/BaseEnemy.tscn" id="1_qx5d6"]
+[ext_resource type="Texture2D" uid="uid://dr82wafa02tsj" path="res://Assets/Textures/Sprites/Triangle.png" id="2_p7ewt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rc2f5"]
+radius = 475.857
+
+[node name="FastTriangle" instance=ExtResource("1_qx5d6")]
+MaxHP = 50
+CollisionDamage = 5.0
+Speed = 1000.0
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_p7ewt")
+
+[node name="CollisionShape2D" parent="Sprite2D/Area2D" index="0"]
+position = Vector2(-8, 92)
+shape = SubResource("CircleShape2D_rc2f5")

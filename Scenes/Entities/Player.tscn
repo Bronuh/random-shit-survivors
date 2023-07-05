@@ -10,7 +10,3 @@ script = ExtResource("2_46ijo")
 Controller = SubResource("Resource_prot6")
 MaxHP = 100
 Team = 1
-
-[node name="Sprite2D" parent="." index="1"]
-position = Vector2(0, -0.5)
-scale = Vector2(32, 33)

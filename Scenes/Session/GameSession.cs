@@ -8,20 +8,36 @@ using System.Collections.ObjectModel;
 public partial class GameSession : Node2D, IExposable
 {
 	// Getters for the session objects
+	public static GameSession Instance => _instance;
 	public static Entity Player => Instance.GetNode<Entity>("Entities/Player");
 	public static Node2D Playground => Instance.GetNode<Node2D>("Entities");
-	public static ReadOnlyCollection<Entity> Enemies => Instance._enemies.AsReadOnly();
 	public static FollowingCamera Camera => Instance.GetNode<FollowingCamera>("PlayerCamera");
-	public static double Difficulty => 1 + _passedTime / (_difficultyIncreaseMinutes * 60);
+	public static ReadOnlyCollection<Entity> Enemies => Instance._enemies.AsReadOnly();
 
-	public static GameSession Instance => _instance ?? new GameSession();
-	private static GameSession _instance;
+	// Enemy scenes
+	public static PackedScene BaseEnemy { get; private set; }
+	public static PackedScene FastTriangle { get; private set; }
+	public static PackedScene HeavySquare { get; private set; }
+	public static PackedScene PowerfulHexagon { get; private set; }
+
+	// Some values
+	public static double Difficulty => InternalGameSettings.BaseDifficulty + _passedTime / (_difficultyIncreaseMinutes * 60);
+	public static int MaximumEnemies => InternalGameSettings.EnemiesPerDifficultyLevel + (int)Mathf.Ceil(Difficulty);
+
 
 	private List<Entity> _enemies = new List<Entity>();
 	private Entity _player;
+	private static GameSession _instance;
 
 	private static double _passedTime = 0;
 	private static double _difficultyIncreaseMinutes = 10;
+
+	// scenes paths
+	public static string _baseEnemyPath = "res://Scenes/Entities/Enemies/BaseEnemy.tscn";
+	public static string _fastTrianglePath = "res://Scenes/Entities/Enemies/FastTriangle.tscn";
+	public static string _heavySquarePath = "res://Scenes/Entities/Enemies/HeavySquare.tscn";
+	public static string _powerfulHexagonPath = "res://Scenes/Entities/Enemies/PowerfulHexagon.tscn";
+
 
 	public GameSession()
 	{
@@ -30,7 +46,13 @@ public partial class GameSession : Node2D, IExposable
 
 	public override void _Ready()
 	{
+		BaseEnemy = GD.Load<PackedScene>(_baseEnemyPath);
+		FastTriangle = GD.Load<PackedScene>(_fastTrianglePath);
+		HeavySquare = GD.Load<PackedScene>(_heavySquarePath);
+		PowerfulHexagon = GD.Load<PackedScene>(_powerfulHexagonPath);
+
 		Player.Init(PlayerData.Instance);
+
 	}
 
 	public override void _Process(double delta)

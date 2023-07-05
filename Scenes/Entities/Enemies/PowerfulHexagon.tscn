@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8v7hv75da75v"]
+
+[ext_resource type="PackedScene" uid="uid://ck5kpo3lykeba" path="res://Scenes/Entities/Enemies/BaseEnemy.tscn" id="1_mlnf8"]
+[ext_resource type="Texture2D" uid="uid://h3218rfnpbbq" path="res://Assets/Textures/Sprites/Hexagon.png" id="2_l14e4"]
+
+[node name="PowerfulHexagon" instance=ExtResource("1_mlnf8")]
+MaxHP = 75
+CollisionDamage = 40.0
+Speed = 400.0
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_l14e4")

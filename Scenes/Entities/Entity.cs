@@ -37,6 +37,9 @@ public partial class Entity : Node2D
 	public double Armor { get; set; }
 
 	[Export]
+	public double CollisionDamage { get; set; }
+
+	[Export]
 	public float Speed { get; set; } = 1000;
 
 	[Export]

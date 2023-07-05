@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwsis2c24g821"]
+
+[ext_resource type="PackedScene" uid="uid://ck5kpo3lykeba" path="res://Scenes/Entities/Enemies/BaseEnemy.tscn" id="1_81sqb"]
+[ext_resource type="Texture2D" uid="uid://f185l0x6mfef" path="res://Assets/Textures/Sprites/Square.png" id="2_gcpt8"]
+
+[node name="HeavySquare" instance=ExtResource("1_81sqb")]
+MaxHP = 300
+CollisionDamage = 20.0
+Speed = 250.0
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(1.515, 1.515)
+texture = ExtResource("2_gcpt8")

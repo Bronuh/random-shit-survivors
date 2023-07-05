@@ -2,20 +2,22 @@
 
 [ext_resource type="Script" path="res://Scenes/Entities/Entity.cs" id="1_d3irh"]
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_fclyp"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u4yev"]
 size = Vector2(2, 2)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_fclyp"]
-
 [node name="Entity" type="Node2D"]
 script = ExtResource("1_d3irh")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_u4yev")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-2.98023e-08, 2.98023e-08)
 scale = Vector2(2, 2)
 texture = SubResource("CanvasTexture_fclyp")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+position = Vector2(1.49011e-08, -1.49011e-08)
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("RectangleShape2D_u4yev")
