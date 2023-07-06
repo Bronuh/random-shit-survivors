@@ -104,24 +104,8 @@ namespace Scripts.Libs
 		/// <returns>A new Vector2 instance representing the original vector rotated by a random angle.</returns>
 		public static Vector2 Spin(this Vector2 vector)
 		{
-			float angle = (float)(MainNode.GameRandom.NextDouble() * 2 * Math.PI);
+			float angle = (Rand.Value * 2 * Maths.PI);
 			vector = vector.Rotated(angle);
-
-			return vector;
-		}
-
-		/// <summary>
-		/// Generates a random Vector2 with its components corresponding to the coordinates of a point on the unit circle.
-		/// </summary>
-		/// <returns>A new Vector2 instance representing a random point on the unit circle.</returns>
-		public static Vector2 RandNorm2()
-		{
-			float angle = (float)(MainNode.GameRandom.NextDouble() * 2 * Math.PI);
-			float x = (float)Math.Cos(angle);
-			float y = (float)Math.Sin(angle);
-
-			Vector2 vector = new Vector2(x, y);
-			vector = vector.Normalized();
 
 			return vector;
 		}

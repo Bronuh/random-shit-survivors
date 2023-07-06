@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Scripts.Libs;
 
 namespace Scripts.Common.GodotNodes
 {
@@ -214,7 +215,7 @@ namespace Scripts.Common.GodotNodes
 		{
 			// Define the punch properties
 			float punchDuration = 0.2f; // Duration of the punch animation in seconds
-			Offset = strength * RandNorm2();
+			Offset = strength * Rand.UnitVector2;
 
 			Tween tween = CreateTween();
 			tween.TweenProperty(this, "offset", Vec2(), punchDuration);

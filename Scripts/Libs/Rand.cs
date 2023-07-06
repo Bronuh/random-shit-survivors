@@ -42,6 +42,30 @@ namespace Scripts.Libs
 		/// </summary>
 		public static int Int => MurmurHash.GetInt(_seed, _iterations++);
 
+		/// <summary>
+		/// Generates a random unit vector in 2D space.
+		/// </summary>
+		/// <returns>A random unit vector in 2D space.</returns>
+		public static Vector2 UnitVector2 => new Vector2(Gaussian(), Gaussian()).Normalized();
+
+		/// <summary>
+		/// Generates a random vector inside the unit circle in 2D space.
+		/// </summary>
+		/// <returns>A random vector inside the unit circle in 2D space.</returns>
+		public static Vector2 InsideUnitCircle
+		{
+			get
+			{
+				Vector2 result;
+				do
+				{
+					result = new Vector2(Value - 0.5f, Value - 0.5f) * 2f;
+				}
+				while (!(result.LengthSquared() <= 1f));
+				return result;
+			}
+		}
+
 
 
 		private static Random _rand;
@@ -53,6 +77,21 @@ namespace Scripts.Libs
 		{
 			_rand = InternalGameSettings.UseConstantSeed ? new Random(0) : new Random();
 			_seed = (uint)DateTime.Now.GetHashCode();
+		}
+
+		/// <summary>
+		/// Generates a random vector inside an annulus (a region between two concentric circles) in 2D space.
+		/// </summary>
+		/// <param name="innerRadius">The inner radius of the annulus.</param>
+		/// <param name="outerRadius">The outer radius of the annulus.</param>
+		/// <returns>A random vector inside the annulus in 2D space.</returns>
+		public static Vector2 InsideAnnulus(float innerRadius, float outerRadius)
+		{
+			float f = (float)Math.PI * 2f * Value;
+			Vector2 vector = new Vector2(Mathf.Cos(f), Mathf.Sin(f));
+			innerRadius *= innerRadius;
+			outerRadius *= outerRadius;
+			return Mathf.Sqrt(Mathf.Lerp(innerRadius, outerRadius, Value)) * vector;
 		}
 
 		/// <summary>
