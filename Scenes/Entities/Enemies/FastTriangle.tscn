@@ -12,6 +12,7 @@ CollisionDamage = 5.0
 Speed = 1000.0
 
 [node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.07, 0.07)
 texture = ExtResource("2_p7ewt")
 
 [node name="CollisionShape2D" parent="Sprite2D/Area2D" index="0"]

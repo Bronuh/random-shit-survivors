@@ -1,17 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck5kpo3lykeba"]
+[gd_scene load_steps=4 format=3 uid="uid://ck5kpo3lykeba"]
 
 [ext_resource type="PackedScene" uid="uid://s7lip0f036v5" path="res://Scenes/Entities/Entity.tscn" id="1_2uvjq"]
-[ext_resource type="Script" path="res://Scenes/Entities/Controllers/PrimitiveAiController.cs" id="2_yc5ml"]
 [ext_resource type="Texture2D" uid="uid://c07vvjsulfc0q" path="res://Assets/Textures/Sprites/Circle.png" id="3_orlpc"]
-
-[sub_resource type="Resource" id="Resource_bhc8a"]
-script = ExtResource("2_yc5ml")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pjp26"]
 radius = 468.273
 
 [node name="BaseEnemy" instance=ExtResource("1_2uvjq")]
-Controller = SubResource("Resource_bhc8a")
 MaxHP = 100
 CollisionDamage = 10.0
 Speed = 500.0
@@ -19,8 +14,11 @@ Team = 2
 
 [node name="Sprite2D" parent="." index="0"]
 modulate = Color(0, 0, 0, 1)
-scale = Vector2(1, 1)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_orlpc")
+
+[node name="Area2D" parent="Sprite2D" index="0"]
+collision_layer = 2
 
 [node name="CollisionShape2D" parent="Sprite2D/Area2D" index="0"]
 shape = SubResource("CircleShape2D_pjp26")

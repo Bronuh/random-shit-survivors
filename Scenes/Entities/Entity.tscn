@@ -12,7 +12,6 @@ script = ExtResource("1_d3irh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-2.98023e-08, 2.98023e-08)
-scale = Vector2(2, 2)
 texture = SubResource("CanvasTexture_fclyp")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]

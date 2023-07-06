@@ -1,8 +1,4 @@
 using Godot;
-using HarmonyLib;
-using Scripts.Common.GodotNodes;
-using Scripts.Current;
-using System;
 
 
 /// <summary>
@@ -108,13 +104,6 @@ public partial class ExperimentalTrailPolygon : Node2D
 		// Update all segments
 		foreach (var segment in segments)
 			segment.Update(delta);
-
-		// Debug info
-		if (InternalGameSettings.Debug)
-		{
-			MonitorLabel.SetGlobal("Mouse pos", Target.Position);
-			MonitorLabel.SetGlobal("Active segments", GetChildCount());
-		}
 	}
 
 	// Creates new segment

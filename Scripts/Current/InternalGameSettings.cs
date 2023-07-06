@@ -19,8 +19,6 @@ public static class InternalGameSettings{
 	public static Color EnemyColor = Grayscale(0);
 
 	// Gameplay
-	public static double BaseDifficulty = 0;
-	public static int EnemiesPerDifficultyLevel = 30;
 	public static double DefenseArmor = 0.06; // Warcraft 3 style of damage calculation
 
 	public static int MaxLevel = 100;

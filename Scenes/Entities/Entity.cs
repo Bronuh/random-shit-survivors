@@ -45,8 +45,13 @@ public partial class Entity : Node2D
 	[Export]
 	public EntityTeam Team { get; set; } = EntityTeam.None;
 
+	public Area2D CollisionArea => GetNode<Area2D>("Sprite2D/Area2D");
+
 	public GameSession Session => GameSession.Instance;
 	private EntityController _controller = null;
+
+	public Action<Entity> DeathCallback = null;
+	public Action<Entity> DamageCallback = null;
 
 	public override void _Ready()
 	{
@@ -57,8 +62,6 @@ public partial class Entity : Node2D
 	public override void _Process(double delta)
 	{
 		Position = Position + Controller.GetDirection() * Speed * (float)delta;
-		MonitorLabel.SetGlobal("Position", Position);
-		MonitorLabel.SetGlobal("Dir", Controller.GetDirection());
 	}
 
 	public override void _PhysicsProcess(double delta)

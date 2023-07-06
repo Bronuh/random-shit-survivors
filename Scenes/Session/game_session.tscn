@@ -20,12 +20,11 @@ script = ExtResource("2_kbj26")
 
 [node name="ExperimentalTrailPolygon" type="Node2D" parent="Entities/Player"]
 script = ExtResource("5_djlwf")
-StartWidth = 20.0
-EndWidth = 20.0
-Length = 0.25
+StartWidth = 30.0
 EndAlpha = 0.0
 
 [node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("TargetNode")]
+zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 25.0
 script = ExtResource("3_y8blh")
@@ -34,3 +33,4 @@ UsePull = true
 ProcessOn = 0
 UseOnReady = true
 AllowZoom = true
+ZoomStep = 0.191

@@ -9,4 +9,5 @@ CollisionDamage = 40.0
 Speed = 400.0
 
 [node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.1, 0.188)
 texture = ExtResource("2_l14e4")

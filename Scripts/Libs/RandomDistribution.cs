@@ -48,9 +48,9 @@ namespace Scripts.Libs
 		public bool TryProc()
 		{
 			// Generate random value for proc.
-			var random = MainNode.GameRandom.NextDouble();
+			var random = Rand.Value;
 			
-			if(random <= CurrentChance)
+			if(Rand.Chance(CurrentChance))
 			{
 				// if this execution is proc'd, then reset proc chance to base and return true.
 				CurrentChance = _constant;
@@ -67,19 +67,19 @@ namespace Scripts.Libs
 			probability = Math.Clamp(probability, 0, 1);
 
 			// Calculate the lower bound by truncating the decimal part of probability
-			double lowerBound = (int)probability;
+			double lowerBound = (int)(probability * 100);
 
 			// Calculate the upper bound by adding 1 to the lower bound
-			double upperBound = (int)probability + 1;
+			double upperBound = (int)(probability * 100 + 1);
 
 			// Retrieve the constant value associated with the lower bound from the _constants array
-			double lowerConst = _constants[(int)(lowerBound * 100)];
+			double lowerConst = _constants[(int)(lowerBound)];
 
 			// Retrieve the constant value associated with the upper bound from the _constants array
-			double upperConst = _constants[(int)(upperBound * 100)];
+			double upperConst = _constants[(int)(upperBound)];
 
 			// Calculate the weight based on the relative position of the probability within the bounds
-			double weight = (probability - lowerBound) / (upperBound - lowerBound);
+			double weight = (probability - lowerBound / 100) / (upperBound / 100 - lowerBound / 100);
 
 			// Interpolate between the lower and upper constant values based on the weight
 			return Mathf.Lerp(lowerConst, upperConst, weight);

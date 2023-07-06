@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cjsepe4wt2q56"]
+[gd_scene load_steps=12 format=3 uid="uid://cjsepe4wt2q56"]
 
 [ext_resource type="Script" path="res://Scripts/Current/MainNode.cs" id="1_gcou8"]
 [ext_resource type="PackedScene" uid="uid://oilwraaijcfo" path="res://Scenes/Ui/shaders_node.tscn" id="2_j61ta"]
 [ext_resource type="Script" path="res://Scripts/Common/GodotNodes/UI/ShadersNode.cs" id="3_7pkw1"]
 [ext_resource type="PackedScene" uid="uid://btwyyvp72keen" path="res://Scenes/Ui/hud_node.tscn" id="3_wq2fv"]
 [ext_resource type="PackedScene" uid="uid://bi7rb5qknto8t" path="res://Scenes/Ui/menu_node.tscn" id="4_mlycn"]
-[ext_resource type="Script" path="res://addons/smoothing/smoothing_2d.gd" id="5_12dna"]
 [ext_resource type="Script" path="res://Scripts/Common/GodotNodes/UI/HudNode.cs" id="5_h26ms"]
 [ext_resource type="Script" path="res://Scripts/Common/GodotNodes/MonitorLabel.cs" id="6_6mgnn"]
 [ext_resource type="Script" path="res://Scripts/Common/GodotNodes/UI/MenuNode.cs" id="7_4vnm6"]
@@ -50,10 +49,5 @@ script = ExtResource("10_cas5n")
 unique_name_in_owner = true
 position = Vector2(1, 1)
 script = ExtResource("8_n4xt2")
-
-[node name="PhysicsSmoothing" type="Node2D" parent="WorldNode"]
-unique_name_in_owner = true
-visible = false
-script = ExtResource("5_12dna")
 
 [node name="GameSession" parent="WorldNode" instance=ExtResource("12_vax0a")]
