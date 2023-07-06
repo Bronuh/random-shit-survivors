@@ -360,6 +360,12 @@ namespace Scripts.Libs
 			return node.GetChild<TNode>() != null;
 		}
 
+		public static void SetAbsolutScale(this Sprite2D sprite, Vector2 size)
+		{
+			var curSize = sprite.Texture.GetSize();
+			sprite.Scale = new Vector2(size.X / curSize.X, size.Y / curSize.Y);
+		}
+
 		/// <summary>
 		///		Returns first children of required type or null.
 		/// </summary>
@@ -383,6 +389,24 @@ namespace Scripts.Libs
 		public static MainNode GetMain(this Node node)
 		{
 			return node.GetNode<MainNode>($"/{GameNodes.MainNodeName}");
+		}
+
+		/// <summary>
+		/// Tries to recursively retrieve the parent node of the specified type from a given child node.
+		/// </summary>
+		/// <typeparam name="TNode">The type of the parent node to retrieve.</typeparam>
+		/// <param name="child">The child node from which to start searching.</param>
+		/// <returns>The parent node of the specified type if found, otherwise null.</returns>
+		public static TNode TryGetParentOfType<TNode>(this Node child) where TNode : Node
+		{
+			var parent = child.GetParent();
+			if (parent is null)
+				return null;
+
+			if (parent is TNode)
+				return parent as TNode;
+
+			return TryGetParentOfType<TNode>(parent);
 		}
 
 

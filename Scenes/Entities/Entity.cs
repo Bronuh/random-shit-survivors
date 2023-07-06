@@ -2,7 +2,7 @@ using Godot;
 using Godot.Collections;
 using Scripts.Common.GodotNodes;
 using Scripts.Current;
-using static GameSession;
+using Scripts.Current.GameTypes;
 
 public enum EntityTeam
 {
@@ -66,11 +66,35 @@ public partial class Entity : Node2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		var overlaps = CollisionArea.GetOverlappingAreas();
+		foreach (var area in overlaps)
+		{
+			var entity = area.TryGetParentOfType<Entity>();
+			if (entity is null)
+				continue;
 
+			if (entity.Team != Team)
+				continue;
+
+			ApplyDamage(entity, CollisionDamage * delta);
+		}
 	}
 
 	internal void Init(PlayerData instance)
 	{
 		
+	}
+
+	public void ApplyDamage(Entity target, double amount)
+	{
+		var damage = new Damage();
+		damage.Inflictor = this;
+		damage.Amount = amount;
+		target.TakeDamage(damage);
+	}
+
+	public void TakeDamage(Damage damage)
+	{
+		HP -= Calculations.GetDamageReduction(Armor) * damage.Amount;
 	}
 }
