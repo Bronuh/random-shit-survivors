@@ -402,7 +402,7 @@ namespace Scripts.Libs
 			var parent = child.GetParent();
 			if (parent is null)
 				return null;
-
+			
 			if (parent is TNode)
 				return parent as TNode;
 

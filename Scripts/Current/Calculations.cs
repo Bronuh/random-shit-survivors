@@ -18,5 +18,10 @@
 			var mult = InternalGameSettings.DefenseArmor;
 			return (armor * mult) / (1 + (armor * mult));
 		}
+
+		public static double GatDamagePercentage(double armor)
+		{
+			return 1 - GetDamageReduction(armor);
+		}
 	}
 }

@@ -62,20 +62,36 @@ public partial class Entity : Node2D
 	public override void _Process(double delta)
 	{
 		Position = Position + Controller.GetDirection() * Speed * (float)delta;
+		if (this == GameSession.Player)
+		{
+			MonitorLabel.SetGlobal("HP", HP);
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		var overlaps = CollisionArea.GetOverlappingAreas();
+		if (this == GameSession.Player)
+		{
+			MonitorLabel.SetGlobal("Overlaps", overlaps.Count);
+		}
 		foreach (var area in overlaps)
 		{
+			if (area == CollisionArea)
+				continue;
+
 			var entity = area.TryGetParentOfType<Entity>();
 			if (entity is null)
 				continue;
 
-			if (entity.Team != Team)
+			if (entity.Team == Team)
 				continue;
 
+			if (this == GameSession.Player)
+			{
+				MonitorLabel.SetGlobal("Overentity", entity.Name);
+			}
+			
 			ApplyDamage(entity, CollisionDamage * delta);
 		}
 	}
@@ -95,6 +111,11 @@ public partial class Entity : Node2D
 
 	public void TakeDamage(Damage damage)
 	{
-		HP -= Calculations.GetDamageReduction(Armor) * damage.Amount;
+		HP -= Calculations.GatDamagePercentage(Armor) * damage.Amount;
+		if (HP <= 0)
+		{
+			DeathCallback?.Invoke(damage.Inflictor);
+			QueueFree();
+		}
 	}
 }

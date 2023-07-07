@@ -1,3 +1,11 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
 config_version=5
 
 [MonoCustomResourceRegistry]
@@ -9,12 +17,12 @@ ResourceScriptDirectories=["res://"]
 [application]
 
 config/name="RandomShitSurvivors"
+config/tags=PackedStringArray("test", "game")
 run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 boot_splash/image="res://NewGodotRed.png"
 boot_splash/fullsize=false
 config/icon="res://NewGodot.svg"
-config/tags=PackedStringArray("test", "game")
 
 [dotnet]
 

@@ -57,6 +57,7 @@ public partial class MainNode : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+
 	}
 
 	public override void _PhysicsProcess(double delta)
