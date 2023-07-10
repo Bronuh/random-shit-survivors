@@ -12,7 +12,7 @@ radius = 517.21
 
 [node name="Player" instance=ExtResource("1_mo0o1")]
 Controller = SubResource("Resource_mnt4x")
-MaxHP = 100
+MaxHP = 100.0
 Team = 1
 
 [node name="Sprite2D" parent="." index="0"]
