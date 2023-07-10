@@ -9,7 +9,7 @@ radius = 475.857
 [node name="FastTriangle" instance=ExtResource("1_qx5d6")]
 MaxHP = 50
 CollisionDamage = 5.0
-Speed = 1000.0
+Speed = 900.0
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(0.07, 0.07)
