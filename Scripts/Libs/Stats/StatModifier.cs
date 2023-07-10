@@ -27,7 +27,7 @@ namespace Scripts.Libs.Stats
     public class StatModifier
     {
         public bool IsConstant = false;
-        public IStatModifierGiver Source { get; } = null;
+        public IStatusEffect Source { get; } = null;
         public string TargetStatName = String.Empty;
         public StatOperation Operation = StatOperation.None;
         public double Value = 0;
@@ -36,7 +36,7 @@ namespace Scripts.Libs.Stats
         public StatModifier() { }
         public StatModifier(string name, double value = 0, 
             StatOperation statOperation = StatOperation.AddBefore, 
-            IStatModifierGiver source = null) 
+            IStatusEffect source = null) 
         { 
             TargetStatName = name;
             Value = value;

@@ -23,7 +23,7 @@ namespace Scripts.Libs.Stats
 			stat.BaseValue = value;
 		}
 
-		public void TryApply(IStatModifierGiver giver)
+		public void TryApply(IStatusEffect giver)
 		{
 			bool isTagHolder = this is ITagsHolder;
 			ITagsHolder tagsHolder = this as ITagsHolder;
@@ -42,7 +42,7 @@ namespace Scripts.Libs.Stats
 			}
 		}
 
-		public void TryRemove(IStatModifierGiver giver)
+		public void TryRemove(IStatusEffect giver)
 		{
 			foreach (var modifier in giver.GetModifiers())
 			{
