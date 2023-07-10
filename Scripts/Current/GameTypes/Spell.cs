@@ -34,8 +34,11 @@ namespace Scripts.Current.GameTypes
 			set => SetStat(ref _number, SpellStats.Number, value);
 		}
 
+		public Spell()
+		{
+			Tags.Add("Spell");
+		}
 
-		public TagsContainer Tags { get; private set; } = new() { "Spell" };
 
 		private Stat _cooldown = null;
 		private Stat _size = null;

@@ -74,7 +74,6 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 	public EntityTeam Team { get; set; } = EntityTeam.None;
 	#endregion
 
-	public TagsContainer Tags { get; private set; } = new() { "Entity" };
 	public List<Spell> Spells { get; set; } = new();
 	public List<Perk> Perks { get; set; } = new();
 
@@ -91,6 +90,11 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 	private Stat _armor = null;
 	private Stat _speed = null;
 	private Stat _damage = null;
+
+	public Entity()
+	{
+		Tags.Add("Entity");
+	}
 
 	public override void _Ready()
 	{
