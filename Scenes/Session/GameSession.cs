@@ -1,6 +1,7 @@
 using Godot;
 using Scripts.Common.GodotNodes;
 using Scripts.Current;
+using Scripts.Current.GameTypes;
 using Scripts.Libs;
 using Scripts.Libs.SaveLoad;
 using System.Collections.ObjectModel;
