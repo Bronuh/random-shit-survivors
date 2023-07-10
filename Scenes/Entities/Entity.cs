@@ -106,7 +106,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 		Position = Position + Controller.GetDirection() * Speed * (float)delta;
 		if (this == GameSession.Player)
 		{
-			MonitorLabel.SetGlobal("HP", HP);
+			// MonitorLabel.SetGlobal("HP", HP);
 		}
 	}
 
