@@ -24,8 +24,8 @@ namespace Scripts.Libs.Stats
         AddAfter
     }
 
-    public class StatModifier
-    {
+	public class StatModifier : ICloneable<StatModifier>
+	{
         public bool IsConstant = false;
         public IStatusEffect Source { get; } = null;
         public string TargetStatName = String.Empty;
@@ -47,5 +47,13 @@ namespace Scripts.Libs.Stats
                 IsConstant = true;
             }
         }
-    }
+
+		public StatModifier Clone()
+		{
+			var modifier = new StatModifier(TargetStatName, Value, Operation, Source);
+			modifier.IsConstant = IsConstant;
+
+			return modifier;
+		}
+	}
 }
