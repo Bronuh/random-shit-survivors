@@ -18,7 +18,7 @@ public enum EntityTeam
 
 [Mixin(typeof(StatsMixin))]
 [Mixin(typeof(TagsMixin))]
-public partial class Entity : Node2D
+public partial class Entity : Node2D, IStatusEffectConsumer
 {
 	#region Exports
 	[Export]
@@ -140,7 +140,7 @@ public partial class Entity : Node2D
 		
 	}
 
-	public void ApplyEffect(IStatModifierGiver effect)
+	public void ApplyEffect(IStatusEffect effect)
 	{
 		TryApply(effect);
 		foreach (var spell in Spells)
@@ -149,7 +149,7 @@ public partial class Entity : Node2D
 		}
 	}
 
-	public void RemoveEffect(IStatModifierGiver effect)
+	public void RemoveEffect(IStatusEffect effect)
 	{
 		TryRemove(effect);
 		foreach (var spell in Spells)
