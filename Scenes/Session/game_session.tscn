@@ -30,7 +30,6 @@ position_smoothing_speed = 25.0
 script = ExtResource("3_y8blh")
 TargetNode = NodePath("../Entities/Player")
 UsePull = true
-ProcessOn = 0
 UseOnReady = true
 AllowZoom = true
 ZoomStep = 0.191
