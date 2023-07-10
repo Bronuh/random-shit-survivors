@@ -133,6 +133,30 @@ namespace Scripts.Libs
 			// Return the flattened string
 			return flattenedString.ToString();
 		}
+
+		/// <summary>
+		/// Checks whether the current collection contains any elements from another collection.
+		/// </summary>
+		/// <typeparam name="T">The type of elements in the collections.</typeparam>
+		/// <param name="source">The current collection.</param>
+		/// <param name="otherCollection">The other collection to check for common elements.</param>
+		/// <returns><c>true</c> if the current collection contains any elements from the other collection; otherwise, <c>false</c>.</returns>
+		public static bool HasAnyOf<T>(this IEnumerable<T> source, IEnumerable<T> otherCollection)
+		{
+			return source.Intersect(otherCollection).Any();
+		}
+
+		/// <summary>
+		/// Checks whether the current collection contains all elements from another collection.
+		/// </summary>
+		/// <typeparam name="T">The type of elements in the collections.</typeparam>
+		/// <param name="source">The current collection.</param>
+		/// <param name="otherCollection">The other collection to check for all elements.</param>
+		/// <returns><c>true</c> if the current collection contains all elements from the other collection; otherwise, <c>false</c>.</returns>
+		public static bool HasAllOf<T>(this IEnumerable<T> source, IEnumerable<T> otherCollection)
+		{
+			return !otherCollection.Except(source).Any();
+		}
 	}
 
 }
