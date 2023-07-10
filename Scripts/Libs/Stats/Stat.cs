@@ -57,7 +57,7 @@ namespace Scripts.Libs.Stats
             (m.Operation is StatOperation.None)
             || (!m.IsConstant)
             || (m.Source is null)
-            || (!m.Source.IsValid()));
+            || (!m.Source.IsValid));
 
             var addBefore = ModifierList.Where(m => m.Operation is StatOperation.AddBefore);
             var multiply = ModifierList.Where(m => m.Operation is StatOperation.Multiply);
