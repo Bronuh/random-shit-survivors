@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Scripts.Current.GameTypes;
 
 namespace Scripts.Libs.Stats
 {
 	public interface IStatusEffectConsumer
 	{
-		void ApplyEffect(IStatusEffect effect);
-		void RemoveEffect(IStatusEffect effect);
+		void ApplyEffect(StatusEffect effect);
+		void RemoveEffect(StatusEffect effect);
+
+		bool IsEffectActive(StatusEffect effect);
 	}
 }

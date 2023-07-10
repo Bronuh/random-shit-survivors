@@ -1,4 +1,6 @@
 ﻿
+using Scripts.Current.GameTypes;
+
 namespace Scripts.Libs.Stats
 {
 	public interface IStatsHolder
@@ -9,6 +11,7 @@ namespace Scripts.Libs.Stats
 	public class StatsMixin : IStatsHolder
 	{
 		public StatsHoder Stats { get; } = new StatsHoder();
+		public List<StatusEffect> Effects { get; } = new List<StatusEffect>();
 
 		private Stat GetStat(ref Stat statRef, string name)
 		{
@@ -23,7 +26,7 @@ namespace Scripts.Libs.Stats
 			stat.BaseValue = value;
 		}
 
-		public void TryApply(IStatusEffect giver)
+		public void TryApply(StatusEffect giver)
 		{
 			bool isTagHolder = this is ITagsHolder;
 			ITagsHolder tagsHolder = this as ITagsHolder;
@@ -40,14 +43,18 @@ namespace Scripts.Libs.Stats
 					Stats.ApplyStatModifier(modifier);
 				}
 			}
+
+			Effects.Add(giver);
 		}
 
-		public void TryRemove(IStatusEffect giver)
+		public void TryRemove(StatusEffect giver)
 		{
 			foreach (var modifier in giver.GetModifiers())
 			{
 				Stats.RemoveStatModifier(modifier);
 			}
+
+			Effects.Remove(giver);
 		}
 	}
 }

@@ -24,14 +24,20 @@ namespace Scripts.Libs.Stats
         AddAfter
     }
 
-	public class StatModifier : ICloneable<StatModifier>
+	public class StatModifier : IPrototype<StatModifier>
 	{
         public bool IsConstant = false;
         public IStatusEffect Source { get; } = null;
-        public string TargetStatName = String.Empty;
+
+		public StatModifier Prototype => _prototype;
+		public bool IsInstance => Prototype is not null;
+
+		public string TargetStatName = String.Empty;
         public StatOperation Operation = StatOperation.None;
         public double Value = 0;
 		public TagsFilter Filter = null;
+
+		private StatModifier _prototype = null;
 
         public StatModifier() { }
         public StatModifier(string name, double value = 0, 
@@ -48,12 +54,19 @@ namespace Scripts.Libs.Stats
             }
         }
 
-		public StatModifier Clone()
+		public StatModifier Instantiate()
 		{
 			var modifier = new StatModifier(TargetStatName, Value, Operation, Source);
 			modifier.IsConstant = IsConstant;
+			modifier._prototype = IsInstance ? _prototype : this;
 
 			return modifier;
+		}
+
+
+		public void MakePrototype()
+		{
+			_prototype = null;
 		}
 	}
 }

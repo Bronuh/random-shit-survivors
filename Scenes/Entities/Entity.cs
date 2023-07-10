@@ -144,7 +144,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 		
 	}
 
-	public void ApplyEffect(IStatusEffect effect)
+	public void ApplyEffect(StatusEffect effect)
 	{
 		TryApply(effect);
 		foreach (var spell in Spells)
@@ -153,13 +153,23 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 		}
 	}
 
-	public void RemoveEffect(IStatusEffect effect)
+	public void RemoveEffect(StatusEffect effect)
 	{
 		TryRemove(effect);
 		foreach (var spell in Spells)
 		{
 			spell.TryRemove(effect);
 		}
+	}
+
+	public bool IsEffectActive(StatusEffect effect)
+	{
+		if (effect.IsInstance)
+		{
+			return Effects.Find(e => e == effect) is not null;
+		}
+
+		return Effects.Find(e => e.Prototype == effect) is not null;
 	}
 
 	public void ApplyDamage(Entity target, double amount)

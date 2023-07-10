@@ -9,6 +9,8 @@ namespace Scripts.Libs.Stats
 	public interface IStatusEffectSource
 	{
 		IEnumerable<IStatusEffect> Effects { get;}
-		void ApplyEffects();
+
+		void ApplyEffects(params IStatusEffectConsumer[] targets);
+		bool IsAffected(IStatusEffectConsumer target);
 	}
 }
