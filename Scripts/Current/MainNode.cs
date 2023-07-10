@@ -9,7 +9,6 @@ public partial class MainNode : Node2D
 {
 	public static MainNode Main { get; private set; }
 	
-	// TODO: Assign values on ready
 	public WorldNode World { get; private set; }
 	public HudNode Hud { get; private set; }
 	public ShadersNode Shaders { get; private set; }
