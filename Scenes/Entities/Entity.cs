@@ -43,13 +43,6 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 	}
 
 	[Export]
-	public double HP
-	{
-		get => _hp;
-		set => Maths.Max(_hp, MaxHP);
-	}
-
-	[Export]
 	public double Armor
 	{
 		get => GetStat(ref _armor, EntityStats.Armor);
@@ -73,6 +66,12 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 	[Export]
 	public EntityTeam Team { get; set; } = EntityTeam.None;
 	#endregion
+
+	public double HP
+	{
+		get => _hp;
+		set => _hp = Maths.Max(_hp, MaxHP);
+	}
 
 	public List<Spell> Spells { get; set; } = new();
 	public List<Perk> Perks { get; set; } = new();
