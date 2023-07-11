@@ -49,5 +49,11 @@ namespace Scripts.Current.GameTypes
 		{
 			_prototype = null;
 		}
+
+		public void Update(double dt)
+		{
+			if(Lifetime > 0)
+				Lifetime -= dt;
+		}
 	}
 }
