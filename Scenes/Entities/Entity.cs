@@ -111,7 +111,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 		foreach(var effect in  Effects)
 		{
 			effect.Update(delta);
-	}
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -149,6 +149,14 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 
 	public void ApplyEffect(StatusEffect effect)
 	{
+		var appliedEffect = GetAppliedEffectInstance(effect);
+
+		if (appliedEffect is not null)
+		{
+			appliedEffect.Renew();
+			return;
+		}
+
 		TryApply(effect);
 		foreach (var spell in Spells)
 		{
@@ -167,12 +175,17 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 
 	public bool IsEffectActive(StatusEffect effect)
 	{
+		return GetAppliedEffectInstance(effect) is not null;
+	}
+
+	public StatusEffect GetAppliedEffectInstance(StatusEffect effect)
+	{
 		if (effect.IsInstance)
 		{
-			return Effects.Find(e => e == effect) is not null;
+			return Effects.Find(e => e == effect);
 		}
 
-		return Effects.Find(e => e.Prototype == effect) is not null;
+		return Effects.Find(e => e.Prototype == effect);
 	}
 
 	public void ApplyDamage(Entity target, double amount)
