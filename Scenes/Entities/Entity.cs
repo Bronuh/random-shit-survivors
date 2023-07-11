@@ -108,6 +108,10 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 		{
 			// MonitorLabel.SetGlobal("HP", HP);
 		}
+		foreach(var effect in  Effects)
+		{
+			effect.Update(delta);
+	}
 	}
 
 	public override void _PhysicsProcess(double delta)
