@@ -121,12 +121,12 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 		{
 			MonitorLabel.SetGlobal("Overlaps", overlaps.Count);
 		}
-		foreach (var area in overlaps)
+		foreach (var otherArea in overlaps)
 		{
-			if (area == CollisionArea)
+			if (otherArea == CollisionArea)
 				continue;
 
-			var entity = area.TryGetParentOfType<Entity>();
+			var entity = otherArea.TryGetParentOfType<Entity>();
 			if (entity is null)
 				continue;
 
@@ -134,8 +134,8 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 				continue;
 
 			var dmg = CollisionDamage * delta;
-			
-			ApplyDamage(entity, CollisionDamage * delta);
+
+			ApplyDamageTo(entity, dmg);
 		}
 	}
 
@@ -185,7 +185,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 		return Effects.Find(e => e.Prototype == effect);
 	}
 
-	public void ApplyDamage(Entity target, double amount)
+	public void ApplyDamageTo(Entity target, double amount)
 	{
 		var damage = new Damage();
 		damage.Inflictor = this;
