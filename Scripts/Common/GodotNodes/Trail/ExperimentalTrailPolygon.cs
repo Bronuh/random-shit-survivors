@@ -62,7 +62,43 @@ public partial class ExperimentalTrailPolygon : Node2D
 	/// </summary>
 	[Export(PropertyHint.Range, "0, 1, 0.05")]
 	public float EndAlpha = 1f;
-	
+
+	/// <summary>
+	/// Sets the color of the trail. Setting the color will update both the start and end color values.
+	/// </summary>
+	public Color Color
+	{
+		set
+		{
+			StartColor = value;
+			EndColor = value;
+		}
+	}
+
+	/// <summary>
+	/// Sets the alpha value of the trail. Setting the alpha will update both the start and end alpha values.
+	/// </summary>
+	public float Alpha
+	{
+		set
+		{
+			StartAlpha = value;
+			EndAlpha = value;
+		}
+	}
+
+	/// <summary>
+	/// Sets the width of the trail. Setting the width will update both the start and end width values.
+	/// </summary>
+	public float Width
+	{
+		set
+		{
+			StartWidth = value;
+			EndWidth = value;
+		}
+	}
+
 	// Actual segments spawning delay will dependon your FPS.
 	private double TimeBetweenSpawns => Length / SegmentsCount;
 
