@@ -25,7 +25,7 @@ public partial class GameSession : Node2D, IExposable
 			return null;
 		}
 	}
-	public static Node2D Playground => Instance.GetNode<Node2D>("Entities");
+	public static Node2D World => Instance.GetNode<Node2D>("Entities");
 	public static FollowingCamera Camera => Instance.GetNode<FollowingCamera>("PlayerCamera");
 	public static ReadOnlyCollection<Entity> Enemies => Instance._enemies.AsReadOnly();
 
