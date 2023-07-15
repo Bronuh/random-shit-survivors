@@ -6,12 +6,18 @@ namespace Scripts.Libs.Stats
 	public interface IStatsHolder
 	{
 		public StatsHoder Stats { get; }
+		public Stat GetStat(string name);
 	}
 
 	public class StatsMixin : IStatsHolder
 	{
 		public StatsHoder Stats { get; } = new StatsHoder();
 		public List<StatusEffect> Effects { get; } = new List<StatusEffect>();
+
+		public Stat GetStat(string name)
+		{
+			return Stats[name];
+		}
 
 		private Stat GetStat(ref Stat statRef, string name)
 		{
