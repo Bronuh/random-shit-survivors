@@ -133,10 +133,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 			if (entity.Team == Team)
 				continue;
 
-			if (this == GameSession.Player)
-			{
-				MonitorLabel.SetGlobal("Overentity", entity.Name);
-			}
+			var dmg = CollisionDamage * delta;
 			
 			ApplyDamage(entity, CollisionDamage * delta);
 		}
