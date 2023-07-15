@@ -73,6 +73,8 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 		set => _hp = Maths.Clamp(value, -1, MaxHP);
 	}
 
+	public bool IsDead => HP <= 0;
+
 	public List<Spell> Spells { get; set; } = new();
 	public List<Perk> Perks { get; set; } = new();
 
@@ -103,6 +105,9 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 
 	public override void _Process(double delta)
 	{
+		if (IsDead)
+			return;
+
 		Position = Position + Controller.GetDirection() * Speed * (float)delta;
 		if (this == GameSession.Player)
 		{
@@ -198,6 +203,9 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 
 	public void ApplyDamageTo(Entity target, double amount)
 	{
+		if (IsDead)
+			return;
+
 		var damage = new Damage();
 		damage.Inflictor = this;
 		damage.Amount = amount;
@@ -207,7 +215,9 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 	public void TakeDamage(Damage damage)
 	{
 		HP -= Calculations.GatDamagePercentage(Armor) * damage.Amount;
-		if (HP <= 0)
+		MonitorLabel.SetGlobal("IsDead", IsDead);
+
+		if (IsDead && (this != GameSession.Player))
 		{
 			DeathCallback?.Invoke(damage.Inflictor);
 			MonitorLabel.SetGlobal("IsDead", true);
