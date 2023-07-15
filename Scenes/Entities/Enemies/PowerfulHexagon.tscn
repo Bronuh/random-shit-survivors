@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://h3218rfnpbbq" path="res://Assets/Textures/Sprites/Hexagon.png" id="2_l14e4"]
 
 [node name="PowerfulHexagon" instance=ExtResource("1_mlnf8")]
-MaxHP = 75
+MaxHP = 120.0
 CollisionDamage = 40.0
 Speed = 400.0
 

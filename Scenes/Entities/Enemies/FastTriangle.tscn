@@ -7,7 +7,7 @@
 radius = 475.857
 
 [node name="FastTriangle" instance=ExtResource("1_qx5d6")]
-MaxHP = 50
+MaxHP = 50.0
 CollisionDamage = 5.0
 Speed = 900.0
 

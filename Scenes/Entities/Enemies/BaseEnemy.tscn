@@ -7,7 +7,7 @@
 radius = 468.273
 
 [node name="BaseEnemy" instance=ExtResource("1_2uvjq")]
-MaxHP = 100
+MaxHP = 100.0
 CollisionDamage = 10.0
 Speed = 500.0
 Team = 2
