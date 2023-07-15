@@ -108,9 +108,20 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 		{
 			MonitorLabel.SetGlobal("HP", $"{HP}/{MaxHP}");
 		}
+
 		foreach(var effect in  Effects)
 		{
 			effect.Update(delta);
+		}
+
+		foreach (var spell in Spells)
+		{
+			var ticks = spell.Update(delta);
+
+			for (int i = 0; i < ticks; i++)
+			{
+				spell.Cast(this);
+			}
 		}
 	}
 
