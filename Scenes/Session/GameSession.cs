@@ -15,14 +15,7 @@ public partial class GameSession : Node2D, IExposable
 	{
 		get
 		{
-			if (!IsInProcess)
-				return null;
-
-			if((Instance._player is not null) && (IsInstanceValid(Instance._player)))
-				return Instance._player;
-
-			Instance._isInProcess = false;
-			return null;
+			return Instance.GetNode<Entity>("Entities/Player");
 		}
 	}
 	public static Node2D World => Instance.GetNode<Node2D>("Entities");

@@ -1,4 +1,5 @@
 using Godot;
+using Scripts.Common;
 using Scripts.Current.GameTypes;
 using Scripts.Libs.Stats;
 
@@ -20,6 +21,8 @@ public partial class CollideProjectile : Projectile
 	{
 		// add area2d with collision shape and sprite
 		CollisionArea = new Area2D();
+		CollisionArea.CollisionLayer = (uint)Layer.Projectiles;
+		CollisionArea.CollisionMask = (uint)(Layer.Enemy);
 		var collisionShape = new CollisionShape2D();
 		var shape = new CircleShape2D();
 		shape.Radius = size;
@@ -41,6 +44,7 @@ public partial class CollideProjectile : Projectile
 
 	public override void _Process(double delta)
 	{
+		base._Process(delta);
 	}
 
 

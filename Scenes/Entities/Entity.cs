@@ -6,6 +6,7 @@ using Scripts.Current.GameTypes;
 using Scripts.Libs;
 using Scripts.Libs.Stats;
 using Mixin;
+using Scripts.Current.Content.Spells;
 
 namespace Scripts.Current.GameTypes;
 
@@ -101,6 +102,11 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 	{
 		Controller.Parent = this;
 		HP = MaxHP;
+
+		if(this == GameSession.Player)
+		{
+			Spells.Add(new BasicBolt());
+		}
 	}
 
 	public override void _Process(double delta)
@@ -220,7 +226,6 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 		if (IsDead && (this != GameSession.Player))
 		{
 			DeathCallback?.Invoke(damage.Inflictor);
-			MonitorLabel.SetGlobal("IsDead", true);
 			QueueFree();
 		}
 	}

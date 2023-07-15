@@ -17,22 +17,27 @@ public partial class Projectile : Node2D
 
 	// Referencees
 	public Entity Shooter { get; set; } = null;
-	public Damage CustomDamage { get; set; } = new Damage();
+	public Damage CustomDamage { get; set; } = null;
 	public Spell Spell { get; set; } = null;
 
+	// Internals
+	protected double _passedLifetime = 0;
 
 	public override void _Ready()
 	{
 		// add sprite
 		var sprite = new Sprite2D();
-		sprite.Texture = GD.Load<ImageTexture>(spriteTexture);
-		sprite.SetAbsolutScale(Vec2(size));
+		sprite.Texture = GD.Load<Texture2D>(spriteTexture);
+		sprite.SetAbsoluteScale(Vec2(size));
 		AddChild(sprite);
 	}
 
 	public override void _Process(double delta)
 	{
 		// movement here
+		_passedLifetime += delta;
+		if (_passedLifetime >= lifetime)
+			QueueFree();
 	}
 
 	public override void _PhysicsProcess(double delta)

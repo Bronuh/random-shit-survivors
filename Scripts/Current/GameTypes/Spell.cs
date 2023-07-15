@@ -37,9 +37,9 @@ namespace Scripts.Current.GameTypes
 			get => (int)GetStat(ref _number, SpellStats.Number);
 			set => SetStat(ref _number, SpellStats.Number, value);
 		}
-		public int Speed
+		public double Speed
 		{
-			get => (int)GetStat(ref _speed, SpellStats.Speed);
+			get => GetStat(ref _speed, SpellStats.Speed);
 			set => SetStat(ref _speed, SpellStats.Speed, value);
 		}
 

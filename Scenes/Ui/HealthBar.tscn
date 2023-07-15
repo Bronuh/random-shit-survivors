@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bminp2tfvfnp7"]
+
+[node name="HealthBar" type="Node2D"]

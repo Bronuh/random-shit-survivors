@@ -175,7 +175,7 @@ public partial class ExperimentalTrailPolygon : Node2D
 		public bool Finished => timeToLive <= 0 || polygon == null;
 
 		// Start pos is the end pos of the previous segment
-		public Vector2 StartPos => previous?.endPos ?? startPos;
+		public Vector2 StartPos => previous is null ? startPos : previous.endPos;
 		public Vector2 EndPos => endPos;
 
 		// Used to calculate the segment edge
@@ -223,7 +223,7 @@ public partial class ExperimentalTrailPolygon : Node2D
 			endWidth = trail.EndWidth;
 
 			// Set static starting position
-			startPos = prev?.endPos ?? parentTrail.Target.Position;
+			startPos = prev is null ? parentTrail.Target.GlobalPosition : prev.endPos;
 
 			// Placeholder polygon
 			polygon.Polygon = new[] { startPos, startPos, startPos, startPos };
