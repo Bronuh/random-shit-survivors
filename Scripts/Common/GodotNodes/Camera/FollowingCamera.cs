@@ -41,7 +41,7 @@ namespace Scripts.Common.GodotNodes
 		public override void _Process(double delta)
 		{
 			base._Process(delta);
-			if (TargetNode is null) return;
+			if (!IsInstanceValid(TargetNode)) return;
 
 			if (UsePull)
 			{

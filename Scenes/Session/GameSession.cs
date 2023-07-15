@@ -11,7 +11,20 @@ public partial class GameSession : Node2D, IExposable
 {
 	// Getters for the session objects
 	public static GameSession Instance => _instance;
-	public static Entity Player => Instance.GetNode<Entity>("Entities/Player");
+	public static Entity Player
+	{
+		get
+		{
+			if (!IsInProcess)
+				return null;
+
+			if((Instance._player is not null) && (IsInstanceValid(Instance._player)))
+				return Instance._player;
+
+			Instance._isInProcess = false;
+			return null;
+		}
+	}
 	public static Node2D Playground => Instance.GetNode<Node2D>("Entities");
 	public static FollowingCamera Camera => Instance.GetNode<FollowingCamera>("PlayerCamera");
 	public static ReadOnlyCollection<Entity> Enemies => Instance._enemies.AsReadOnly();
@@ -30,8 +43,10 @@ public partial class GameSession : Node2D, IExposable
 	public static int EnemiesPerDifficultyLevel = 30;
 	public static double EnemiesFillTime = 10;
 
+	public static bool IsInProcess => Instance._isInProcess;
+
 	private List<Entity> _enemies = new List<Entity>();
-	private Entity _player;
+	private Entity _player = null;
 	private static GameSession _instance;
 
 	private static double _passedTime = 0;
@@ -48,7 +63,7 @@ public partial class GameSession : Node2D, IExposable
 	// time between spawns
 	private double TimeBetweenSpawns => EnemiesFillTime / MaximumEnemies;
 	private double _spawnThreshold = 0;
-
+	private bool _isInProcess = true;
 	
 
 	public GameSession()
@@ -74,6 +89,9 @@ public partial class GameSession : Node2D, IExposable
 		_picker.Add(FastTriangle, 50);
 		_picker.Add(HeavySquare, 25);
 		_picker.Add(PowerfulHexagon, 50);
+
+		// Get Player reference
+		Instance._player = Instance.GetNode<Entity>("Entities/Player");
 
 		Player.Init(PlayerData.Instance);
 		Camera.TargetNode = Player;
@@ -105,6 +123,9 @@ public partial class GameSession : Node2D, IExposable
 	// Spawn enemy outside the player's vision
 	public static Entity SpawnEnemy(PackedScene enemyScene)
 	{
+		if (!IsInProcess)
+			return null;
+
 		Entity enemy = enemyScene.Instantiate<Entity>();
 		enemy.Controller = new PrimitiveAiController();
 		Playground.AddChild(enemy);
