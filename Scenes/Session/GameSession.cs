@@ -64,7 +64,7 @@ public partial class GameSession : Node2D, IExposable
 	private double TimeBetweenSpawns => EnemiesFillTime / MaximumEnemies;
 	private double _spawnThreshold = 0;
 	private bool _isInProcess = true;
-	
+
 
 	public GameSession()
 	{
@@ -115,6 +115,7 @@ public partial class GameSession : Node2D, IExposable
 			_spawnThreshold -= accumulatedSpawns * TimeBetweenSpawns;
 		}
 
+		MonitorLabel.SetGlobal("IsInProcess", IsInProcess);
 		MonitorLabel.SetGlobal("Difficulty", Difficulty);
 		MonitorLabel.SetGlobal("Enemies count", $"{Instance._enemies.Count}/{MaximumEnemies}");
 		MonitorLabel.SetGlobal("Time between spawns", TimeBetweenSpawns);
