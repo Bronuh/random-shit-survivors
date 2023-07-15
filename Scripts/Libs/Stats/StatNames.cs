@@ -22,5 +22,6 @@ namespace Scripts.Libs.Stats
 		public const string Cooldown = "Cooldown";
 		public const string Size = "Size";
 		public const string Number = "Number";
+		public const string Speed = "Speed";
 	}
 }

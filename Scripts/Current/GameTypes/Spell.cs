@@ -37,6 +37,11 @@ namespace Scripts.Current.GameTypes
 			get => (int)GetStat(ref _number, SpellStats.Number);
 			set => SetStat(ref _number, SpellStats.Number, value);
 		}
+		public int Speed
+		{
+			get => (int)GetStat(ref _speed, SpellStats.Speed);
+			set => SetStat(ref _speed, SpellStats.Speed, value);
+		}
 
 		public Spell()
 		{
@@ -50,6 +55,7 @@ namespace Scripts.Current.GameTypes
 		private Stat _damage = null;
 		private Stat _duration = null;
 		private Stat _number = null;
+		private Stat _speed = null;
 
 		public abstract void Cast(Entity caster);
 
