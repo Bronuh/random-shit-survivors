@@ -27,6 +27,10 @@ public partial class CollideProjectile : Node2D
 	// Utility
 	public Area2D CollisionArea { get; private set; }
 
+	// Processing
+	public Vector2 direction = Vec2();
+	public Action customMovement = null;
+
 	public override void _Ready()
 	{
 		// add area2d with collision shape and sprite
@@ -57,8 +61,19 @@ public partial class CollideProjectile : Node2D
 		// movement here
 	}
 
+
 	public override void _PhysicsProcess(double delta)
 	{
+		// movement here
+		if (customMovement is null)
+		{
+			BasicMovement(delta);
+		}
+		else
+		{
+			customMovement?.Invoke();
+		}
+
 		// collisions here
 		var overlaps = CollisionArea.GetOverlappingAreas();
 		foreach (var area in overlaps)
@@ -69,5 +84,11 @@ public partial class CollideProjectile : Node2D
 			OnOverlap?.Invoke(entity);
 			entity.TakeDamage(Damage);
 		}
+	}
+
+
+	private void BasicMovement(double dt)
+	{
+		Position += direction * speed * (float)dt;
 	}
 }
