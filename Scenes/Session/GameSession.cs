@@ -129,7 +129,7 @@ public partial class GameSession : Node2D, IExposable
 
 		Entity enemy = enemyScene.Instantiate<Entity>();
 		enemy.Controller = new PrimitiveAiController();
-		Playground.AddChild(enemy);
+		World.AddChild(enemy);
 		enemy.Position = Player.Position + Rand.UnitVector2 * GetCameraRadius() * 1.5f;
 		Instance._enemies.Add(enemy);
 		enemy.DeathCallback = (e) =>
