@@ -1,5 +1,4 @@
 using Godot;
-using Mixin;
 using Scripts.Current.GameTypes;
 using Scripts.Libs.Stats;
 
@@ -44,6 +43,13 @@ public partial class CollideProjectile : Node2D
 		sprite.Texture = GD.Load<ImageTexture>(spriteTexture);
 		sprite.SetAbsolutScale(Vec2(size));
 		AddChild(sprite);
+		// Invoke collision
+		CollisionArea.AreaEntered += (other) =>
+		{
+			var entity = other.TryGetParentOfType<Entity>();
+			if (entity is not null)
+				OnCollide?.Invoke(entity);
+		};
 	}
 
 	public override void _Process(double delta)
@@ -60,7 +66,7 @@ public partial class CollideProjectile : Node2D
 			var entity = area.TryGetParentOfType<Entity>();
 			if (entity is null)
 				continue;
-
+			OnOverlap?.Invoke(entity);
 			entity.TakeDamage(Damage);
 		}
 	}
