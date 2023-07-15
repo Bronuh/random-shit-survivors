@@ -360,10 +360,10 @@ namespace Scripts.Libs
 			return node.GetChild<TNode>() != null;
 		}
 
-		public static void SetAbsolutScale(this Sprite2D sprite, Vector2 size)
+		public static void SetAbsoluteScale(this Sprite2D sprite, Vector2 size)
 		{
-			var curSize = sprite.Texture.GetSize();
-			sprite.Scale = new Vector2(size.X / curSize.X, size.Y / curSize.Y);
+			var textureSize = sprite.Texture.GetSize();
+			sprite.Scale = new Vector2(size.X / textureSize.X, size.Y / textureSize.Y);
 		}
 
 		/// <summary>
