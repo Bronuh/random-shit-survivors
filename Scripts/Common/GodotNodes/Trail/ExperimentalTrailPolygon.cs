@@ -37,7 +37,7 @@ public partial class ExperimentalTrailPolygon : Node2D
 	/// How many seconds will the trail last.
 	/// </summary>
 	[Export]
-	private double Length = 1;
+	public double Length = 1;
 
 	/// <summary>
 	/// Trail color at the start.
