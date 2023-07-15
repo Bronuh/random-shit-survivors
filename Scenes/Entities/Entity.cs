@@ -70,7 +70,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 	public double HP
 	{
 		get => _hp;
-		set => _hp = Maths.Max(_hp, MaxHP);
+		set => _hp = Maths.Clamp(value, -1, MaxHP);
 	}
 
 	public List<Spell> Spells { get; set; } = new();
