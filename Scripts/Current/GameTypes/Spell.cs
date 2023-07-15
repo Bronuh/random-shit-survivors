@@ -11,7 +11,11 @@ namespace Scripts.Current.GameTypes
 		public double Cooldown
 		{
 			get => GetStat(ref _cooldown, SpellStats.Cooldown);
-			set => SetStat(ref _cooldown, SpellStats.Cooldown, value);
+			set 
+			{
+				_timer.Duration = value;
+				SetStat(ref _cooldown, SpellStats.Cooldown, value);
+			}
 		}
 		public double Size
 		{
@@ -39,6 +43,7 @@ namespace Scripts.Current.GameTypes
 			Tags.Add("Spell");
 		}
 
+		private Cooldown _timer = new Cooldown();
 
 		private Stat _cooldown = null;
 		private Stat _size = null;
@@ -48,5 +53,10 @@ namespace Scripts.Current.GameTypes
 
 		public abstract void Cast(Entity caster);
 
+		public int Update(double dt)
+		{
+			var ticks = _timer.Update(dt);
+			return ticks;
+		}
 	}
 }
