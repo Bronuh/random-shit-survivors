@@ -163,11 +163,17 @@ public partial class GameSession : Node2D, IExposable
 		// Not needed for now
 	}
 
+	// Is it even needed?
 	public void ExposeData()
 	{
 		if (SaveLoad.Mode is SaveLoadMode.PostLoading)
 		{
 
 		}
+	}
+
+	public static Entity FindClosestEnemy(Vector2 position)
+	{
+		return Enemies.OrderBy(e => e.Position.DistanceTo(position)).FirstOrDefault();
 	}
 }
