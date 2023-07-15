@@ -134,7 +134,7 @@ public partial class GameSession : Node2D, IExposable
 		Instance._enemies.Add(enemy);
 		enemy.DeathCallback = (e) =>
 		{
-			e.QueueFree();
+			enemy.QueueFree();
 			Instance._enemies.Remove(enemy);
 		};
 		return enemy;
