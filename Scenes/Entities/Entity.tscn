@@ -1,6 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://s7lip0f036v5"]
+[gd_scene load_steps=6 format=3 uid="uid://s7lip0f036v5"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Entity.cs" id="1_d3irh"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Blink.gdshader" id="2_4xbml"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ipclr"]
+shader = ExtResource("2_4xbml")
+shader_parameter/hit_opacity = 0.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_fclyp"]
 
@@ -12,6 +17,7 @@ script = ExtResource("1_d3irh")
 Speed = 1000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ipclr")
 position = Vector2(-2.98023e-08, 2.98023e-08)
 texture = SubResource("CanvasTexture_fclyp")
 
