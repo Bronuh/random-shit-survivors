@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c0k5aie66rr7x"
-path="res://.godot/imported/launcher_1.wav-b0716497e5fff8071313e63f9d807323.sample"
+path="res://.godot/imported/launcher_1.wav-755eb7605adc3b0a9f7ef4b3bcd7c845.sample"
 
 [deps]
 
-source_file="res://Assets/Audio/Sounds/normal/launcher_1.wav"
-dest_files=["res://.godot/imported/launcher_1.wav-b0716497e5fff8071313e63f9d807323.sample"]
+source_file="res://Assets/Audio/Sounds/normal/weapons/launcher_1.wav"
+dest_files=["res://.godot/imported/launcher_1.wav-755eb7605adc3b0a9f7ef4b3bcd7c845.sample"]
 
 [params]
 

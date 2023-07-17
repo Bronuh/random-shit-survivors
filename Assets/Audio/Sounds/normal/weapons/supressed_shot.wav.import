@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b2dsmsaqekwk2"
-path="res://.godot/imported/supressed_shot.wav-e2d45196de0efb590053e70dbba73ee6.sample"
+path="res://.godot/imported/supressed_shot.wav-a392fc51e05f81f75d953cfeb75c41c2.sample"
 
 [deps]
 
-source_file="res://Assets/Audio/Sounds/normal/supressed_shot.wav"
-dest_files=["res://.godot/imported/supressed_shot.wav-e2d45196de0efb590053e70dbba73ee6.sample"]
+source_file="res://Assets/Audio/Sounds/normal/weapons/supressed_shot.wav"
+dest_files=["res://.godot/imported/supressed_shot.wav-a392fc51e05f81f75d953cfeb75c41c2.sample"]
 
 [params]
 

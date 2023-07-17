@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://pkksw365jdxt"
-path="res://.godot/imported/handgun_shot.wav-33b1cbe8c7cb508008bdf530c665f112.sample"
+path="res://.godot/imported/handgun_shot.wav-3e647e12ec302bf728bb3d7ef5301385.sample"
 
 [deps]
 
-source_file="res://Assets/Audio/Sounds/normal/handgun_shot.wav"
-dest_files=["res://.godot/imported/handgun_shot.wav-33b1cbe8c7cb508008bdf530c665f112.sample"]
+source_file="res://Assets/Audio/Sounds/normal/weapons/handgun_shot.wav"
+dest_files=["res://.godot/imported/handgun_shot.wav-3e647e12ec302bf728bb3d7ef5301385.sample"]
 
 [params]
 
