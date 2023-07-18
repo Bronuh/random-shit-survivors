@@ -55,7 +55,7 @@ public partial class Projectile : Node2D
 		{
 			OnTimeout?.Invoke();
 			QueueFree();
-	}
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
