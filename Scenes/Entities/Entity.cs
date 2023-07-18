@@ -33,13 +33,20 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 	}
 
 	[Export]
-	public Array<EntityComponent> Components { get; set; } = new Array<EntityComponent> ();
+	public Array<EntityComponent> Components { get; set; } = new Array<EntityComponent>();
 
 	[Export]
 	public double MaxHP 
 	{ 
 		get => GetStat(ref _maxHp, EntityStats.Health); 
 		set => SetStat(ref _maxHp, EntityStats.Health, value); 
+	}
+
+	[Export]
+	public double Regen
+	{
+		get => GetStat(ref _regen, EntityStats.Regen);
+		set => SetStat(ref _regen, EntityStats.Regen, value);
 	}
 
 	[Export]
@@ -91,6 +98,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 
 	private double _hp = 0;
 	private Stat _maxHp = null;
+	private Stat _regen = null;
 	private Stat _armor = null;
 	private Stat _speed = null;
 	private Stat _damage = null;
@@ -99,6 +107,8 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 	{
 		Tags.Add("Entity");
 	}
+
+	public Entity() { }
 
 	public override void _Ready()
 	{
@@ -117,10 +127,9 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 			return;
 
 		Position = Position + Controller.GetDirection() * Speed * (float)delta;
-		if (this == GameSession.Player)
-		{
-			MonitorLabel.SetGlobal("HP", $"{HP}/{MaxHP}");
-		}
+
+		// Apply regen
+		HP += Regen * delta;
 
 		foreach(var effect in  Effects)
 		{

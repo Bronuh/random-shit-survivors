@@ -48,6 +48,8 @@ namespace Scripts.Current.GameTypes
 			Tags.Add("Spell");
 		}
 
+		public Spell() { }
+
 		private Cooldown _timer = new Cooldown();
 
 		private Stat _cooldown = null;

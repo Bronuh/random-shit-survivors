@@ -1,3 +1,34 @@
-[gd_scene format=3 uid="uid://bminp2tfvfnp7"]
+[gd_scene load_steps=4 format=3 uid="uid://bminp2tfvfnp7"]
+
+[ext_resource type="Script" path="res://Scripts/Common/GodotNodes/UI/HealthBar.cs" id="1_tkq1n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2h0cv"]
+bg_color = Color(0.156863, 0, 0, 0.658824)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f58i8"]
+bg_color = Color(0.717647, 0.603922, 0.6, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="HealthBar" type="Node2D"]
+script = ExtResource("1_tkq1n")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -58.0
+offset_top = -73.0
+offset_right = 57.0
+offset_bottom = -50.0
+theme_override_styles/background = SubResource("StyleBoxFlat_2h0cv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_f58i8")
+max_value = 1.0
+show_percentage = false
