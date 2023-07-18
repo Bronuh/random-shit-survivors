@@ -86,7 +86,7 @@ namespace Scripts.Libs
 		// Mappings for integer
 		public static int Min(int x, int y) => Math.Min(x, y);
 		public static int Max(int x, int y) => Math.Max(x, y);
-		public static int Clamp(int value, int min, int max) => Math.Clamp(value, min, max);
+		public static int Clamp(int value, int min, int max) => Math.Clamp(value, Min(min,max), Max(min,max));
 		public static int Abs(int x) => Math.Abs(x);
 
 		// Custom properties
