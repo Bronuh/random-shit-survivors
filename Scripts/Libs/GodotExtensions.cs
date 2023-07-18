@@ -419,6 +419,21 @@ namespace Scripts.Libs
 		{
 			return node.GetNode<MainNode>(GameNodes.WorldNodeName);
 		}
+
+		public static float DistanceTo(this Node2D node, Node2D other)
+		{
+			return node.Position.DistanceTo(other.Position);
+		}
+
+		public static float DistanceTo(this Node2D node, Vector2 pos)
+		{
+			return node.Position.DistanceTo(pos);
+		}
+
+		public static float DistanceTo(this Vector2 pos, Node2D other)
+		{
+			return pos.DistanceTo(other.Position);
+		}
 		#endregion
 
 		#region Color
