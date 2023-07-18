@@ -7,6 +7,7 @@ namespace Scripts.Current.GameTypes
 	[Mixin(typeof(StatsMixin))]
 	public abstract partial class Spell : ITagsHolder
 	{
+		public bool IsIdle { get; protected set; } = true;
 		public TagsContainer Tags { get; private set; } = new TagsContainer{ "Spell" };
 		public double Cooldown
 		{
@@ -42,16 +43,18 @@ namespace Scripts.Current.GameTypes
 			get => GetStat(ref _speed, SpellStats.Speed);
 			set => SetStat(ref _speed, SpellStats.Speed, value);
 		}
-
-		public Spell()
+		public double BurstTime
 		{
-			Tags.Add("Spell");
+			get => GetStat(ref _burstTime, SpellStats.BurstTime);
+			set => SetStat(ref _burstTime, SpellStats.BurstTime, value);
 		}
 
 		public Spell() { }
 
 		private Cooldown _timer = new Cooldown();
+		protected int _shots = 0;
 
+		private Stat _burstTime = null;
 		private Stat _cooldown = null;
 		private Stat _size = null;
 		private Stat _damage = null;
@@ -63,7 +66,8 @@ namespace Scripts.Current.GameTypes
 
 		public int Update(double dt)
 		{
-			var ticks = _timer.Update(dt);
+			var ticks = IsIdle ? _timer.Update(dt) : 0;
+
 			return ticks;
 		}
 	}
