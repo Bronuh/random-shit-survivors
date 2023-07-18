@@ -447,16 +447,38 @@ namespace Scripts.Libs
 		/// </remarks>
 		public static Color Col(float value) => new Color(value, value, value);
 
+		/// <summary>
+		/// Extension method that converts a color to grayscale.
+		/// </summary>
+		/// <param name="color">The color to convert.</param>
+		/// <returns>A grayscale color.</returns>
 		public static Color Grayscale(this Color color)
 		{
 			float gray = 0.299f * color.R + 0.587f * color.G + 0.114f * color.B;
 			return new Color(gray, gray, gray, color.A);
 		}
 
+		/// <summary>
+		/// Creates a new color with RGB values set to 0.
+		/// </summary>
+		/// <returns>A color with RGB values set to 0.</returns>
 		public static Color Col() => new Color(0, 0, 0);
 
+		/// <summary>
+		/// Creates a new color with the specified RGB and alpha values.
+		/// </summary>
+		/// <param name="r">The red component of the color.</param>
+		/// <param name="g">The green component of the color.</param>
+		/// <param name="b">The blue component of the color.</param>
+		/// <param name="a">The alpha component of the color (default is 1).</param>
+		/// <returns>A new color with the specified RGB and alpha values.</returns>
 		public static Color Col(float r, float g, float b, float a = 1) => new Color(r, g, b, a);
 
+		/// <summary>
+		/// Creates a new color with RGB values derived from a Vector3.
+		/// </summary>
+		/// <param name="vec">The Vector3 containing the RGB values.</param>
+		/// <returns>A new color with RGB values derived from the Vector3.</returns>
 		public static Color Col(Vector3 vec) => Col(vec.X, vec.Y, vec.Z);
 
 
