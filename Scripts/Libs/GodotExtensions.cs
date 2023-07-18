@@ -445,10 +445,20 @@ namespace Scripts.Libs
 		/// <remarks>
 		/// The grayscale value will be applied to all color components (R, G, and B) of the resulting Color object.
 		/// </remarks>
-		public static Color Grayscale(float value)
+		public static Color Col(float value) => new Color(value, value, value);
+
+		public static Color Grayscale(this Color color)
 		{
-			return new Color(value, value, value);
+			float gray = 0.299f * color.R + 0.587f * color.G + 0.114f * color.B;
+			return new Color(gray, gray, gray, color.A);
 		}
+
+		public static Color Col() => new Color(0, 0, 0);
+
+		public static Color Col(float r, float g, float b, float a = 1) => new Color(r, g, b, a);
+
+		public static Color Col(Vector3 vec) => Col(vec.X, vec.Y, vec.Z);
+
 
 		/// <summary>
 		/// Converts a Vector3 object representing RGB values to a Color object.
@@ -460,10 +470,7 @@ namespace Scripts.Libs
 		/// The Y component of the Vector3 object will be used as the Green value of the resulting Color object.
 		/// The Z component of the Vector3 object will be used as the Blue value of the resulting Color object.
 		/// </remarks>
-		public static Color ToColor(Vector3 rgb)
-		{
-			return new Color(rgb.X, rgb.Y, rgb.Z);
-		}
+		public static Color ToColor(Vector3 rgb) => Col(rgb);
 
 		/// <summary>
 		/// Darkens the specified color by the given amount.
