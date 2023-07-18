@@ -8,11 +8,6 @@ namespace Scripts.Libs
 		TagsContainer Tags { get; }
 	}
 
-	public class TagsMixin : ITagsHolder
-	{
-		public TagsContainer Tags { get; } = new TagsContainer();
-	}
-
 	public interface ITagsContainer : IEnumerable<string>
 	{
 		public IEnumerable<string> Tags { get; }

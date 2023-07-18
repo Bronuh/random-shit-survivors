@@ -4,10 +4,10 @@ using Scripts.Libs.Stats;
 
 namespace Scripts.Current.GameTypes
 {
-	[Mixin(typeof(TagsMixin))]
 	[Mixin(typeof(StatsMixin))]
-	public abstract partial class Spell
+	public abstract partial class Spell : ITagsHolder
 	{
+		public TagsContainer Tags { get; private set; } = new TagsContainer{ "Spell" };
 		public double Cooldown
 		{
 			get => GetStat(ref _cooldown, SpellStats.Cooldown);

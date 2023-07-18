@@ -18,8 +18,7 @@ public enum EntityTeam
 }
 
 [Mixin(typeof(StatsMixin))]
-[Mixin(typeof(TagsMixin))]
-public partial class Entity : Node2D, IStatusEffectConsumer
+public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 {
 	#region Exports
 	[Export]
@@ -82,6 +81,9 @@ public partial class Entity : Node2D, IStatusEffectConsumer
 	public Area2D CollisionArea => GetNode<Area2D>("Sprite2D/Area2D");
 
 	public GameSession Session => GameSession.Instance;
+
+	public TagsContainer Tags { get; set; } = new() { "Entity" };
+
 	private EntityController _controller = null;
 
 	public Action<Entity> DeathCallback = null;
