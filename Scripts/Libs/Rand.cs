@@ -172,6 +172,21 @@ namespace Scripts.Libs
 		}
 
 		/// <summary>
+		/// Generates a random double value within the specified range.
+		/// </summary>
+		/// <param name="min">The inclusive minimum value of the range.</param>
+		/// <param name="max">The exclusive maximum value of the range.</param>
+		/// <returns>A random float value within the specified range.</returns>
+		public static double Range(double min, double max)
+		{
+			if (max <= min)
+			{
+				return min;
+			}
+			return Value * (max - min) + min;
+		}
+
+		/// <summary>
 		/// Determines whether an event with the specified chance occurs.
 		/// </summary>
 		/// <param name="chance">The probability of the event occurring, ranging from 0 to 1.</param>
