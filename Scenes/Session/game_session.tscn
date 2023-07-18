@@ -20,7 +20,9 @@ script = ExtResource("2_kbj26")
 
 [node name="ExperimentalTrailPolygon" type="Node2D" parent="Entities/Player"]
 script = ExtResource("5_djlwf")
+SegmentsCount = 10
 StartWidth = 30.0
+Length = 0.25
 EndAlpha = 0.0
 
 [node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("TargetNode")]
