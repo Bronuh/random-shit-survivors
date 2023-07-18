@@ -1,12 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://do2y788c7bvx1"]
+[gd_scene load_steps=9 format=3 uid="uid://do2y788c7bvx1"]
 
 [ext_resource type="PackedScene" uid="uid://s7lip0f036v5" path="res://Scenes/Entities/Entity.tscn" id="1_mo0o1"]
 [ext_resource type="Script" path="res://Scenes/Entities/Controllers/PlayerController.cs" id="2_46ijo"]
+[ext_resource type="Shader" path="res://Assets/Shaders/outline2D_inner.gdshader" id="3_ovelx"]
 [ext_resource type="Texture2D" uid="uid://c07vvjsulfc0q" path="res://Assets/Textures/Sprites/Circle.png" id="3_sicc8"]
 [ext_resource type="PackedScene" uid="uid://bminp2tfvfnp7" path="res://Scenes/Ui/HealthBar.tscn" id="4_ggskm"]
 
 [sub_resource type="Resource" id="Resource_mnt4x"]
 script = ExtResource("2_46ijo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_31cni"]
+shader = ExtResource("3_ovelx")
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_thickness = 35.843
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p44hh"]
 radius = 517.21
@@ -20,6 +26,7 @@ Speed = 1100.0
 Team = 1
 
 [node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_31cni")
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_sicc8")
 
