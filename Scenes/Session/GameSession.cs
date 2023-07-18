@@ -145,6 +145,21 @@ public partial class GameSession : Node2D, IExposable
 		};
 	}
 
+	public static void PlaySoundAt(string path, Vector2 position)
+	{
+		var soundPlayer = new AudioStreamPlayer2D();
+		soundPlayer.Stream = GD.Load<AudioStream>(path);
+		Instance.AddChild(soundPlayer);
+		soundPlayer.Position = position;
+		soundPlayer.Finished += () => soundPlayer.QueueFree();
+		soundPlayer.Play();
+	}
+
+	public static void PlaySoundAt(IEnumerable<string> paths, Vector2 position)
+	{
+		PlaySoundAt(paths.GetRandom(), position);
+	}
+
 
 	public static float GetCameraRadius()
 	{
