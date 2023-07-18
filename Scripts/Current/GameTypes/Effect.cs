@@ -22,11 +22,6 @@ namespace Scripts.Current.GameTypes
 			Update(delta);
 		}
 
-		public override void _PhysicsProcess(double delta)
-		{
-			Update(delta);
-		}
-
 		protected virtual void Update(double delta)
 		{
 			cooldown.Update(delta);
