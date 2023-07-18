@@ -26,7 +26,7 @@ namespace Scripts.Libs
 
 		public static float Min(float x, float y) => MathF.Min(x, y);
 		public static float Max(float x, float y) => MathF.Max(x, y);
-		public static float Clamp(float value, float min, float max) => Max(Min(value, max), min);
+		public static float Clamp(float value, float min, float max) => Max(Min(value, Max(max, min)), Min(min, max));
 
 		public static float Floor(float x) => MathF.Floor(x);
 		public static float Round(float x) => MathF.Round(x);
