@@ -60,7 +60,7 @@ namespace Scripts.Libs
 
 		public static double Min(double x, double y) => Math.Min(x, y);
 		public static double Max(double x, double y) => Math.Max(x, y);
-		public static double Clamp(double value, double min, double max) => Math.Clamp(value, min, max);
+		public static double Clamp(double value, double min, double max) => Math.Clamp(value, Min(min, max), Max(min, max));
 
 		public static double Floor(double x) => Math.Floor(x);
 		public static double Round(double x) => Math.Round(x);
