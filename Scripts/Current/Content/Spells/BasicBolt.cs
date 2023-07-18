@@ -6,13 +6,16 @@ namespace Scripts.Current.Content.Spells
 {
 	public class BasicBolt : Spell
 	{
+		public float TurnSpeed { get; set; } = 0;
+		public float HomingRadius { get; set; } = 0;
+
 		public BasicBolt()
 		{
 			Name = "Basic Bolt";
 			Description = "Shoots projectiles, that deals damage on collision";
 
 			Cooldown = 2;
-			Number = 3;
+			Number = 5;
 			Damage = 25;
 			Duration = 5;
 			Size = 15;
@@ -43,16 +46,16 @@ namespace Scripts.Current.Content.Spells
 		private void Shot(Entity caster, Timer timer = null)
 		{
 			_shots++;
-			var anglePerShot = 5.0;
-			var fullAng = anglePerShot * (Number - 1);
+			var anglePerShot = Maths.Atan(Size/(100)) * Maths.RadDeg;
+			var fullAng = anglePerShot * (Number+1);
 			var startAng = -fullAng / 2;
-			var curAng = startAng + fullAng * ((double)_shots / (Number));
+			var curAng = startAng + anglePerShot * _shots;//+ fullAng * ((double)_shots / (Number));
 
 			if ((timer is not null))
 				timer.QueueFree();
 
 			// Arrange references
-			var projectile = new CollideProjectile();
+			var projectile = new HomingProjectile();
 			var target = GameSession.FindClosestEnemy(caster.Position);
 
 			// Setup base values
@@ -60,11 +63,14 @@ namespace Scripts.Current.Content.Spells
 			projectile.lifetime = (float)Duration;
 			projectile.speed = (float)Speed;
 			projectile.damage = Damage;
+			projectile.turnSpeed = TurnSpeed;
+			projectile.homingRadius = HomingRadius;
 
 			// Place projectile in the world
 			GameSession.World.AddChild(projectile);
 			projectile.direction = target is not null ? (target.Position - caster.Position).Normalized() : Rand.UnitVector2;
 			projectile.direction = projectile.direction.Rotated((float)curAng * Maths.DegreesToRadians);
+			projectile.direction = projectile.direction.Rotated((float)Rand.Range(-Inaccuracy, Inaccuracy));
 			projectile.Position = caster.Position;
 
 			// Assign internal references
@@ -109,6 +115,7 @@ namespace Scripts.Current.Content.Spells
 				newTimer.Timeout += () => Shot(caster, newTimer);
 				caster.AddChild(newTimer);
 			}
+
 		}
 	}
 }
