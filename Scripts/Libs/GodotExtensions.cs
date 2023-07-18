@@ -454,8 +454,18 @@ namespace Scripts.Libs
 		/// <returns>A grayscale color.</returns>
 		public static Color Grayscale(this Color color)
 		{
-			float gray = 0.299f * color.R + 0.587f * color.G + 0.114f * color.B;
+			float gray = GrayscaleValue(color);
 			return new Color(gray, gray, gray, color.A);
+		}
+
+		/// <summary>
+		/// Calculates the grayscale value of a color.
+		/// </summary>
+		/// <param name="color">The color to calculate the grayscale value for.</param>
+		/// <returns>The grayscale value of the color.</returns>
+		public static float GrayscaleValue(this Color color)
+		{
+			return 0.299f * color.R + 0.587f * color.G + 0.114f * color.B;
 		}
 
 		/// <summary>
