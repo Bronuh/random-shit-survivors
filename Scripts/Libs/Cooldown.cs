@@ -41,6 +41,8 @@ namespace Scripts.Libs
 		/// </summary>
 		public double FractionCompleted => _elapsedTime / Duration;
 
+		public event Action OnReady;
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Cooldown"/> class with a default duration of 0 seconds.
 		/// </summary>
@@ -50,7 +52,11 @@ namespace Scripts.Libs
 		/// Initializes a new instance of the <see cref="Cooldown"/> class with the specified duration.
 		/// </summary>
 		/// <param name="duration">The duration of the cooldown in seconds.</param>
-		public Cooldown(double duration) { Duration = duration; }
+		public Cooldown(double duration, CooldownMode mode = CooldownMode.Cyclic) 
+		{
+			Duration = duration; 
+			Mode = mode;
+		}
 
 		/// <summary>
 		/// Updates the cooldown by a specified delta time and returns the number of ticks that occurred.
@@ -65,12 +71,21 @@ namespace Scripts.Libs
 				_elapsedTime += deltaTime;
 				ticks = (int)(_elapsedTime / Duration);
 				_elapsedTime -= ticks * Duration;
+				if(ticks>0)
+					for (int i = 0; i < ticks; i++)
+					{
+						OnReady?.Invoke();
+					}
 			}
 			else
 			{
 				_elapsedTime = Maths.Clamp(_elapsedTime + deltaTime, 0, Duration);
 				if (_elapsedTime >= Duration)
+				{
 					ticks = 1;
+					OnReady?.Invoke();
+				}
+					
 			}
 			return ticks;
 		}
