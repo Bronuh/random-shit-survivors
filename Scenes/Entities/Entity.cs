@@ -66,8 +66,8 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 	[Export]
 	public float Speed
 	{
-		get => GetStat(ref _damage, EntityStats.Damage);
-		set => SetStat(ref _damage, EntityStats.Damage, value);
+		get => GetStat(ref _speed, EntityStats.Speed);
+		set => SetStat(ref _speed, EntityStats.Speed, value);
 	}
 
 	[Export]
