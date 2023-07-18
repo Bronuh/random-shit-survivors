@@ -5,7 +5,7 @@
 
 [node name="HeavySquare" instance=ExtResource("1_81sqb")]
 MaxHP = 250.0
-CollisionDamage = 20.0
+CollisionDamage = 60.0
 Speed = 250.0
 
 [node name="Sprite2D" parent="." index="0"]

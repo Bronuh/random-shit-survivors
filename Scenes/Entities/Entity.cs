@@ -36,10 +36,10 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 	public Array<EntityComponent> Components { get; set; } = new Array<EntityComponent>();
 
 	[Export]
-	public double MaxHP 
-	{ 
-		get => GetStat(ref _maxHp, EntityStats.Health); 
-		set => SetStat(ref _maxHp, EntityStats.Health, value); 
+	public double MaxHP
+	{
+		get => GetStat(ref _maxHp, EntityStats.Health);
+		set => SetStat(ref _maxHp, EntityStats.Health, value);
 	}
 
 	[Export]
@@ -160,7 +160,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 		if (this == GameSession.Player)
 		{
 			MonitorLabel.SetGlobal("HP", $"{HP}/{MaxHP}");
-	}
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
