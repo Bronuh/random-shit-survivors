@@ -7,11 +7,29 @@ using System.Threading.Tasks;
 namespace Scripts.Libs
 {
 	/// <summary>
+	/// Specifies the mode of a cooldown mechanism.
+	/// </summary>
+	public enum CooldownMode
+	{
+		/// <summary>
+		/// The cooldown restarts automatically after reaching the duration.
+		/// </summary>
+		Cyclic,
+
+		/// <summary>
+		/// The cooldown does not restart automatically after reaching the duration.
+		/// </summary>
+		Single
+	}
+
+	/// <summary>
 	/// Represents a cooldown mechanism that tracks the elapsed time and provides tick-based functionality.
 	/// </summary>
 	public class Cooldown
 	{
 		private double _elapsedTime = 0;
+
+		public CooldownMode Mode { get; set; } = CooldownMode.Cyclic;
 
 		/// <summary>
 		/// Gets or sets the duration of the cooldown in seconds.
@@ -41,10 +59,38 @@ namespace Scripts.Libs
 		/// <returns>The number of ticks that occurred during the update.</returns>
 		public int Update(double deltaTime)
 		{
-			_elapsedTime += deltaTime;
-			int ticks = (int)(_elapsedTime / Duration);
-			_elapsedTime -= ticks * Duration;
+			int ticks = 0;
+			if(Mode is CooldownMode.Cyclic)
+			{
+				_elapsedTime += deltaTime;
+				ticks = (int)(_elapsedTime / Duration);
+				_elapsedTime -= ticks * Duration;
+			}
+			else
+			{
+				_elapsedTime = Maths.Clamp(_elapsedTime + deltaTime, 0, Duration);
+				if (_elapsedTime >= Duration)
+					ticks = 1;
+			}
 			return ticks;
+		}
+
+		/// <summary>
+		/// Restarts the cooldown, resetting the elapsed time to 0.
+		/// </summary>
+		public void Restart()
+		{
+			_elapsedTime = 0;
+		}
+
+		public bool Use()
+		{
+			bool canUse = _elapsedTime >= Duration;
+
+			if (canUse && (Mode is CooldownMode.Single))
+				Restart();
+
+			return canUse;
 		}
 	}
 }
