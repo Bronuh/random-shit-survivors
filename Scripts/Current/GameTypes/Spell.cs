@@ -7,8 +7,15 @@ namespace Scripts.Current.GameTypes
 	[Mixin(typeof(StatsMixin))]
 	public abstract partial class Spell : ITagsHolder
 	{
+		public string Name { get; set; } = "Spell";
+		public string Description { get; set; } = "";
 		public bool IsIdle { get; protected set; } = true;
+
+		public string[] CastSounds = Array.Empty<string>();
+		public string[] HitSounds = Array.Empty<string>();
+		public Color Color { get; set; } = new Color(1f, 1f, 1f);
 		public TagsContainer Tags { get; private set; } = new TagsContainer{ "Spell" };
+
 		public double Cooldown
 		{
 			get => GetStat(ref _cooldown, SpellStats.Cooldown);
