@@ -71,7 +71,7 @@ public partial class CollideProjectile : Projectile
 		}
 	}
 
-	private void BasicMovement(double dt)
+	protected virtual void BasicMovement(double dt)
 	{
 		Position += direction * speed * (float)dt;
 	}
