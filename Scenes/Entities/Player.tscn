@@ -30,5 +30,3 @@ collision_mask = 6
 shape = SubResource("CircleShape2D_p44hh")
 
 [node name="HealthBar" parent="." index="1" instance=ExtResource("4_ggskm")]
-
-[node name="Timer" type="Timer" parent="." index="2"]

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://f185l0x6mfef" path="res://Assets/Textures/Sprites/Square.png" id="2_gcpt8"]
 
 [node name="HeavySquare" instance=ExtResource("1_81sqb")]
-MaxHP = 250.0
+MaxHP = 350.0
 CollisionDamage = 60.0
 Speed = 250.0
 

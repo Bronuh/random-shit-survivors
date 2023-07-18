@@ -1,4 +1,5 @@
-﻿using Mixin;
+﻿using Godot;
+using Mixin;
 using Scripts.Libs;
 using Scripts.Libs.Stats;
 
