@@ -56,6 +56,11 @@ namespace Scripts.Current.GameTypes
 			get => GetStat(ref _burstTime, SpellStats.BurstTime);
 			set => SetStat(ref _burstTime, SpellStats.BurstTime, value);
 		}
+		public double Inaccuracy
+		{
+			get => GetStat(ref _inaccuracy, SpellStats.Inaccuracy);
+			set => SetStat(ref _inaccuracy, SpellStats.Inaccuracy, value);
+		}
 
 		public Spell() { }
 
@@ -69,6 +74,7 @@ namespace Scripts.Current.GameTypes
 		private Stat _duration = null;
 		private Stat _number = null;
 		private Stat _speed = null;
+		private Stat _inaccuracy = null;
 
 		public abstract void Cast(Entity caster);
 
