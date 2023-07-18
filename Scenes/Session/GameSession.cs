@@ -184,4 +184,11 @@ public partial class GameSession : Node2D, IExposable
 	{
 		return Enemies.OrderBy(e => e.Position.DistanceTo(position)).FirstOrDefault();
 	}
+
+	public static void ShowDamage(double amount, Vector2 position)
+	{
+		var indicator = new DamageIndicator(amount);
+		Instance.AddChild(indicator);
+		indicator.Position = position;
+	}
 }

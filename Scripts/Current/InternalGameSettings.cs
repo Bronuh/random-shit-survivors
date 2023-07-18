@@ -15,8 +15,8 @@ public static class InternalGameSettings{
 	public static bool AllowCoreMods = true; // Allows the execution of core assemblies on startup.
 
 	// Visuals
-	public static Color PlayerColor = Grayscale(1);
-	public static Color EnemyColor = Grayscale(0);
+	public static Color PlayerColor = Col(1);
+	public static Color EnemyColor = Col(0);
 
 	// Gameplay
 	public static double DefenseArmor = 0.06; // Warcraft 3 style of damage calculation

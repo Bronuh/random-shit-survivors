@@ -115,5 +115,26 @@ namespace Scripts.Libs
 			/// <summary> Quadrillion </summary>
 			Q
 		}
+
+
+		public static string FirstNumber(this double number)
+		{
+			string formatted;
+
+			if (number >= 1 || number == 0)
+			{
+				formatted = ((int)number).ToString();
+			}
+			else if (number < 1 && number > 0)
+			{
+				formatted = number.ToString("F2");
+			}
+			else
+			{
+				formatted = number.ToString();
+			}
+
+			return formatted;
+		}
 	}
 }
