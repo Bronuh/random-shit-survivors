@@ -248,7 +248,6 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 	public void TakeDamage(Damage damage)
 	{
 		HP -= Calculations.GatDamagePercentage(Armor) * damage.Amount;
-		MonitorLabel.SetGlobal("IsDead", IsDead);
 
 		if (IsDead && (this != GameSession.Player))
 		{
