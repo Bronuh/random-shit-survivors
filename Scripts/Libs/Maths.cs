@@ -99,10 +99,10 @@ namespace Scripts.Libs
 		/// <summary>
 		/// Multiply by this to convert from degrees to radians
 		/// </summary>
-		public static float DegreesToRadians = PI / 180;
-		public static float DegRad = DegreesToRadians;
-		public static double DoubleDegRad = 0.017453292519943295;
-		public static double DoubleRadDeg = 57.29577951308232;
+		public static float DegreesToRadians => PI / 180;
+		public static float DegRad => DegreesToRadians;
+		public static double DoubleDegRad => 0.017453292519943295;
+		public static double DoubleRadDeg => 57.29577951308232;
 
 		// Custom methods
 
