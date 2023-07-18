@@ -12,24 +12,36 @@ public partial class Projectile : Node2D
 
 	// visuals
 	public string spriteTexture = "res://Assets/Textures/Sprites/Circle.png";
-	public Color color = new Color(1, 1, 1);
+	public Color Color
+	{
+		get => _color;
+		set
+		{
+			_color = value;
+			Sprite.Modulate = _color;
+		}
+	}
 
 
 	// Referencees
 	public Entity Shooter { get; set; } = null;
 	public Damage CustomDamage { get; set; } = null;
 	public Spell Spell { get; set; } = null;
+	public Sprite2D Sprite { get; private set; }
 
 	// Internals
 	protected double _passedLifetime = 0;
+	protected Color _color = new Color(1, 1, 1);
 
 	public override void _Ready()
 	{
 		// add sprite
-		var sprite = new Sprite2D();
-		sprite.Texture = GD.Load<Texture2D>(spriteTexture);
-		sprite.SetAbsoluteScale(Vec2(size));
-		AddChild(sprite);
+		Sprite = new Sprite2D();
+		Sprite.Texture = GD.Load<Texture2D>(spriteTexture);
+		Sprite.SetAbsoluteScale(Vec2(size));
+		Sprite.Modulate = Color;
+		AddChild(Sprite);
+
 	}
 
 	public override void _Process(double delta)
