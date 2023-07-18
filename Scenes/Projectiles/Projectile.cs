@@ -29,6 +29,9 @@ public partial class Projectile : Node2D
 	public Spell Spell { get; set; } = null;
 	public Sprite2D Sprite { get; private set; }
 
+	public Action OnTimeout;
+
+
 	// Internals
 	protected double _passedLifetime = 0;
 	protected Color _color = new Color(1, 1, 1);
@@ -49,7 +52,10 @@ public partial class Projectile : Node2D
 		// movement here
 		_passedLifetime += delta;
 		if (_passedLifetime >= lifetime)
+		{
+			OnTimeout?.Invoke();
 			QueueFree();
+	}
 	}
 
 	public override void _PhysicsProcess(double delta)
