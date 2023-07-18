@@ -96,6 +96,13 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 	public Action<Entity> DeathCallback = null;
 	public Action<Entity> DamageCallback = null;
 
+
+	public string[] HitSounds = new[] { 
+				"res://Assets/Audio/Sounds/normal/hit1.wav",
+				"res://Assets/Audio/Sounds/normal/hit2.wav",
+				"res://Assets/Audio/Sounds/normal/hit3.wav"
+			};
+
 	private double _hp = 0;
 	private Stat _maxHp = null;
 	private Stat _regen = null;
@@ -103,10 +110,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 	private Stat _speed = null;
 	private Stat _damage = null;
 
-	public Entity()
-	{
-		Tags.Add("Entity");
-	}
+	private Cooldown _hitSoundCooldown = new Cooldown(0.1) { Mode = CooldownMode.Single };
 
 	public Entity() { }
 
@@ -126,16 +130,22 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 		if (IsDead)
 			return;
 
+		// Update hit sound cooldown
+		_hitSoundCooldown.Update(delta);
+
+		// Process movement
 		Position = Position + Controller.GetDirection() * Speed * (float)delta;
 
 		// Apply regen
 		HP += Regen * delta;
 
+		// Update applied effects
 		foreach(var effect in  Effects)
 		{
 			effect.Update(delta);
 		}
 
+		// Update and cast spells
 		foreach (var spell in Spells)
 		{
 			var ticks = spell.Update(delta);
@@ -145,6 +155,12 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 				spell.Cast(this);
 			}
 		}
+
+		// Debug section
+		if (this == GameSession.Player)
+		{
+			MonitorLabel.SetGlobal("HP", $"{HP}/{MaxHP}");
+	}
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -239,5 +255,11 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 			DeathCallback?.Invoke(damage.Inflictor);
 			QueueFree();
 		}
+		else
+		{
+			if (_hitSoundCooldown.Use())
+				GameSession.PlaySoundAt(HitSounds, Position);
+		}
+		MonitorLabel.SetGlobal("IsDead", IsDead);
 	}
 }
