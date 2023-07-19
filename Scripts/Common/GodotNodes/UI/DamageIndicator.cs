@@ -23,7 +23,7 @@ public partial class DamageIndicator : Node2D
 		_isCriticalDamage = damage.IsCritical;
 		_damageAmount = damage.PassedAmount;
 		_velocity = Rand.UnitVector2 * 300;
-		_angle = Rand.Range(-Maths.PI/2, Maths.PI/2);
+		_angle = Rand.Range(-Maths.PI/4, Maths.PI/4);
 	}
 
 
