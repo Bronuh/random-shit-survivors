@@ -103,6 +103,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 	public List<Perk> Perks { get; set; } = new();
 
 	public Area2D CollisionArea => GetNode<Area2D>("Sprite2D/Area2D");
+	public Sprite2D Sprite => GetNode<Sprite2D>("Sprite2D");
 
 	public GameSession Session => GameSession.Instance;
 
@@ -128,6 +129,8 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 	private Stat _damage = null;
 	private Stat _critChance = null;
 	private Stat _critMult = null;
+
+	private float hitOpacity = 1;
 
 	private RandomDistribution _randomDistribution = new RandomDistribution();
 
@@ -176,6 +179,14 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 			{
 				spell.Cast(this);
 			}
+		}
+
+		// process shader
+		if(this != GameSession.Player)
+		{
+			hitOpacity = Maths.Approach(hitOpacity, 1, 4f * (float)delta);
+			var mat = Sprite.Material as ShaderMaterial;
+			mat.SetShaderParameter("hit_opacity", hitOpacity);
 		}
 
 		// Debug section
@@ -290,6 +301,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 		var takenDamage = Calculations.GatDamagePercentage(Armor) * damage.Amount * damageMult;
 		damage.PassedAmount = takenDamage;
 		HP -= takenDamage;
+		hitOpacity = 0;
 
 		GameSession.ShowDamage(damage, Position);
 
