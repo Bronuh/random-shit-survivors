@@ -97,17 +97,17 @@ namespace Scripts.Current.Content.Spells
 			// Effect
 			projectile.Color = Color;
 			var trail = new ExperimentalTrailPolygon();
-			trail.Color = Col(1);
+			trail.Color = Color;
 			trail.Length = 0.5;
 			trail.SegmentsCount = 10;
 			trail.StartWidth = (float)(Size*1.1);
 			projectile.AddChild(trail);
 
 			var trail2 = new ExperimentalTrailPolygon();
-			trail2.Color = Color;
+			trail2.Color = Col(1);
 			trail2.Length = 0.5;
 			trail2.SegmentsCount = 10;
-			trail2.StartWidth = (float)(Size * 0.75);
+			trail2.StartWidth = (float)(Size * 0.5);
 			projectile.AddChild(trail2);
 
 			// Sound
