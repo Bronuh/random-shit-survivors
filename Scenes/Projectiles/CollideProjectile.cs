@@ -17,6 +17,9 @@ public partial class CollideProjectile : Projectile
 	public Vector2 direction = Vec2();
 	public Action<double> customMovement = null;
 
+	public HashSet<Entity> Collided { get; private set; } = new HashSet<Entity>();
+	public List<Entity> LastOverlapped { get; private set; } = new List<Entity>();
+
 	public override void _Ready()
 	{
 		// add area2d with collision shape and sprite
@@ -38,7 +41,11 @@ public partial class CollideProjectile : Projectile
 		{
 			var entity = other.TryGetParentOfType<Entity>();
 			if (entity is not null)
+			{
 				OnCollide?.Invoke(entity);
+				Collided.Add(entity);
+				entity.OnDeath += (e) => { Collided.Remove(e); };
+			}
 		};
 	}
 
@@ -47,6 +54,15 @@ public partial class CollideProjectile : Projectile
 		base._Process(delta);
 	}
 
+	public bool IsCollidedWith(Entity target)
+	{
+		return Collided.Contains(target);
+	}
+
+	public bool OverlappedPreviously(Entity target)
+	{
+		return LastOverlapped.Contains(target);
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -62,13 +78,18 @@ public partial class CollideProjectile : Projectile
 
 		// collisions here
 		var overlaps = CollisionArea.GetOverlappingAreas();
+		var newOverlaps = new List<Entity>();
 		foreach (var area in overlaps)
 		{
 			var entity = area.TryGetParentOfType<Entity>();
 			if (entity is null)
 				continue;
 			OnOverlap?.Invoke(entity);
+			Collided.Add(entity);
+			entity.OnDeath += (e) => { Collided.Remove(e); };
+			newOverlaps.Add(entity);
 		}
+		LastOverlapped = newOverlaps;
 	}
 
 	protected virtual void BasicMovement(double dt)

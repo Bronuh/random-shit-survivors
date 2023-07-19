@@ -99,6 +99,9 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 
 	public bool IsDead => HP <= 0;
 
+	public event Action<Entity, Damage> OnDamage;
+	public event Action<Entity> OnDeath;
+
 	public List<Spell> Spells { get; set; } = new();
 	public List<Perk> Perks { get; set; } = new();
 
@@ -301,6 +304,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 		var takenDamage = Calculations.GatDamagePercentage(Armor) * damage.Amount * damageMult;
 		damage.PassedAmount = takenDamage;
 		HP -= takenDamage;
+		OnDamage?.Invoke(this, damage);
 		hitOpacity = 0;
 
 		GameSession.ShowDamage(damage, Position);
@@ -308,6 +312,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 		if (IsDead && (this != GameSession.Player))
 		{
 			DeathCallback?.Invoke(damage.Inflictor);
+			OnDeath?.Invoke(this);
 			QueueFree();
 		}
 		else
