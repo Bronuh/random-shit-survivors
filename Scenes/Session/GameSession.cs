@@ -32,7 +32,7 @@ public partial class GameSession : Node2D, IExposable
 	public static double Difficulty => BaseDifficulty + _passedTime / (_difficultyIncreaseMinutes * 60);
 	public static int MaximumEnemies => (int)(EnemiesPerDifficultyLevel * Difficulty);
 
-	public static double BaseDifficulty = 0.3;
+	public static double BaseDifficulty = 1;
 	public static int EnemiesPerDifficultyLevel = 30;
 	public static double EnemiesFillTime = 10;
 
@@ -42,7 +42,7 @@ public partial class GameSession : Node2D, IExposable
 	private Entity _player = null;
 	private static GameSession _instance;
 
-	private static double _passedTime = 0;
+	private static double _passedTime = 240;
 	private static double _difficultyIncreaseMinutes = 10;
 
 	// scenes paths
@@ -107,6 +107,10 @@ public partial class GameSession : Node2D, IExposable
 
 			_spawnThreshold -= accumulatedSpawns * TimeBetweenSpawns;
 		}
+
+		var label = GetNode<Label>("%TimeLabel");
+		var span = TimeSpan.FromSeconds(_passedTime);
+		label.Text = span.ToString(@"mm\:ss\.ff");
 
 		MonitorLabel.SetGlobal("IsInProcess", IsInProcess);
 		MonitorLabel.SetGlobal("Difficulty", Difficulty.ToString("F3"));

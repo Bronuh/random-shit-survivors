@@ -25,7 +25,7 @@ public partial class ExperimentalTrailPolygon : Node2D
 	/// Trail width at the start.
 	/// </summary>
 	[Export]
-	public float StartWidth = 10f;
+	public float StartWidth = 0f;
 
 	/// <summary>
 	/// Trail width at the end.
@@ -151,7 +151,7 @@ public partial class ExperimentalTrailPolygon : Node2D
 	}
 
 	// Free and remove all active segments
-	private void Reset()
+	public void Reset()
 	{
 		foreach (var line in segments)
 		{
@@ -161,6 +161,7 @@ public partial class ExperimentalTrailPolygon : Node2D
 		currentSegment?.QueueFree();
 
 		currentSegment = new Segment(this, null);
+		segments.Add(currentSegment);
 	}
 
 
@@ -184,12 +185,12 @@ public partial class ExperimentalTrailPolygon : Node2D
 		// Ending edge is being calculated
 		public Vector2[] EndingEdge => new[] { EndPos + EdgeNorm * WidthAtEnd / 2, EndPos - EdgeNorm * WidthAtEnd / 2 };
 		// Starting edge is just an ending edge of the previous segment
-		public Vector2[] StartingEdge => previous?.EndingEdge ?? new[] { startPos, startPos };
+		public Vector2[] StartingEdge => previous is null ? new[] { StartPos + EdgeNorm * WidthAtStart / 2, StartPos - EdgeNorm * WidthAtStart / 2 } : previous.EndingEdge;
 		
 
 		// These properties returns widths at the start and the end of segment
 		public float WidthAtEnd => Mathf.Lerp(endWidth, startWidth, (float)(timeToLive / startingTimeToLive));
-		public float WidthAtStart => previous?.WidthAtEnd ?? 0;
+		public float WidthAtStart => previous is null ? WidthAtEnd : previous.WidthAtEnd;
 
 		// Polygon used to draw the segment
 		public Polygon2D polygon = new Polygon2D();

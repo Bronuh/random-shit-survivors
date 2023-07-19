@@ -23,7 +23,7 @@ MaxHP = 100.0
 Regen = 1.0
 CollisionDamage = 1.0
 Speed = 1100.0
-CritChance = 0.1
+CritChance = 0.15
 CritMult = 2.0
 Team = 1
 

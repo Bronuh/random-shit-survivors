@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cjsepe4wt2q56"]
+[gd_scene load_steps=13 format=3 uid="uid://cjsepe4wt2q56"]
 
 [ext_resource type="Script" path="res://Scripts/Current/MainNode.cs" id="1_gcou8"]
 [ext_resource type="PackedScene" uid="uid://oilwraaijcfo" path="res://Scenes/Ui/shaders_node.tscn" id="2_j61ta"]
@@ -11,6 +11,11 @@
 [ext_resource type="Script" path="res://Scripts/Current/WorldNode.cs" id="8_n4xt2"]
 [ext_resource type="Script" path="res://Scripts/Common/Input/AdvancedInputListener.cs" id="10_cas5n"]
 [ext_resource type="PackedScene" uid="uid://ciwsxdiag1gvc" path="res://Scenes/Session/game_session.tscn" id="12_vax0a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2olu3"]
+font_size = 24
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
 
 [node name="MainNode" type="Node2D"]
 script = ExtResource("1_gcou8")
@@ -46,6 +51,27 @@ layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("6_6mgnn")
 UseGlobal = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="UiNode/HudNode"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TimeLabel" type="Label" parent="UiNode/HudNode/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "null"
+label_settings = SubResource("LabelSettings_2olu3")
+horizontal_alignment = 1
 
 [node name="MenuNode" parent="UiNode" instance=ExtResource("4_mlycn")]
 unique_name_in_owner = true
