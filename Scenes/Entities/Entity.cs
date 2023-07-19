@@ -69,6 +69,25 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 	}
 
 	[Export]
+	public float CritChance
+	{
+		get => GetStat(ref _critChance, EntityStats.CritChance);
+		set
+		{
+			SetStat(ref _critChance, EntityStats.CritChance, value);
+			_randomDistribution.ProcChance = value;
+		}
+	}
+
+
+	[Export]
+	public float CritMult
+	{
+		get => GetStat(ref _critMult, EntityStats.CritMult);
+		set => SetStat(ref _critMult, EntityStats.CritMult, value);
+	}
+
+	[Export]
 	public EntityTeam Team { get; set; } = EntityTeam.None;
 	#endregion
 
@@ -107,6 +126,10 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 	private Stat _armor = null;
 	private Stat _speed = null;
 	private Stat _damage = null;
+	private Stat _critChance = null;
+	private Stat _critMult = null;
+
+	private RandomDistribution _randomDistribution = new RandomDistribution();
 
 	private Cooldown _hitSoundCooldown = new Cooldown(0.1) { Mode = CooldownMode.Single };
 
@@ -257,10 +280,18 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 
 	public void TakeDamage(Damage damage)
 	{
-		var takenDamage = Calculations.GatDamagePercentage(Armor) * damage.Amount;
+		var damageMult = 1.0;
+		if((damage.Inflictor is not null) && damage.Inflictor.TryProcCrit())
+		{
+			damageMult = damage.Inflictor.CritMult;
+			damage.IsCritical = true;
+		}
+
+		var takenDamage = Calculations.GatDamagePercentage(Armor) * damage.Amount * damageMult;
+		damage.PassedAmount = takenDamage;
 		HP -= takenDamage;
 
-		GameSession.ShowDamage(takenDamage, Position);
+		GameSession.ShowDamage(damage, Position);
 
 		if (IsDead && (this != GameSession.Player))
 		{
@@ -273,5 +304,10 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 				GameSession.PlaySoundAt(HitSounds, Position);
 		}
 		MonitorLabel.SetGlobal("IsDead", IsDead);
+	}
+
+	public bool TryProcCrit()
+	{
+		return _randomDistribution.TryProc();
 	}
 }

@@ -12,10 +12,10 @@ namespace Scripts.Current.GameTypes
 		{
 		}
 
-
 		public double Amount { get; set; } = 0;
 		public Entity Inflictor { get; set; } = null;
 		public Projectile Source { get; set; } = null;
-
+		public bool IsCritical { get; set; } = false;
+		public double PassedAmount { get; set; } = 0;
 	}
 }

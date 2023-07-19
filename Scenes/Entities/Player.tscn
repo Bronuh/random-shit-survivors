@@ -23,6 +23,8 @@ MaxHP = 100.0
 Regen = 1.0
 CollisionDamage = 1.0
 Speed = 1100.0
+CritChance = 0.1
+CritMult = 2.0
 Team = 1
 
 [node name="Sprite2D" parent="." index="0"]

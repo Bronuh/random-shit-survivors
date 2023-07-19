@@ -35,7 +35,7 @@ namespace Scripts.Libs
 		// This flag indicates state of _constants cache.
 		private static bool _ready = false;
 
-		public RandomDistribution(double procChance)
+		public RandomDistribution(double procChance = 0)
 		{
 			if (!_ready)
 				Initialize();

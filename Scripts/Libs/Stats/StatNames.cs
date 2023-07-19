@@ -13,6 +13,8 @@ namespace Scripts.Libs.Stats
 		public const string Damage = "Damage";
 		public const string Speed = "Speed";
 		public const string Regen = "Regen";
+		public const string CritChance = "CritChance";
+		public const string CritMult = "CritMult";
 	}
 
 	public static class SpellStats

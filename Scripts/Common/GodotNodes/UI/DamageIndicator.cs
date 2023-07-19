@@ -1,19 +1,27 @@
 ﻿using Godot;
+using Scripts.Current.GameTypes;
 using Scripts.Libs;
 
 public partial class DamageIndicator : Node2D
 {
+	public static Color CommonDamageColor => Col(1);
+	public static Color CriticalDamageColor => Col(1,0.1f,0.1f);
+	public static float CriticalDamageScale = 2f;
+
+	private bool _isCriticalDamage;
 	private float _angle;
-	private double _damage;
+	private double _damageAmount;
 	private Vector2 _velocity;
 
 	private Label _label;
 	private Cooldown _cooldown = new(1, CooldownMode.Single);
+	private Damage _damage;
 
-
-	public DamageIndicator(double damage)
+	public DamageIndicator(Damage damage)
 	{
 		_damage = damage;
+		_isCriticalDamage = damage.IsCritical;
+		_damageAmount = damage.PassedAmount;
 		_velocity = Rand.UnitVector2 * 300;
 		_angle = Rand.Range(-Maths.PI/2, Maths.PI/2);
 	}
@@ -22,13 +30,13 @@ public partial class DamageIndicator : Node2D
 	public override void _Ready()
 	{
 		Rotation = _angle;
-		var text = _damage.FirstNumber();
+		var text = _damageAmount.FirstNumber();
 
 		var settings = new LabelSettings();
 		settings.OutlineSize = 5;
 		settings.OutlineColor = Col();
-		settings.FontColor = Col(1);
-		settings.FontSize = 30;
+		settings.FontColor = _isCriticalDamage ? CriticalDamageColor : CommonDamageColor;
+		settings.FontSize = (int)(30 * (_isCriticalDamage ? CriticalDamageScale : 1));
 
 		_label = new Label();
 		_label.Text = text;
