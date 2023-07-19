@@ -41,6 +41,8 @@ namespace Scripts.Libs
 		/// </summary>
 		public double FractionCompleted => _elapsedTime / Duration;
 
+		public double TimeLeft => (1-FractionCompleted) * Duration;
+
 		public event Action OnReady;
 
 		/// <summary>
