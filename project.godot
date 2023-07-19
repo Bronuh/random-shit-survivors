@@ -24,6 +24,11 @@ boot_splash/image="res://NewGodotRed.png"
 boot_splash/fullsize=false
 config/icon="res://NewGodot.svg"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [dotnet]
 
 project/assembly_name="RandomShitSurvivors"
