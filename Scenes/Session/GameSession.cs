@@ -32,7 +32,7 @@ public partial class GameSession : Node2D, IExposable
 	public static double Difficulty => BaseDifficulty + _passedTime / (_difficultyIncreaseMinutes * 60);
 	public static int MaximumEnemies => (int)(EnemiesPerDifficultyLevel * Difficulty);
 
-	public static double BaseDifficulty = 0.1;
+	public static double BaseDifficulty = 0.3;
 	public static int EnemiesPerDifficultyLevel = 30;
 	public static double EnemiesFillTime = 10;
 
