@@ -9,6 +9,7 @@ public partial class Projectile : Node2D
 	public float speed = 500;
 	public double lifetime = 1; // Time until disappearing in seconds
 	public double damage = 0;
+	public bool CanDamage = true;
 
 	// visuals
 	public string spriteTexture = "res://Assets/Textures/Sprites/Circle.png";
@@ -65,6 +66,9 @@ public partial class Projectile : Node2D
 
 	public virtual void ApplyDamageTo(Entity target)
 	{
+		if (!CanDamage)
+			return;
+
 		if(CustomDamage is not null)
 		{
 			target.TakeDamage(CustomDamage);

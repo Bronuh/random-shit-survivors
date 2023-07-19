@@ -22,6 +22,9 @@ namespace Scripts.Current.Content.Spells
 			Speed = 2000;
 			BurstTime = 0.5;
 
+			HomingRadius = 1500;
+			TurnSpeed = 0.5f;
+
 			Color = new Color(1, 0.8f, 0.6f);
 
 			Tags.Add("Basic");
@@ -79,6 +82,8 @@ namespace Scripts.Current.Content.Spells
 
 			// Set collision callback
 			projectile.OnCollide = (e) => {
+				if (!GodotObject.IsInstanceValid(projectile) || projectile.IsQueuedForDeletion())
+					return;
 				projectile.ApplyDamageTo(e);
 				projectile.QueueFree();
 			};
