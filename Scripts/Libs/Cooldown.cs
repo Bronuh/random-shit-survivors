@@ -39,7 +39,7 @@ namespace Scripts.Libs
 		/// <summary>
 		/// Gets the fraction of the cooldown completed, ranging from 0 to 1.
 		/// </summary>
-		public double FractionCompleted => _elapsedTime / Duration;
+		public double FractionElapsed => _elapsedTime / Duration;
 
 		public double TimeLeft => (1-FractionElapsed) * Duration;
 		public double TimeElapsed => _elapsedTime;
