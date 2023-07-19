@@ -53,7 +53,7 @@ public partial class DamageIndicator : Node2D
 		Position += _velocity * (float)delta;
 		_velocity += Vec2(0,300) * (float)delta;
 
-		Modulate = Modulate with { A = 1-(float)_cooldown.FractionCompleted };
+		Modulate = Modulate with { A = 1-(float)_cooldown.FractionElapsed };
 
 
 		_cooldown.Update(delta);
