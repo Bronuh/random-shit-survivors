@@ -159,7 +159,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 		// Debug section
 		if (this == GameSession.Player)
 		{
-			MonitorLabel.SetGlobal("HP", $"{HP}/{MaxHP}");
+			MonitorLabel.SetGlobal("HP", $"{(HP.ToString("F1"))}/{MaxHP.ToString("F1")}");
 		}
 	}
 
@@ -186,6 +186,17 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 
 			ApplyDamageTo(entity, dmg);
 		}
+
+		if(this == GameSession.Player)
+		{
+			var spells = new List<string>();
+			foreach (var spell in Spells)
+			{
+				spells.Add($"{spell.Name}({(spell.CooldownTimer.TimeLeft).ToString("F1")})");
+			}
+			MonitorLabel.SetGlobal("Spells", String.Join(", ", spells));
+		}
+
 	}
 
 	internal void Init(PlayerData instance)

@@ -109,9 +109,9 @@ public partial class GameSession : Node2D, IExposable
 		}
 
 		MonitorLabel.SetGlobal("IsInProcess", IsInProcess);
-		MonitorLabel.SetGlobal("Difficulty", Difficulty);
+		MonitorLabel.SetGlobal("Difficulty", Difficulty.ToString("F3"));
 		MonitorLabel.SetGlobal("Enemies count", $"{Instance._enemies.Count}/{MaximumEnemies}");
-		MonitorLabel.SetGlobal("Time between spawns", TimeBetweenSpawns);
+		MonitorLabel.SetGlobal("Time between spawns", TimeBetweenSpawns.ToString("F1"));
 	}
 	
 	// Spawn enemy outside the player's vision
