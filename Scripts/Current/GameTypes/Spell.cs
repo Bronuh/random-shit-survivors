@@ -22,7 +22,7 @@ namespace Scripts.Current.GameTypes
 			get => GetStat(ref _cooldown, SpellStats.Cooldown);
 			set 
 			{
-				_timer.Duration = value;
+				CooldownTimer.Duration = value;
 				SetStat(ref _cooldown, SpellStats.Cooldown, value);
 			}
 		}
@@ -64,7 +64,7 @@ namespace Scripts.Current.GameTypes
 
 		public Spell() { }
 
-		private Cooldown _timer = new Cooldown();
+		public Cooldown CooldownTimer { get; private set; } = new Cooldown();
 		protected int _shots = 0;
 
 		private Stat _burstTime = null;
@@ -80,7 +80,7 @@ namespace Scripts.Current.GameTypes
 
 		public int Update(double dt)
 		{
-			var ticks = IsIdle ? _timer.Update(dt) : 0;
+			var ticks = IsIdle ? CooldownTimer.Update(dt) : 0;
 
 			return ticks;
 		}

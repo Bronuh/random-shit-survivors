@@ -1,8 +1,6 @@
 using Godot;
 using Godot.Collections;
 using Scripts.Common.GodotNodes;
-using Scripts.Current;
-using Scripts.Current.GameTypes;
 using Scripts.Libs;
 using Scripts.Libs.Stats;
 using Mixin;
@@ -122,6 +120,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 		if(this == GameSession.Player)
 		{
 			Spells.Add(new BasicBolt());
+			Spells.Add(new Swarm());
 		}
 	}
 

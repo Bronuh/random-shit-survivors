@@ -4,37 +4,37 @@ using Scripts.Libs;
 
 namespace Scripts.Current.Content.Spells
 {
-	public class BasicBolt : Spell
+	public class Swarm : Spell
 	{
 		public float TurnSpeed { get; set; } = 0;
 		public float HomingRadius { get; set; } = 0;
 
-		public BasicBolt()
+		public Swarm()
 		{
-			Name = "Basic Bolt";
-			Description = "Shoots projectiles, that deals damage on collision";
+			Name = "Swarm";
+			Description = "Shoots large amount of projectiles to random directions, that deals damage on collision";
 
-			Cooldown = 2;
-			Number = 5;
-			Damage = 50;
-			Duration = 5;
-			Size = 15;
-			Speed = 2000;
+			Cooldown = 4;
+			Number = 20;
+			Damage = 10;
+			Duration = 7;
+			Size = 8;
+			Speed = 1000;
 			BurstTime = 0.5;
 
-			HomingRadius = 0;
-			TurnSpeed = 0f;
+			HomingRadius = 1000;
+			TurnSpeed = 3.5f;
 
-			Color = new Color(1, 0.8f, 0.6f);
+			Color = new Color(0.8f, 0.3f, 0.1f);
 
 			Tags.Add("Basic");
 			Tags.Add("Neutral");
 
 			CastSounds = new[] {
-				"res://Assets/Audio/Sounds/normal/magic/woosh_short1.wav",
-				"res://Assets/Audio/Sounds/normal/magic/woosh_short2.wav",
-				"res://Assets/Audio/Sounds/normal/magic/woosh_short3.wav",
-				"res://Assets/Audio/Sounds/normal/magic/woosh_short4.wav"
+				"res://Assets/Audio/Sounds/normal/weapons/plasma_shot1.wav",
+				"res://Assets/Audio/Sounds/normal/weapons/plasma_shot2.wav",
+				"res://Assets/Audio/Sounds/normal/weapons/plasma_shot3.wav",
+				"res://Assets/Audio/Sounds/normal/weapons/plasma_shot4.wav"
 			};
 		}
 		private double _anglePerProjectile = 1;
@@ -49,7 +49,7 @@ namespace Scripts.Current.Content.Spells
 		private void Shot(Entity caster, Timer timer = null)
 		{
 			_shots++;
-			var anglePerShot = Maths.Atan(Size/(200)) * Maths.RadDeg;
+			var anglePerShot = Maths.Atan(Size/(100)) * Maths.RadDeg;
 			var fullAng = anglePerShot * (Number+1);
 			var startAng = -fullAng / 2;
 			var curAng = startAng + anglePerShot * _shots;//+ fullAng * ((double)_shots / (Number));
@@ -71,7 +71,7 @@ namespace Scripts.Current.Content.Spells
 
 			// Place projectile in the world
 			GameSession.World.AddChild(projectile);
-			projectile.direction = target is not null ? (target.Position - caster.Position).Normalized() : Rand.UnitVector2;
+			projectile.direction = Rand.UnitVector2;
 			projectile.direction = projectile.direction.Rotated((float)curAng * Maths.DegreesToRadians);
 			projectile.direction = projectile.direction.Rotated((float)Rand.Range(-Inaccuracy, Inaccuracy));
 			projectile.Position = caster.Position;
