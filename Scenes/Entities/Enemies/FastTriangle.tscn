@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://xk27css5pefv"]
+[gd_scene load_steps=6 format=3 uid="uid://xk27css5pefv"]
 
 [ext_resource type="PackedScene" uid="uid://ck5kpo3lykeba" path="res://Scenes/Entities/Enemies/BaseEnemy.tscn" id="1_qx5d6"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Blink.gdshader" id="2_d1fps"]
 [ext_resource type="Texture2D" uid="uid://dr82wafa02tsj" path="res://Assets/Textures/Sprites/Triangle.png" id="2_p7ewt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3am5h"]
+resource_local_to_scene = true
+shader = ExtResource("2_d1fps")
+shader_parameter/hit_opacity = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rc2f5"]
 radius = 475.857
@@ -12,6 +18,7 @@ CollisionDamage = 15.0
 Speed = 900.0
 
 [node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_3am5h")
 scale = Vector2(0.07, 0.07)
 texture = ExtResource("2_p7ewt")
 

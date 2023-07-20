@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8v7hv75da75v"]
+[gd_scene load_steps=5 format=3 uid="uid://c8v7hv75da75v"]
 
 [ext_resource type="PackedScene" uid="uid://ck5kpo3lykeba" path="res://Scenes/Entities/Enemies/BaseEnemy.tscn" id="1_mlnf8"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Blink.gdshader" id="2_jo4d8"]
 [ext_resource type="Texture2D" uid="uid://h3218rfnpbbq" path="res://Assets/Textures/Sprites/Hexagon.png" id="2_l14e4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8g75y"]
+resource_local_to_scene = true
+shader = ExtResource("2_jo4d8")
+shader_parameter/hit_opacity = 1.0
 
 [node name="PowerfulHexagon" instance=ExtResource("1_mlnf8")]
 MaxHP = 150.0
@@ -9,5 +15,6 @@ CollisionDamage = 120.0
 Speed = 400.0
 
 [node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_8g75y")
 scale = Vector2(0.1, 0.188)
 texture = ExtResource("2_l14e4")
