@@ -19,7 +19,7 @@ namespace Scripts.Current.Content.Spells
 			Damage = 200;
 			Duration = 5;
 			Size = 100;
-			Speed = 1500;
+			Speed = 2500;
 			BurstTime = 0.5;
 
 			HomingRadius = 0;
@@ -100,14 +100,16 @@ namespace Scripts.Current.Content.Spells
 			trail.Color = Color;
 			trail.Length = 0.5;
 			trail.SegmentsCount = 10;
-			trail.StartWidth = (float)(Size*1.1);
+			trail.Width = (float)(Size*1.1);
+			trail.EndAlpha = 0;
 			projectile.AddChild(trail);
 
 			var trail2 = new ExperimentalTrailPolygon();
 			trail2.Color = Col(1);
 			trail2.Length = 0.5;
 			trail2.SegmentsCount = 10;
-			trail2.StartWidth = (float)(Size * 0.5);
+			trail2.Width = (float)(Size * 0.5);
+			trail2.EndAlpha = 0;
 			projectile.AddChild(trail2);
 
 			// Sound
