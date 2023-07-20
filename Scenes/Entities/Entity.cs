@@ -166,7 +166,8 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 		Position = Position + Controller.GetDirection() * Speed * (float)delta;
 
 		// Apply regen
-		HP += Regen * delta;
+		if(!IsDead)
+			HP += Regen * delta;
 
 		// Update applied effects
 		foreach(var effect in  Effects)
@@ -305,12 +306,13 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 		var takenDamage = Calculations.GatDamagePercentage(Armor) * damage.Amount * damageMult;
 		damage.PassedAmount = takenDamage;
 
-		if (!(IsDead && (this != GameSession.Player)))
+		if (!IsDead && (this != GameSession.Player))
 		{
 			if (_hitSoundCooldown.Use())
 				GameSession.PlaySoundAt(HitSounds, Position);
 
-			GameSession.ShowDamage(damage, Position);
+			if(damage.PassedAmount > 0.5)
+				GameSession.ShowDamage(damage, Position);
 		}
 
 		HP -= takenDamage;
@@ -318,7 +320,7 @@ public partial class Entity : Node2D, IStatusEffectConsumer, ITagsHolder
 		hitOpacity = 0;
 
 
-		if ((IsDead && (this != GameSession.Player)))
+		if (IsDead && (this != GameSession.Player))
 		{
 			DeathCallback?.Invoke(damage.Inflictor);
 			OnDeath?.Invoke(this);
